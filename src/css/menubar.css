@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 10px;
+}
+
+.bar-menu {
+  width: 390px;
+  border-top: 0.5px solid #dbdbdb;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.btn-home,
+.btn-chat,
+.btn-new-post,
+.btn-profile {
+  display: inline-block;
+  width: 84px;
+  margin-right: 14px;
+  padding: 15px 0 6px 0;
+  cursor: pointer;
+}
+
+.img-btn {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 6px;
+}
+
+.btn-profile {
+  margin-right: 0;
+}
+
+.checked {
+  color: #7e3e9d;
+}

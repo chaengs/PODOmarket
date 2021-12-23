@@ -1,0 +1,59 @@
+header {
+  padding: 12px 19px 8px 19px;
+  border-bottom: 0.5px solid #dbdbdb;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.search-input {
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 32px;
+  padding: 7px 16px;
+  width: 316px;
+  line-height: 18px;
+  font-size: 14px;
+}
+
+main {
+  padding: 4px 16px;
+}
+
+article {
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.img-profile {
+  width: 50px;
+  height: 50px;
+}
+
+article > a {
+  text-decoration: none;
+  color: black;
+}
+
+.wrap-profile-desc span {
+  color: #f26e22;
+}
+
+.profile-nick-name {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 6px;
+}
+
+.profile-id {
+  font-size: 12px;
+  line-height: 15px;
+  color: #767676;
+}
+
+.profile-id::before {
+  content: "@ ";
+}

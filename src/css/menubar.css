@@ -2,11 +2,9 @@
   box-sizing: border-box;
 }
 
-body {
-  padding: 10px;
-}
-
 .bar-menu {
+  position: fixed;
+  top: calc(100% - 70px);
   width: 390px;
   border-top: 0.5px solid #dbdbdb;
   font-size: 10px;

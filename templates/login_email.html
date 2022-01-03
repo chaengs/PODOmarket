@@ -9,14 +9,20 @@
     <link rel="stylesheet" href="../src/css/login_email.css" />
   </head>
   <body>
-    <h1>로그인</h1>
-    <form>
-        <label for="eMail">이메일</label>
-        <input type="email" name="eMail">
-        <label for="pwd">비밀번호</label>
-        <input type="password" name="pwd">
-        <button type="submit">로그인</button>
-    </form>
-    <a href="#">이메일로 회원가입</a>
+   <main class="main">
+        <h1 class="title">로그인</h1>
+        <form>
+            <div class="input_wrap">
+                <label for="eMail">이메일</label>
+                <input type="email" name="eMail">
+            </div>
+            <div class="input_wrap">
+                <label for="pwd">비밀번호</label>
+                <input type="password" name="pwd">
+            </div>
+            <button class="btn_submit"type="submit">로그인</button>
+        </form>
+        <a class="link_register"href="#">이메일로 회원가입</a>
+   </main>
   </body>
 </html>

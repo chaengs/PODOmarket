@@ -1,3 +1,65 @@
 * {
   box-sizing: border-box;
 }
+
+.main {
+  padding: 54px 34px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  margin-bottom: 40px;
+}
+
+.input_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  color: #767676;
+}
+input {
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 1px solid #7e3e9d;
+}
+
+.btn_submit {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #fff;
+  padding: 13px 0;
+  width: 100%;
+  background-color: #c0a4ce;
+  border: none;
+  border-radius: 44px;
+  margin: 14px 0 20px 0;
+}
+
+.activate {
+  background-color: #7e3e9d;
+}
+
+.link_register {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 15px;
+  color: #767676;
+}

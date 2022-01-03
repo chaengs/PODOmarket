@@ -1,0 +1,7 @@
+header {
+    padding: 12px 19px 8px 19px;
+    border-bottom: 0.5px solid #dbdbdb;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}

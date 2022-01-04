@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+body {
+  font-family: "Righteous", cursive;
+}
+
+.logo_wrap {
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: #7e3e9d;
+}
+.img_logo {
+  width: 120px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIC: 회원가입</title>
+    <link rel="stylesheet" href="../src/css/reset.css" />
+    <link rel="stylesheet" href="../src/css/join_profile.css" />
+  </head>
+  <body>
+   <main class="main">
+        <h1 class="title">프로필 설정</h1>
+        <p class="title_desc">나중에 언제든지 변경할 수 있습니다.</p>
+            <div class="relative-wrap">
+                <img class="img_profile"src="../src/images/join/basic-profile-img.png" alt="profile-img">
+                <label for="img_profile">
+                    <img class="img_upload_btn"src="../src/images/join/img-btn.png" alt="profile-img">
+                </label>
+            </div>
+            <input type="file" id="img_profile" hidden>
+            <div class="input_wrap">
+                <label for="userName" >사용자 이름</label>
+                <input type="text" id="userName" name="userName" placeholder="2~10자 이내여야 합니다.">
+            </div>
+            <div class="input_wrap">
+                <label for="userID">계정 ID</label>
+                <input type="text" id="userID"name="userID" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.">
+            </div>
+            <div class="input_wrap">
+                <label for="userDesc">소개</label>
+                <input type="text" id="userDesc" name="userDesc" placeholder="자신과 판매할 상품에 대해 소개해 주세요!">
+            </div>
+            <button class="btn_submit"type="submit">PIC 시작하기</button>
+        </form>
+   </main>
+  </body>
+</html>

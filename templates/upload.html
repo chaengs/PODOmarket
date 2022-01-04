@@ -6,29 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PIC: 회원가입</title>
     <link rel="stylesheet" href="../src/css/reset.css" />
+    <link rel="stylesheet" href="../src/css/upload.css" />
   </head>
   <body>
-    <main>
-      <header>
-        <!-- <img src="../src/images/upload/icon-arrow-left.png" alt="" /> -->
-        <button>업로드</button>
-      </header>
-      <section>
-        <div>
-          <!-- <img src="../src/images/upload/basic-profile-img.png" alt="" /> -->
-          <div>
-            <textarea
-              name="content"
-              id="content"
-              cols="30"
-              rows="10"
-            ></textarea>
-            <div>
-              <!-- <img src="" alt=""> -->
-            </div>
+    <header>
+      <img
+        class="btn_back"
+        src="../src/images/upload/icon-arrow-left.png"
+        alt=""
+      />
+      <button class="btn_upload">업로드</button>
+    </header>
+    <section class="content_wrap">
+      <img
+        class="img_profile"
+        src="../src/images/upload/basic-profile-img.png"
+        alt=""
+      />
+      <div>
+        <textarea
+          class="content_text"
+          name="content"
+          id="content"
+          onkeydown="resize(this)"
+          onkeyup="resize(this)"
+          placeholder="게시글 입력하기.."
+        ></textarea>
+        <!-- single img -->
+        <div class="imgs_wrap">
+          <div class="img_wrap">
+            <img
+              class="img_single"
+              src="../src/images/upload/testset/test1.png"
+              alt=""
+            />
+            <img class="btn_x" src="../src/images/upload/x.svg" alt="" />
           </div>
         </div>
-      </section>
-    </main>
+        <br />
+        <!-- multi img -->
+        <div class="imgs_wrap">
+          <div class="img_wrap">
+            <img
+              class="img_multi"
+              src="../src/images/upload/testset/test1.png"
+              alt=""
+            />
+            <img class="btn_x" src="../src/images/upload/x.svg" alt="" />
+          </div>
+          <div class="img_wrap">
+            <img
+              class="img_multi"
+              src="../src/images/upload/testset/test2.png"
+              alt=""
+            />
+            <img class="btn_x" src="../src/images/upload/x.svg" alt="" />
+          </div>
+          <div class="img_wrap">
+            <img
+              class="img_multi"
+              src="../src/images/upload/testset/test3.png"
+              alt=""
+            />
+            <img class="btn_x" src="../src/images/upload/x.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      <label for="img_upload">
+        <img
+          class="img_upload_btn"
+          src="../src/images/upload/img-btn.png"
+          alt="profile-img"
+        />
+      </label>
+      <input type="file" id="img_upload" hidden />
+    </section>
+    <script>
+      function resize(obj) {
+        obj.style.height = "1px";
+        obj.style.height = 14 + obj.scrollHeight + "px";
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,81 @@
+body {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-size: 14px;
+}
+
+.txt-hide {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+header {
+  width: 390px;
+  padding: 13px 16px;
+  border-bottom: 0.5px solid #dbdbdb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-bar {
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #000000;
+}
+.search-btn {
+  position: relative;
+  border: none;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  padding: 0;
+  background-image: url(../images/feed/search-icon.png);
+  cursor: pointer;
+}
+
+main {
+  position: relative;
+  width: 390px;
+  height: 668px;
+  padding: 0;
+}
+
+.section-feed-new-user {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 340px;
+}
+
+.section-feed-new-user .feed-title {
+  color: #767676;
+  margin-bottom: 20px;
+}
+
+.btn-search-feed {
+  padding: 13px 34px;
+  background-color: #7E3E9D;
+  color: #ffffff;
+  border-radius: 44px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  background-image: url(../images/feed/symbol-logo.png);
+  width: 74px;
+  height: 89px;
+  top: 226px;
+  left: 158px;
+} 
+

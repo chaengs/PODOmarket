@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.txt-hide {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.post {
+  width: 390px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 16px;
+}
+
+.post-card {
+  width: 304px;
+}
+
+.post-card-profile {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+}
+.post-card-profile img {
+  width: 100%;
+  object-fit: contain;
+}
+
+nav.user-info {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user span {
+  display: block;
+}
+.user-name {
+  line-height: 18px;
+  font-weight: 500;
+}
+.user-id {
+  color: #767676;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 2px;
+}
+
+.post-edit-btn {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+}
+.dot {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #C4C4C4;
+}
+
+.post-content-txt {
+  margin: 16px 0;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.post-content-img {
+  width: 304px;
+}
+.post-content-img img {
+  width: 100%;
+}
+
+.like-comment-container  {
+  display: flex;
+  margin: 12px 0 16px 0;
+}
+
+.like-comment-container li {
+  display: flex;
+  align-items: center;
+  color: #767676;
+}
+
+.like-comment-container li.like {
+  margin-right: 18.5px;
+}
+
+.like-comment-container li button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.like-comment-container .like button {
+  background-image: url(../images/userpost/like-icon.png);
+}
+
+
+
+.like-comment-container .comment button {
+  background-image: url(../images/userpost/comment-icon.png);
+}
+
+.like-comment-container li span {
+  margin: 4px 0 0 6px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+p.post-date {
+  font-size: 10px;
+  color: #767676;
+}

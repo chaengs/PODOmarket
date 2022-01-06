@@ -1,0 +1,29 @@
+<!-- 
+**3.1.1 splash**
+
+- 서비스 접속 초기화면입니다.
+- splash 화면이 잠시 나온 뒤 다음 페이지가 나타납니다.
+    - 로그인을 하지 않은 경우 : 로그인 화면
+    - 로그인이 되어 있는 경우 : 감귤마켓 피드
+ -->
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIC: 로그인</title>
+    <link rel="stylesheet" href="../src/css/reset.css" />
+    <link rel="stylesheet" href="../src/css/splash.css" />
+  </head>
+  <body>
+    <div class="logo_wrap">
+      <img class="img_logo" src="../src/images/splash/logo_purple.png" alt="" />
+      <p class="barnd_name">PIC</p>
+    </div>
+    <script>
+      setTimeout("location.href='./login.html'", 3000);
+    </script>
+  </body>
+</html>

@@ -1,9 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 * {
   box-sizing: border-box;
 }
+
+@keyframes moveUp {
+  from {
+    top: 40%;
+  }
+  to {
+    top: 30%;
+  }
+}
+
+@keyframes backColor {
+  from {
+    background-color: #fff;
+  }
+  to {
+    background-color: #7e3e9d;
+  }
+}
+
+@keyframes loginWrap {
+  from {
+    bottom: -40%;
+  }
+  to {
+    bottom: 0;
+  }
+}
+
 body {
   background-color: #7e3e9d;
   overflow: hidden;
+  font-family: "Righteous", cursive;
+  animation: backColor 3s;
 }
 
 .logo_wrap {
@@ -12,6 +43,9 @@ body {
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: #fff;
+  animation: moveUp 3s;
 }
 
 .img_logo {
@@ -26,6 +60,7 @@ body {
   padding: 50px 34px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  animation: loginWrap 3s;
 }
 
 .btn_wrap {
@@ -42,6 +77,10 @@ body {
   margin-bottom: 10px;
   color: #767676;
   position: relative;
+  cursor: pointer;
+}
+.btn_login:hover {
+  transform: scale(1.02);
 }
 
 .btn_login_kakao {
@@ -108,4 +147,8 @@ body {
 .link_email::after {
   content: "|";
   margin: 0 12px;
+}
+
+.link_wrap a:hover {
+  font-weight: 700;
 }

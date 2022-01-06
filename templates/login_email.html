@@ -9,20 +9,50 @@
     <link rel="stylesheet" href="../src/css/login_email.css" />
   </head>
   <body>
-   <main class="main">
-        <h1 class="title">로그인</h1>
-        <form>
-            <div class="input_wrap">
-                <label for="eMail">이메일</label>
-                <input type="email" name="eMail">
-            </div>
-            <div class="input_wrap">
-                <label for="pwd">비밀번호</label>
-                <input type="password" name="pwd">
-            </div>
-            <button class="btn_submit"type="submit">로그인</button>
-        </form>
-        <a class="link_register"href="#">이메일로 회원가입</a>
-   </main>
+    <main class="main">
+      <h1 class="title">로그인</h1>
+      <form>
+        <div class="input_wrap">
+          <label for="eMail">이메일</label>
+          <input id="eMail" type="email" name="eMail" />
+        </div>
+        <div class="input_wrap">
+          <label for="pwd">비밀번호</label>
+          <input id="pwd" type="password" name="pwd" />
+        </div>
+        <button
+          id="submitBtn"
+          class="btn_submit"
+          type="submit"
+          onClick="console.log('zz')"
+          disabled
+        >
+          로그인
+        </button>
+      </form>
+      <a class="link_register" href="#">이메일로 회원가입</a>
+    </main>
+    <script>
+      eMail.oninput = function () {
+        if (!!eMail.value && !!pwd.value) {
+          document.getElementById("submitBtn").removeAttribute("disabled");
+          document.getElementById("submitBtn").className =
+            "btn_submit activate";
+        } else {
+          document.getElementById("submitBtn").setAttribute("disabled", true);
+          document.getElementById("submitBtn").className = "btn_submit";
+        }
+      };
+      pwd.oninput = function () {
+        if (!!eMail.value && !!pwd.value) {
+          document.getElementById("submitBtn").removeAttribute("disabled");
+          document.getElementById("submitBtn").className =
+            "btn_submit activate";
+        } else {
+          document.getElementById("submitBtn").setAttribute("disabled", true);
+          document.getElementById("submitBtn").className = "btn_submit";
+        }
+      };
+    </script>
   </body>
 </html>

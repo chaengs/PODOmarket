@@ -1,0 +1,70 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+* {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
+
+header {
+    padding: 12px 19px 12px 19px;
+    border-bottom: 0.5px solid #dbdbdb;
+    display: flex;
+    /* justify-content: space-between; */
+
+    gap: 20px;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.follow-wrap {
+    display: flex;
+    align-items: center;
+    margin: 16px;
+}
+.follow-wrap .follow-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 0.5px solid #DBDBDB;
+    margin-right: 12px;
+}
+.follow-wrap .follow-name {
+    font-size: 14px;
+    line-height: 18px;
+}
+.follow-wrap .follow-info {
+    font-size: 12px;
+    line-height: 15px;
+    color: #767676;
+}
+/* .follow-wrap .follow-btn {
+    width: 56px;
+    height: 28px;
+    border-radius: 26px;
+    font-size: 12px;
+    line-height: 15px;
+    position: absolute;
+    right: 16px;
+} */
+.follow-btn-orange {
+    background-color:#F26E22;
+    color: #FFFFFF;
+    width: 56px;
+    height: 28px;
+    border-radius: 26px;
+    font-size: 12px;
+    line-height: 15px;
+    position: absolute;
+    right: 16px;
+}
+.follow-btn-white {
+    background-color: #FFFFFF;
+    color: #767676;
+    border: 1px solid #DBDBDB;
+    width: 56px;
+    height: 28px;
+    border-radius: 26px;
+    font-size: 12px;
+    line-height: 15px;
+    position: absolute;
+    right: 16px;
+}

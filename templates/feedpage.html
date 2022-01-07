@@ -188,15 +188,18 @@
       </section>
     </footer>
     <!-- modal -->
-    <div class="modal hide">
-      <div class="btn-to-close"></div>
-      <ul>
-        <li class="modal-btn"><a href="javascript:void(0)" class="delete-btn">삭제</a></li>
-        <li class="modal-btn"><a href="javascript:void(0)" class="edit-btn">수정</a></li>
-      </ul>
+    <div class="modal hidden">
+      <div class="modal-content hidden">
+        <div class="btn-to-close"></div>
+        <ul>
+          <li class="modal-btn"><a href="javascript:void(0)" class="delete-btn">삭제</a></li>
+          <li class="modal-btn"><a href="javascript:void(0)" class="edit-btn">수정</a></li>
+        </ul>
+      </div>
+      <div class="modal-layer"></div>
     </div>
     <!-- modal-delete -->
-    <div class="modal-delete hide">
+    <div class="modal-delete hidden">
       <p>게시글을 삭제할까요?</p>
       <div class="cancel-delete-btn">
         <a href="javascript:void(0)" class="cancel-btn">취소</a>

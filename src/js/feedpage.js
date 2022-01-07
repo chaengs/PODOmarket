@@ -1,35 +1,37 @@
 const postEditBtn = document.querySelectorAll(".post-edit-btn");
 const modal = document.querySelector(".modal");
-const feedBody = document.querySelector("body");
+const modalContent = document.querySelector(".modal-content");
 const deletePostBtn = document.querySelector(".delete-btn");
 const modalDelete = document.querySelector(".modal-delete");
 const cancelBtn = document.querySelector(".cancel-btn");
 const finalCancelBtn = document.querySelector(".delete-btn-final");
 
 
+const handleModal = () => {
+  let isModalClicked = true;
+  if(isModalClicked) {
+    modal.classList.toggle("hidden");
+    modalContent.classList.toggle("hidden");
+  }
+}
 const openModal = () => {
-  modal.classList.remove("hide");
-  modal.classList.add("on");
-  feedBody.classList.add("modal-bg"); 
+  modal.classList.toggle("hidden");
+  modalContent.classList.toggle("hidden");
 }
 
 const handleDelete = () => {
-  modal.classList.add("hide");
-  modal.classList.remove("on");
-  modalDelete.classList.remove("hide");
-  modalDelete.classList.add("on");
+  modalDelete.classList.toggle("hidden");
+  modalContent.classList.toggle("hidden")
 }
 
 const handleCancel = () => {
-  modalDelete.classList.add("hide");
-  modalDelete.classList.remove("on");
-  feedBody.classList.remove("modal-bg"); 
+  modalDelete.classList.toggle("hidden");
+  modal.classList.toggle("hidden");
 }
 
 const handleFinalDelete = () => {
-  modalDelete.classList.add("hide");
-  modalDelete.classList.remove("on");
-  feedBody.classList.remove("modal-bg"); 
+  modalDelete.classList.toggle("hidden");
+  modal.classList.toggle("hidden");
 }
 
 postEditBtn.forEach((button) => {

@@ -21,10 +21,18 @@
   margin-bottom: 30px;
 }
 
-.relative-wrap {
+.relative_wrap {
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
+}
+
+.border_wrap {
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
 }
 
 .img_profile {

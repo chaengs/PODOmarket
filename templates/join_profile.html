@@ -13,12 +13,14 @@
       <h1 class="title">프로필 설정</h1>
       <p class="title_desc">나중에 언제든지 변경할 수 있습니다.</p>
       <form>
-        <div class="relative-wrap">
-          <img
-            class="img_profile"
-            src="../src/images/join/basic-profile-img.png"
-            alt="profile-img"
-          />
+        <div class="relative_wrap">
+          <div class="border_wrap">
+            <img
+              class="img_profile"
+              src="../src/images/join/basic-profile-img.png"
+              alt="profile-img"
+            />
+          </div>
           <label for="img_profile">
             <img
               class="img_upload_btn"
@@ -27,7 +29,14 @@
             />
           </label>
         </div>
-        <input type="file" id="img_profile" hidden />
+
+        <input
+          type="file"
+          id="img_profile"
+          hidden
+          accept="image/*"
+          onchange="setProfile(event)"
+        />
         <div class="input_wrap">
           <label for="userName">사용자 이름</label>
           <input
@@ -58,5 +67,16 @@
         <button class="btn_submit" type="submit">PIC 시작하기</button>
       </form>
     </main>
+    <script>
+      let profileImg = document.querySelector(".img_profile");
+      const setProfile = (event) => {
+        let reader = new FileReader();
+
+        reader.onload = (event) => {
+          profileImg.setAttribute("src", event.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      };
+    </script>
   </body>
 </html>

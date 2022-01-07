@@ -4,7 +4,8 @@
 
 .bar-menu {
   position: fixed;
-  top: calc(100% - 70px);
+  /* top: calc(100% - 70px); */
+  bottom: 0;
   width: 390px;
   border-top: 0.5px solid #dbdbdb;
   font-size: 10px;

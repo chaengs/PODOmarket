@@ -45,6 +45,7 @@
             name="userName"
             placeholder="2~10자 이내여야 합니다."
           />
+          <p id="userNameError" class="err_msg"></p>
         </div>
         <div class="input_wrap">
           <label for="userID">계정 ID</label>
@@ -64,11 +65,24 @@
             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
           />
         </div>
-        <button class="btn_submit" type="submit">PIC 시작하기</button>
+        <button class="btn_submit" type="submit" disabled>PIC 시작하기</button>
       </form>
     </main>
     <script>
       let profileImg = document.querySelector(".img_profile");
+      let userName = document.querySelector("#userName");
+      let userID = document.querySelector("#userID");
+      let userDesc = document.querySelector("#userDesc");
+      let err_userName = document.querySelector("#userNameError");
+
+      const handleCheckUserName = () => {
+        if (userName.value.length > 10 || userName.value.length < 2) {
+          err_userName.innerHTML = "*사용자 이름은 2~10자 이내여야 합니다.";
+        } else {
+          err_userName.innerHTML = "";
+        }
+      };
+
       const setProfile = (event) => {
         let reader = new FileReader();
 
@@ -77,6 +91,8 @@
         };
         reader.readAsDataURL(event.target.files[0]);
       };
+
+      userName.addEventListener("blur", handleCheckUserName);
     </script>
   </body>
 </html>

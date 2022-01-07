@@ -21,10 +21,18 @@
   margin-bottom: 30px;
 }
 
-.relative-wrap {
+.relative_wrap {
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
+}
+
+.border_wrap {
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
 }
 
 .img_profile {
@@ -68,6 +76,14 @@ input:focus {
 input::placeholder {
   color: #dbdbdb;
   line-height: 14px;
+}
+
+.err_msg {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #eb5757;
+  margin-top: 6px;
 }
 
 .btn_submit {

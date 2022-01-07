@@ -1,5 +1,8 @@
-eMail.oninput = function () {
-  if (!!eMail.value && !!pwd.value) {
+let email = document.querySelector("#email");
+let pwd = document.querySelector("#pwd");
+
+const handleCheckInput = () => {
+  if (!!email.value && !!pwd.value) {
     submitBtn.removeAttribute("disabled");
     submitBtn.className = "btn_submit activate";
   } else {
@@ -7,12 +10,6 @@ eMail.oninput = function () {
     submitBtn.className = "btn_submit";
   }
 };
-pwd.oninput = function () {
-  if (!!eMail.value && !!pwd.value) {
-    submitBtn.removeAttribute("disabled");
-    submitBtn.className = "btn_submit activate";
-  } else {
-    submitBtn.setAttribute("disabled", true);
-    submitBtn.className = "btn_submit";
-  }
-};
+
+email.addEventListener("input", handleCheckInput);
+pwd.addEventListener("input", handleCheckInput);

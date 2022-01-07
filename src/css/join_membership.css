@@ -45,6 +45,14 @@ input::placeholder {
   line-height: 14px;
 }
 
+.err_msg {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #eb5757;
+  margin-top: 6px;
+}
+
 .btn_submit {
   font-size: 14px;
   font-weight: 500;
@@ -56,6 +64,7 @@ input::placeholder {
   border: none;
   border-radius: 44px;
   margin: 14px 0 20px 0;
+  cursor: pointer;
 }
 
 .activate {

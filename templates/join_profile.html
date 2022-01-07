@@ -55,6 +55,7 @@
             name="userID"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
           />
+          <p id="userIDError" class="err_msg"></p>
         </div>
         <div class="input_wrap">
           <label for="userDesc">소개</label>
@@ -64,35 +65,11 @@
             name="userDesc"
             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
           />
+          <p id="userDescError" class="err_msg"></p>
         </div>
         <button class="btn_submit" type="submit" disabled>PIC 시작하기</button>
       </form>
     </main>
-    <script>
-      let profileImg = document.querySelector(".img_profile");
-      let userName = document.querySelector("#userName");
-      let userID = document.querySelector("#userID");
-      let userDesc = document.querySelector("#userDesc");
-      let err_userName = document.querySelector("#userNameError");
-
-      const handleCheckUserName = () => {
-        if (userName.value.length > 10 || userName.value.length < 2) {
-          err_userName.innerHTML = "*사용자 이름은 2~10자 이내여야 합니다.";
-        } else {
-          err_userName.innerHTML = "";
-        }
-      };
-
-      const setProfile = (event) => {
-        let reader = new FileReader();
-
-        reader.onload = (event) => {
-          profileImg.setAttribute("src", event.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      };
-
-      userName.addEventListener("blur", handleCheckUserName);
-    </script>
+    <script src="../src/js/join_profile.js" />
   </body>
 </html>

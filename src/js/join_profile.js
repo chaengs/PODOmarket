@@ -115,6 +115,40 @@ const imgUpload = () => {
   });
 };
 
+const handleOnSubmit = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    user: {
+      email: email,
+      password: pwd,
+      username: userName.value,
+      accountname: userID.value,
+      intro: userDesc.value,
+      image: registerImgUrl,
+    },
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("http://146.56.183.55:5050/user", requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .then(() => {
+      // 회원가입 완료 쿠키삭제 후 로그인 페이지로 라우팅
+      document.cookie = "EMAIL=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
+      document.cookie = "PWD=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
+      location.href = "./login_email.html";
+    })
+    .catch((error) => console.log("error", error));
+};
+
 checkIDValid();
 userName.addEventListener("blur", handleCheckUserName);
 userID.addEventListener("blur", handleCheckUserID);

@@ -6,6 +6,24 @@ let err_userName = document.querySelector("#userNameError");
 let err_ID = document.querySelector("#userIDError");
 let err_Desc = document.querySelector("#userDescError");
 let submitBtn = document.querySelector(".btn_submit");
+let imgInput = document.querySelector("#img_profile");
+let registerImgUrl = "1641803765586.png";
+//기본이미지
+console.log(imgInput.value);
+// 이전페이지 쿠키를 가져온다.
+const getCookie = function (name) {
+  const value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return value ? value[2] : null;
+};
+
+const email = getCookie("EMAIL");
+const pwd = getCookie("PWD");
+
+// 이전페이지에서의 쿠키가 없다면 로그인페이지로 강제 이동
+if (!email || !pwd) {
+  alert("잘못된 접근입니다.");
+  location.href = "./login.html";
+}
 
 const checkName = () =>
   userName.value.length < 11 && userName.value.length > 1 ? true : false;
@@ -48,6 +66,25 @@ const setProfile = (event) => {
     profileImg.setAttribute("src", event.target.result);
   };
   reader.readAsDataURL(event.target.files[0]);
+  imgUpload();
+};
+
+const imgUpload = () => {
+  var formdata = new FormData();
+  formdata.append("image", imgInput.files[0], "basic-profile-img.png");
+  var requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
+  };
+  async function fetcher() {
+    return (
+      await fetch("http://146.56.183.55:5050/image/uploadfile", requestOptions)
+    ).json();
+  }
+  fetcher().then((value) => {
+    registerImgUrl = value.filename;
+  });
 };
 
 userName.addEventListener("blur", handleCheckUserName);

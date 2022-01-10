@@ -30,7 +30,6 @@ const checkEmailValid = () => {
       const case1 = "이미 가입된 이메일 주소 입니다.";
       const case2 = "사용 가능한 이메일 입니다.";
       const case3 = "잘못된 접근입니다.";
-      console.log(result);
       if (result.message === case1) {
         email_err_msg.innerHTML = "*" + case1;
         emailCheck = false;

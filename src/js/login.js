@@ -1,6 +1,7 @@
 let email = document.querySelector("#email");
 let pwd = document.querySelector("#pwd");
 
+console.log(document.cookie);
 const handleCheckInput = () => {
   if (!!email.value && !!pwd.value) {
     submitBtn.removeAttribute("disabled");

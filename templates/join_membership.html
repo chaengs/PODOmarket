@@ -20,6 +20,7 @@
             name="email"
             placeholder="이메일 주소를 입력해 주세요."
           />
+          <p id="email_err_msg" class="err_msg"></p>
         </div>
         <div class="input_wrap">
           <label for="pwd">비밀번호</label>
@@ -29,9 +30,16 @@
             name="pwd"
             placeholder="비밀번호를 설정해 주세요."
           />
-          <p class="err_msg"></p>
+          <p id="pwd_err_msg" class="err_msg"></p>
         </div>
-        <button class="btn_submit" type="submit" disabled>회원가입</button>
+        <button
+          class="btn_submit"
+          type="button"
+          onClick="{handleOnSubmit()}"
+          disabled
+        >
+          회원가입
+        </button>
       </form>
     </main>
     <script src="../src/js/join_membership.js" />

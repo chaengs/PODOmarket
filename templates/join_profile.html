@@ -67,7 +67,14 @@
           />
           <p id="userDescError" class="err_msg"></p>
         </div>
-        <button class="btn_submit" type="submit" disabled>PIC 시작하기</button>
+        <button
+          class="btn_submit"
+          type="button"
+          onclick="{handleOnSubmit()}"
+          disabled
+        >
+          PIC 시작하기
+        </button>
       </form>
     </main>
     <script src="../src/js/join_profile.js" />

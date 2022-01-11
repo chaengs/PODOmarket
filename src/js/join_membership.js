@@ -1,3 +1,10 @@
+const isLogined = sessionStorage.pic_isLogined;
+
+// 로그인, 회원가입 등의 페이지에 로그인 상태로 접근할 경우 splash로 이동
+if (isLogined) {
+  location.href = "./index.html";
+}
+
 let email = document.querySelector("#email");
 let pwd = document.querySelector("#pwd");
 let email_err_msg = document.querySelector("#email_err_msg");
@@ -46,7 +53,6 @@ const checkEmailFormet = () => {
 
 // Email 정규표현식 test를 통과하면 중복검사를 실시한다.
 const handleChaeckEmail = () => {
-  checkEmailFormet();
   if (checkEmailFormet()) {
     email_err_msg.innerHTML = "";
     checkEmailValid();
@@ -71,6 +77,7 @@ const handleCheckPwdLength = () => {
 const handleCheckInput = () => {
   function to() {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
+    console.log(!!email.value, !!pwd.value, CheckPwdLength(), emailCheck);
     if (!!email.value && !!pwd.value && CheckPwdLength() && emailCheck) {
       submitBtn.removeAttribute("disabled");
       submitBtn.className = "btn_submit activate";

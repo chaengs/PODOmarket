@@ -64,3 +64,11 @@ input:focus {
   line-height: 15px;
   color: #767676;
 }
+
+.err_msg {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #eb5757;
+  margin-top: 6px;
+}

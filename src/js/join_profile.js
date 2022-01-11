@@ -1,3 +1,10 @@
+const isLogined = sessionStorage.pic_isLogined;
+
+// 로그인, 회원가입 등의 페이지에 로그인 상태로 접근할 경우 splash로 이동
+if (isLogined) {
+  location.href = "./index.html";
+}
+
 let profileImg = document.querySelector(".img_profile");
 let userName = document.querySelector("#userName");
 let userID = document.querySelector("#userID");
@@ -8,6 +15,7 @@ let err_Desc = document.querySelector("#userDescError");
 let submitBtn = document.querySelector(".btn_submit");
 let imgInput = document.querySelector("#img_profile");
 let registerImgUrl = "1641803765586.png";
+// 이미지를 업로드 하지 않을 경우 기본이미지가 db에 들어간다.
 let validID = true;
 
 // 이전페이지 쿠키를 가져온다.
@@ -25,14 +33,17 @@ if (!email || !pwd) {
   location.href = "./login.html";
 }
 
+// username의 길이 유효성 검사
 const checkName = () =>
   userName.value.length < 11 && userName.value.length > 1 ? true : false;
 
+// accountname의 정규표현식 검사
 const checkID = () => {
   const regExp = /^[a-zA-Z0-9._]*$/;
   return regExp.test(userID.value) && !!userID.value ? true : false;
 };
 
+// accountname이 중복인지 검사
 const checkIDValid = () => {
   const requestOptions = {
     method: "GET",
@@ -53,13 +64,16 @@ const checkIDValid = () => {
     .catch((error) => console.log("error", error));
 };
 
+// intro(자기소개)란이 공백인지 검사
 const checkDesc = () => (userDesc.value.length != 0 ? true : false);
 
+// input blur 시 실행
 const handleCheckUserName = () => {
   if (checkName()) err_userName.innerHTML = "";
   else err_userName.innerHTML = "*사용자 이름은 2~10자 이내여야 합니다.";
 };
 
+// input blur 시 실행
 const handleCheckUserID = () => {
   if (checkID()) {
     console.log("1");
@@ -68,13 +82,16 @@ const handleCheckUserID = () => {
   } else err_ID.innerHTML = "*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
 };
 
+// input blur 시 실행
 const handleCheckUserDesc = () => {
   if (checkDesc()) err_Desc.innerHTML = "";
   else err_Desc.innerHTML = "*자신을 소개해 주세요.";
 };
 
+// input tag를  blur,input 시 실행
 const handleCheckInput = () => {
   function check() {
+    // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
     if (checkName() && checkID() && checkDesc() && validID) {
       submitBtn.removeAttribute("disabled");
       submitBtn.className = "btn_submit activate";
@@ -83,10 +100,11 @@ const handleCheckInput = () => {
       submitBtn.className = "btn_submit";
     }
   }
-
+  // fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
   setTimeout(check, 100);
 };
 
+// 이미지 업로드 시 미리보기 view와 이미지 업로드 실행
 const setProfile = (event) => {
   let reader = new FileReader();
 
@@ -97,10 +115,11 @@ const setProfile = (event) => {
   imgUpload();
 };
 
+// 이미지 db에 업로드 후 로그인 시 이용할 변수에 파일이름 할당.
 const imgUpload = () => {
-  var formdata = new FormData();
+  const formdata = new FormData();
   formdata.append("image", imgInput.files[0], "basic-profile-img.png");
-  var requestOptions = {
+  const requestOptions = {
     method: "POST",
     body: formdata,
     redirect: "follow",
@@ -115,6 +134,7 @@ const imgUpload = () => {
   });
 };
 
+// 버튼이 활성화되면 버튼에 생기는 onClick event
 const handleOnSubmit = () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -149,10 +169,11 @@ const handleOnSubmit = () => {
     .catch((error) => console.log("error", error));
 };
 
-checkIDValid();
 userName.addEventListener("blur", handleCheckUserName);
 userID.addEventListener("blur", handleCheckUserID);
 userDesc.addEventListener("blur", handleCheckUserDesc);
+
+// input이 아닌 데이터 변경점이 있기 때문에 blur도 추가하였음.
 userName.addEventListener("blur", handleCheckInput);
 userID.addEventListener("blur", handleCheckInput);
 userDesc.addEventListener("blur", handleCheckInput);

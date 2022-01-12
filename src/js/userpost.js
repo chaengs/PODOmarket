@@ -1,10 +1,16 @@
-const likeBtn = document.querySelector(".like > button");
-const likeCount = document.querySelector(".like > span");
+const likeButtons = document.querySelectorAll(".like > button");
+
 let hasClicked = false;
 
 const handleLike = (event) => {
+  // 각각의 포스팅 별로 내가좋아요 했는지 안했는지 저장하고 api 확인해야 함
   // like or cancel like 
+  const likeBtn = event.target;
+  const likeCount = likeBtn.nextElementSibling;
+  // console.log(likeCount)
   let count = parseInt(likeCount.textContent);
+  console.log(count)
+
   if (!hasClicked) {
     count += 1;
     likeCount.textContent = count;
@@ -21,4 +27,6 @@ const handleLike = (event) => {
 }
 
 
-likeBtn.addEventListener("click", handleLike);
+likeButtons.forEach((btn) => {
+  btn.addEventListener("click", handleLike);
+})

@@ -1,5 +1,9 @@
 header {
   width: 390px;
+  border-bottom: 0.5px solid #dbdbdb;
+}
+
+.feed-search-container {
   padding: 13px 16px;
   border-bottom: 0.5px solid #dbdbdb;
   display: flex;
@@ -41,7 +45,7 @@ header {
   position: relative;
   width: 390px;
   height: 100%;
-  z-index: 1;
+  z-index: 20;
 }
 .modal-layer {
   position: fixed;

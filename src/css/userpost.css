@@ -39,6 +39,8 @@ a {
 .post-card-profile img {
   width: 100%;
   object-fit: contain;
+  border-radius: 50%;
+  border: 0.5px solid #DBDBDB;
 }
 
 nav.user-info {
@@ -71,8 +73,8 @@ nav.user-info {
   cursor: pointer;
 }
 .dot {
-  width: 2px;
-  height: 2px;
+  width: 1.5px;
+  height: 1.5px;
   border-radius: 50%;
   background-color: #C4C4C4;
 }
@@ -111,13 +113,21 @@ nav.user-info {
   padding: 0;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
-.like-comment-container .like button {
+.like button.default {
   background-image: url(../images/userpost/like-icon.png);
 }
-
-
+.like-btn-on {
+  background-image: url(../images/userpost/like-btn-on.png);
+  animation: like 0.5s;
+}
+@keyframes like {
+  0%   { transform: scale(1); }
+  90%   { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 
 .like-comment-container .comment button {
   background-image: url(../images/userpost/comment-icon.png);
@@ -132,4 +142,5 @@ nav.user-info {
 p.post-date {
   font-size: 10px;
   color: #767676;
+  margin-bottom: 4px;
 }

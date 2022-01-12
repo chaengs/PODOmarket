@@ -7,6 +7,16 @@ header {
   align-items: center;
 }
 
+#feed-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  height: calc(100% - 108px);
+  overflow-y: scroll;
+  width: 390px;
+}
 .search-bar {
   border: none;
   font-size: 18px;

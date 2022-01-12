@@ -23,20 +23,20 @@
     <main id="feed-container">
       <article class="post">
         <h2 class="txt-hide">포스트</h2>
-        <a href="javascript:void(0)" class="post-card-profile">
-          <img src="../src/images/search/default_profile.png" alt="user-profile-img">
-        </a>
         <section class="post-card">
           <nav class="user-info">
-            <ul>
+            <a href="javascript:void(0)" class="post-card-profile">
+              <img src="../src/images/search/default_profile.png" alt="user-profile-img">
+            </a>
+            <ul class="user">
               <li>
-                <a href="javascript:void(0)" class="user">
+                <a href="javascript:void(0)">
                   <span class="user-name">애월읍 위니브 감귤농장</span>
                   <span class="user-id">@weniv_Mandarin</span>
                 </a>
               </li>
             </ul>
-            <ul>
+            <ul class="edit-btn-container">
               <li>
                 <a href="javascript:void(0)" class="post-edit-btn">
                   <span class="dot"></span>
@@ -46,45 +46,49 @@
               </li>
             </ul>
           </nav>
-          <p class="post-content-txt">
-            벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은 쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다. 피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.
-          </p>
-          <div class="post-content-img">
-            <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
+          <div class="post-content-container">
+            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은
+              쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다.
+              피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.</p>
+            <div class="post-content-img">
+              <!-- 이미지 여러개 들어 올 수도 있을 것 같아서 일단 div에 넣음 -->
+              <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
+            </div>
+            <ul class="like-comment-container">
+              <li class="like">
+                <button type="button" class="default">
+                  <span class="txt-hide">좋아요 버튼</span>
+                </button>
+                <span>58</span>
+              </li>
+              <li class="comment">
+                <button>
+                  <span class="txt-hide">코멘트 버튼</span>
+                </button>
+                <span>12</span>
+              </li>
+            </ul>
+            <p class="post-date">2022년 1월 3일</p>
           </div>
-          <ul class="like-comment-container">
-            <li class="like">
-              <button type="button">
-                <span class="txt-hide">좋아요 버튼</span>
-              </button>
-              <span>58</span>
-            </li>
-            <li class="comment">
-              <button>
-                <span class="txt-hide">코멘트 버튼</span>
-              </button>
-              <span>12</span>
-            </li>
-          </ul>
-          <p class="post-date">2022년 1월 3일</p>
         </section>
       </article>
-            <article class="post">
+
+      <article class="post">
         <h2 class="txt-hide">포스트</h2>
-        <a href="javascript:void(0)" class="post-card-profile">
-          <img src="../src/images/search/default_profile.png" alt="user-profile-img">
-        </a>
         <section class="post-card">
           <nav class="user-info">
-            <ul>
+            <a href="javascript:void(0)" class="post-card-profile">
+              <img src="../src/images/search/default_profile.png" alt="user-profile-img">
+            </a>
+            <ul class="user">
               <li>
-                <a href="javascript:void(0)" class="user">
+                <a href="javascript:void(0)">
                   <span class="user-name">애월읍 위니브 감귤농장</span>
                   <span class="user-id">@weniv_Mandarin</span>
                 </a>
               </li>
             </ul>
-            <ul>
+            <ul class="edit-btn-container">
               <li>
                 <a href="javascript:void(0)" class="post-edit-btn">
                   <span class="dot"></span>
@@ -94,45 +98,50 @@
               </li>
             </ul>
           </nav>
-          <p class="post-content-txt">
-            벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은 쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다. 피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.
-          </p>
-          <div class="post-content-img">
-            <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
+          <div class="post-content-container">
+            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘
+              애기 많은
+              쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다.
+              피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.</p>
+            <div class="post-content-img">
+              <!-- 이미지 여러개 들어 올 수도 있을 것 같아서 일단 div에 넣음 -->
+              <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
+            </div>
+            <ul class="like-comment-container">
+              <li class="like">
+                <button type="button" class="default">
+                  <span class="txt-hide">좋아요 버튼</span>
+                </button>
+                <span>58</span>
+              </li>
+              <li class="comment">
+                <button>
+                  <span class="txt-hide">코멘트 버튼</span>
+                </button>
+                <span>12</span>
+              </li>
+            </ul>
+            <p class="post-date">2022년 1월 3일</p>
           </div>
-          <ul class="like-comment-container">
-            <li class="like">
-              <button type="button">
-                <span class="txt-hide">좋아요 버튼</span>
-              </button>
-              <span>58</span>
-            </li>
-            <li class="comment">
-              <button>
-                <span class="txt-hide">코멘트 버튼</span>
-              </button>
-              <span>12</span>
-            </li>
-          </ul>
-          <p class="post-date">2022년 1월 3일</p>
         </section>
       </article>
-            <article class="post">
+
+      <article class="post">
         <h2 class="txt-hide">포스트</h2>
-        <a href="javascript:void(0)" class="post-card-profile">
-          <img src="../src/images/search/default_profile.png" alt="user-profile-img">
-        </a>
         <section class="post-card">
           <nav class="user-info">
-            <ul>
+            <a href="javascript:void(0)" class="post-card-profile">
+              <img src="../src/images/search/default_profile.png" alt="user-profile-img">
+            </a>
+            <ul class="user">
               <li>
-                <a href="javascript:void(0)" class="user">
+                <a href="javascript:void(0)">
                   <span class="user-name">애월읍 위니브 감귤농장</span>
                   <span class="user-id">@weniv_Mandarin</span>
                 </a>
               </li>
             </ul>
-            <ul>
+            <ul class="edit-btn-container">
               <li>
                 <a href="javascript:void(0)" class="post-edit-btn">
                   <span class="dot"></span>
@@ -142,29 +151,35 @@
               </li>
             </ul>
           </nav>
-          <p class="post-content-txt">
-            벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은 쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다. 피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.
-          </p>
-          <div class="post-content-img">
-            <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
+          <div class="post-content-container">
+            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은
+              쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다.
+              피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.</p>
+            <div class="post-content-img">
+              <!-- 이미지 여러개 들어 올 수도 있을 것 같아서 일단 div에 넣음 -->
+              <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
+            </div>
+            <ul class="like-comment-container">
+              <li class="like">
+                <button type="button" class="default">
+                  <span class="txt-hide">좋아요 버튼</span>
+                </button>
+                <span class="like-count">58</span>
+              </li>
+              <li class="comment">
+                <button>
+                  <span class="txt-hide">코멘트 버튼</span>
+                </button>
+                <span>12</span>
+              </li>
+            </ul>
+            <p class="post-date">2022년 1월 3일</p>
           </div>
-          <ul class="like-comment-container">
-            <li class="like">
-              <button type="button">
-                <span class="txt-hide">좋아요 버튼</span>
-              </button>
-              <span>58</span>
-            </li>
-            <li class="comment">
-              <button>
-                <span class="txt-hide">코멘트 버튼</span>
-              </button>
-              <span>12</span>
-            </li>
-          </ul>
-          <p class="post-date">2022년 1월 3일</p>
         </section>
       </article>
+
+
+
     </main>
     <!-- menu -->
     <footer>
@@ -206,6 +221,7 @@
         <a href="javascript:void(0)" class="delete-btn-final">삭제</a>
       </div>
     </div>
+    <script src="../src/js/userpost.js"></script>
     <script src="../src/js/feedpage.js"></script>
   </body>
 </html>

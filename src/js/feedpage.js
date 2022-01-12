@@ -1,3 +1,4 @@
+const searchBtn = document.querySelector(".search-btn");
 const postEditBtn = document.querySelectorAll(".post-edit-btn");
 const modal = document.querySelector(".modal");
 const modalContent = document.querySelector(".modal-content");
@@ -34,6 +35,10 @@ const handleFinalDelete = () => {
   modal.classList.toggle("hidden");
 }
 
+const openSearch = () => {
+  location.href = "search.html"
+}
+
 postEditBtn.forEach((button) => {
   button.addEventListener("click", openModal)
 })
@@ -41,3 +46,4 @@ deletePostBtn.addEventListener("click", handleDelete)
 cancelBtn.addEventListener("click", handleCancel);
 finalCancelBtn.addEventListener("click", handleFinalDelete)
 
+searchBtn.addEventListener("click", openSearch)

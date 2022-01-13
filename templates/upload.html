@@ -4,24 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PIC: 회원가입</title>
+    <title>PIC: 업로드</title>
     <link rel="stylesheet" href="../src/css/reset.css" />
     <link rel="stylesheet" href="../src/css/upload.css" />
   </head>
   <body>
     <header>
-      <img
-        class="btn_back"
-        src="../src/images/upload/icon-arrow-left.png"
-        alt=""
-      />
-      <button class="btn_upload">업로드</button>
+      <a href="feed.html">
+        <img
+          class="btn_back"
+          src="../src/images/upload/icon-arrow-left.png"
+          alt=""
+        />
+      </a>
+      <button class="btn_upload" disabled>업로드</button>
     </header>
     <section class="content_wrap">
       <img
         class="img_profile"
         src="../src/images/upload/basic-profile-img.png"
-        alt=""
+        alt="profile"
       />
       <div>
         <textarea
@@ -33,15 +35,23 @@
           placeholder="게시글 입력하기.."
         ></textarea>
         <div class="imgs_wrap"></div>
-        <label for="img_upload">
-        <img
-          class="img_upload_btn"
-          src="../src/images/upload/img-btn.png"
-          alt="profile-img"
+        <label class="img_upload_btn" for="img_upload" tabindex="0">
+          <img
+            class="img_upload_btn"
+            src="../src/images/upload/img-btn.png"
+            alt="profile-img"
+          />
+        </label>
+        <input
+          type="file"
+          id="img_upload"
+          accept="image/*"
+          onchange="setProfile(event)"
+          multiple
+          hidden
         />
-      </label>
-      <input type="file" id="img_upload" accept="image/*" onchange="setProfile(event)" multiple hidden/>
+      </div>
     </section>
-    <script src="../src/js/upload.js"/>
+    <script src="../src/js/upload.js" />
   </body>
 </html>

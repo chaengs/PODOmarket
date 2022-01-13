@@ -14,7 +14,7 @@ header {
 
 .btn_upload {
   padding: 7px 26px;
-  background-color: #7e3e9d;
+  background-color: #c0a4ce;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
@@ -22,6 +22,11 @@ header {
   border: none;
   border-radius: 32px;
 }
+
+.activate {
+  background-color: #7e3e9d;
+}
+
 .content_wrap {
   padding: 0 16px;
   display: grid;
@@ -91,4 +96,5 @@ header {
   height: 50px;
   bottom: 16px;
   right: 16px;
+  cursor: pointer;
 }

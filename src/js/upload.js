@@ -1,7 +1,9 @@
 const fileInput = document.querySelector("#img_upload");
 const imgBlock = document.querySelector(".imgs_wrap");
+const textArea = document.querySelector("#content");
 const imgUrl = [];
 
+// conent textarea 글자수에 따라 높이 조절
 const resize = (obj) => {
   obj.style.height = "1px";
   obj.style.height = 14 + obj.scrollHeight + "px";
@@ -62,3 +64,9 @@ const deleteMultiImg = (e) => {
   fileInput.files = dataTranster.files;
   removeTarget.remove();
 };
+
+const dataExist = () => {};
+
+textArea.addEventListener("input", () => {
+  console.log(textArea.value);
+});

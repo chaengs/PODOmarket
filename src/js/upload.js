@@ -1,3 +1,10 @@
+const isLogined = sessionStorage.pic_isLogined;
+
+// 회원 서비스 페이지에 비 로그인 상태로 접근할 경우 splash로 이동
+if (!isLogined) {
+  location.href = "./index.html";
+}
+
 const fileInput = document.querySelector("#img_upload");
 const imgBlock = document.querySelector(".imgs_wrap");
 const textArea = document.querySelector("#content");

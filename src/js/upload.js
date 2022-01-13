@@ -2,7 +2,8 @@ const fileInput = document.querySelector("#img_upload");
 const imgBlock = document.querySelector(".imgs_wrap");
 const textArea = document.querySelector("#content");
 const uploadBtn = document.querySelector(".btn_upload");
-const imgUrl = [];
+const token = sessionStorage.getItem("pic_token");
+let imgUrl = "";
 
 // conent textarea 글자수에 따라 높이 조절
 const resize = (obj) => {
@@ -69,13 +70,67 @@ const deleteMultiImg = (e) => {
 };
 
 const dataExist = () => {
-  console.log(!!textArea.value.length);
   if (textArea.value.length || fileInput.files.length) {
     uploadBtn.removeAttribute("disabled");
     uploadBtn.className = "btn_upload activate";
   } else {
     uploadBtn.setAttribute("disabled", true);
     uploadBtn.className = "btn_upload";
+  }
+};
+
+const imgUpload = () => {
+  const formdata = new FormData();
+
+  for (let i = 0; i < fileInput.files.length; i++) {
+    formdata.append(`image`, fileInput.files[i], fileInput.files[i].name);
+  }
+
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch("http://146.56.183.55:5050/image/uploadfiles", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      imgUrl = result.map((item) => item.filename).join();
+    })
+    .catch((error) => console.log("error", error));
+};
+
+const postUpload = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    post: {
+      content: textArea.value,
+      image: imgUrl,
+    },
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("http://146.56.183.55:5050/post", requestOptions)
+    .then((response) => response.json())
+    .then(() => (location.href = "./feed.html"))
+    .catch((error) => console.log("error", error));
+};
+
+const handleOnSubmit = () => {
+  if (fileInput.files.length == 0) {
+    postUpload();
+  } else {
+    imgUpload();
+    setTimeout(postUpload, 100);
   }
 };
 

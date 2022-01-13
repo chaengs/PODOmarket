@@ -70,15 +70,19 @@ header {
 }
 
 .img_single {
+  box-sizing: border-box;
   width: 304px;
   height: 228px;
   border-radius: 10px;
+  border: 1px solid #bdbdbd;
 }
 
 .img_multi {
+  box-sizing: border-box;
   width: 168px;
   height: 126px;
   border-radius: 10px;
+  border: 1px solid #bdbdbd;
 }
 
 .img_upload_btn {

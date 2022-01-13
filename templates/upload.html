@@ -32,8 +32,9 @@
           onkeyup="resize(this)"
           placeholder="게시글 입력하기.."
         ></textarea>
+        <div class="imgs_wrap"></div>
         <!-- single img -->
-        <div class="imgs_wrap">
+        <!-- <div class="imgs_wrap">
           <div class="img_wrap">
             <img
               class="img_single"
@@ -42,10 +43,9 @@
             />
             <img class="btn_x" src="../src/images/upload/x.svg" alt="" />
           </div>
-        </div>
-        <br />
+        </div> -->
         <!-- multi img -->
-        <div class="imgs_wrap">
+        <!-- <div class="imgs_wrap">
           <div class="img_wrap">
             <img
               class="img_multi"
@@ -71,7 +71,7 @@
             <img class="btn_x" src="../src/images/upload/x.svg" alt="" />
           </div>
         </div>
-      </div>
+      </div> -->
       <label for="img_upload">
         <img
           class="img_upload_btn"
@@ -79,13 +79,8 @@
           alt="profile-img"
         />
       </label>
-      <input type="file" id="img_upload" hidden />
+      <input type="file" id="img_upload" accept="image/*" onchange="setProfile(event)" multiple hidden/>
     </section>
-    <script>
-      function resize(obj) {
-        obj.style.height = "1px";
-        obj.style.height = 14 + obj.scrollHeight + "px";
-      }
-    </script>
+    <script src="../src/js/upload.js"/>
   </body>
 </html>

@@ -11,33 +11,6 @@ body {
   overflow: hidden;
 }
 
-header {
-  width: 390px;
-  padding: 13px 16px;
-  border-bottom: 0.5px solid #dbdbdb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.search-bar {
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 22px;
-  color: #000000;
-}
-.search-btn {
-  position: relative;
-  border: none;
-  width: 24px;
-  height: 24px;
-  background-color: transparent;
-  padding: 0;
-  background-image: url(../images/feed/search-icon.png);
-  cursor: pointer;
-}
-
 main {
   position: relative;
   width: 390px;

@@ -14,10 +14,31 @@
   <body>
     <!-- search section -->
     <header>
-      <p class="search-bar">계정 검색</p>
-      <button class="search-btn" type="button">
+      <article class="feed-search-container">
+        <p class="search-bar">계정 검색</p>
+        <button class="search-btn" type="button">
         <span class="txt-hide">계정검색 버튼</span>
-      </button>
+        </button>
+      </article>
+      <!-- dock bar (menu) -->
+      <section class="bar-menu">
+        <button class="btn-home checked">
+          <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
+          <p>홈</p>
+        </button>
+        <button class="btn-chat">
+          <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
+          <p>채팅</p>
+        </button>
+        <button class="btn-new-post">
+          <img class="img-btn" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
+          <p>게시물 작성</p>
+        </button>
+        <button class="btn-profile">
+          <img class="img-btn" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+          <p>프로필</p>
+        </button>
+      </section>
     </header>
     <!-- feed section -->
     <main id="feed-container">
@@ -177,31 +198,8 @@
           </div>
         </section>
       </article>
-
-
-
     </main>
-    <!-- menu -->
-    <footer>
-      <section class="bar-menu">
-        <div class="btn-home checked">
-          <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
-          <p>홈</p>
-        </div>
-        <div class="btn-chat">
-          <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
-          <p>채팅</p>
-        </div>
-        <div class="btn-new-post">
-          <img class="img-btn" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
-          <p>게시물 작성</p>
-        </div>
-        <div class="btn-profile">
-          <img class="img-btn" src="../src/images/menubar/icon-user.png" alt="btn-home" />
-          <p>프로필</p>
-        </div>
-      </section>
-    </footer>
+
     <!-- modal -->
     <div class="modal hidden">
       <div class="modal-content hidden">

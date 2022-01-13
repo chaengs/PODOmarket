@@ -1,6 +1,7 @@
 const fileInput = document.querySelector("#img_upload");
 const imgBlock = document.querySelector(".imgs_wrap");
 const textArea = document.querySelector("#content");
+const uploadBtn = document.querySelector(".btn_upload");
 const imgUrl = [];
 
 // conent textarea 글자수에 따라 높이 조절
@@ -25,7 +26,7 @@ const setProfile = (event) => {
         imgBlock.innerHTML += `
           <div class="img_wrap">
             <img class="img_single" src="${event.target.result}" alr="img"/>
-            <img class="btn_x" src="../src/images/upload/x.svg" onclick="deleteMultiImg(this)"/>
+            <img class="btn_x" src="../src/images/upload/x.svg" onclick="deleteSingleImg()"/>
           </div>`;
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -49,6 +50,7 @@ const setProfile = (event) => {
 const deleteSingleImg = () => {
   imgBlock.innerHTML = "";
   fileInput.value = "";
+  dataExist();
 };
 
 const deleteMultiImg = (e) => {
@@ -63,10 +65,19 @@ const deleteMultiImg = (e) => {
     });
   fileInput.files = dataTranster.files;
   removeTarget.remove();
+  dataExist();
 };
 
-const dataExist = () => {};
+const dataExist = () => {
+  console.log(!!textArea.value.length);
+  if (textArea.value.length || fileInput.files.length) {
+    uploadBtn.removeAttribute("disabled");
+    uploadBtn.className = "btn_upload activate";
+  } else {
+    uploadBtn.setAttribute("disabled", true);
+    uploadBtn.className = "btn_upload";
+  }
+};
 
-textArea.addEventListener("input", () => {
-  console.log(textArea.value);
-});
+textArea.addEventListener("input", dataExist);
+fileInput.addEventListener("change", dataExist);

@@ -1,14 +1,15 @@
 header {
   width: 390px;
-  border-bottom: 0.5px solid #dbdbdb;
+  /* border-bottom: 0.5px solid #dbdbdb; */
 }
 
 .feed-search-container {
-  padding: 13px 16px;
+  padding: 0 16px;
   border-bottom: 0.5px solid #dbdbdb;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 48px;
 }
 
 #feed-container {

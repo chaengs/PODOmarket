@@ -7,6 +7,8 @@ const modalDelete = document.querySelector(".modal-delete");
 const cancelBtn = document.querySelector(".cancel-btn");
 const finalCancelBtn = document.querySelector(".delete-btn-final");
 
+const modalLayer = document.querySelector(".modal-layer");
+
 
 const handleModal = () => {
   let isModalClicked = true;
@@ -39,6 +41,11 @@ const openSearch = () => {
   location.href = "search.html"
 }
 
+const closeModal = () => {
+  modal.classList.add("hidden")
+  modalContent.classList.add("hidden");
+}
+
 postEditBtn.forEach((button) => {
   button.addEventListener("click", openModal)
 })
@@ -47,3 +54,5 @@ cancelBtn.addEventListener("click", handleCancel);
 finalCancelBtn.addEventListener("click", handleFinalDelete)
 
 searchBtn.addEventListener("click", openSearch)
+
+modalLayer.addEventListener("click", closeModal);

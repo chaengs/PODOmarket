@@ -7,12 +7,13 @@
     <title></title>
     <link rel="stylesheet" href="../src/css/reset.css" />
     <link rel="stylesheet" href="../src/css/menubar.css" />
+    <link rel="stylesheet" href="../src/css/chat_list.css" />
   </head>
 
   <body>
     <!-- search section -->
     <header>
-      <a>
+      <a href="feed.html">
         <img
           class="btn-back"
           src="../src/images/search/icon-arrow-left.png"
@@ -61,18 +62,67 @@
         <p>프로필</p>
       </button>
     </section>
+    <!-- main content -->
     <main>
+      <!-- 접근성을 위한 tabindex -->
       <span tabindex="0">
         <article class="chat">
           <div class="img_wrap">
-            <img src="../src/images/chat/basic-profile-img.png" alt="" />
+            <img
+              class="profile_img"
+              src="../src/images/chat/basic-profile-img.png"
+              alt=""
+            />
             <div class="newChat"></div>
           </div>
           <div class="text_wrap">
-            <h2>애월읍 위니브 감귤농장</h2>
+            <h2 class="chat_title">애월읍 위니브 감귤농장</h2>
             <div class="flex_wrap">
-              <p>이번에 정정 언제하맨마씸?</p>
-              <p>2020.10.25</p>
+              <p class="chat_content">이번에 정정 언제하맨마씸?</p>
+              <p class="chat_date">2020.10.25</p>
+            </div>
+          </div>
+        </article>
+      </span>
+      <!-- chat 2 -->
+      <span tabindex="0">
+        <article class="chat">
+          <div class="img_wrap">
+            <img
+              class="profile_img"
+              src="../src/images/chat/basic-profile-img.png"
+              alt=""
+            />
+            <div class="newChat"></div>
+          </div>
+          <div class="text_wrap">
+            <h2 class="chat_title">누구네 농장 친환경 한라봉</h2>
+            <div class="flex_wrap">
+              <p class="chat_content">
+                내 차는 내가 평가한다. 오픈 이벤트에 참여 하...
+              </p>
+              <p class="chat_date">2020.10.25</p>
+            </div>
+          </div>
+        </article>
+      </span>
+      <!-- chat 3 -->
+      <span tabindex="0">
+        <article class="chat">
+          <div class="img_wrap">
+            <img
+              class="profile_img"
+              src="../src/images/chat/basic-profile-img.png"
+              alt=""
+            />
+          </div>
+          <div class="text_wrap">
+            <h2 class="chat_title">제주감귤마을</h2>
+            <div class="flex_wrap">
+              <p class="chat_content">
+                깊은 어둠의 존재감, 롤스로이스 뉴 블랙 배지...
+              </p>
+              <p class="chat_date">2020.10.25</p>
             </div>
           </div>
         </article>

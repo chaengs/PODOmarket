@@ -105,6 +105,8 @@ main .profile-img {
   margin-top: 6px;
   padding-left: 11px;
   margin-top: 6px;
+  white-space: nowrap;
+  overflow: auto;
 }
 .item-wrap h2 {
   font-size: 16px;

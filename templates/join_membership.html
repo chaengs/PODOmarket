@@ -12,6 +12,7 @@
     <main class="main">
       <h1 class="title">이메일로 회원가입</h1>
       <form>
+        <!-- input wrap - email -->
         <div class="input_wrap">
           <label for="email">이메일</label>
           <input
@@ -22,6 +23,7 @@
           />
           <p id="email_err_msg" class="err_msg"></p>
         </div>
+        <!-- input wrap - pwd -->
         <div class="input_wrap">
           <label for="pwd">비밀번호</label>
           <input
@@ -32,10 +34,11 @@
           />
           <p id="pwd_err_msg" class="err_msg"></p>
         </div>
+        <!-- submit button -->
         <button
           class="btn_submit"
           type="button"
-          onClick="{handleOnSubmit()}"
+          onclick="handleOnSubmit()"
           disabled
         >
           회원가입

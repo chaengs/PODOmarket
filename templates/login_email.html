@@ -1,14 +1,3 @@
-<!-- 
-  **3.1.2 로그인**
-
-- 로그인은 **로그인 메인 화면**과 **이메일 로그인 화면**으로 나눠져 있습니다. v
-- SNS(카카오톡, 구글, 페이스북) 로그인은 구현하지 않으며, 화면에 버튼만 배치하도록 합니다.v
-- 로그인 메인 화면에서 `이메일로 로그인` 을 클릭하면 이메일로 로그인할 수 있는 화면으로 이동합니다.v
-- 이메일과 비밀번호를 모두 입력하면 `다음` 버튼이 활성화 됩니다. 입력되지 않은 입력창이 있다면 버튼은 활성되지 않습니다.v
-- `로그인` 버튼을 클릭하면 이메일 주소와 로그인에 대한 유효성 검사를 진행하며, 이메일 주소 또는 비밀번호가 일치하지 않을 경우에는 경고 문구가 나타납니다. X
-- 입력창에 focus 될 경우에는 선의 색이 변합니다.(회색, #DBDBDB → 주황색, #F26E22) v
- -->
-
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -23,15 +12,18 @@
     <main class="main">
       <h1 class="title">로그인</h1>
       <form>
+        <!-- input wrap - email -->
         <div class="input_wrap">
           <label for="email">이메일</label>
           <input id="email" type="email" name="eMail" />
           <p id="emailError" class="err_msg"></p>
         </div>
+        <!-- input wrap - pwd -->
         <div class="input_wrap">
           <label for="pwd">비밀번호</label>
           <input id="pwd" type="password" name="pwd" />
         </div>
+        <!-- submit button -->
         <button
           id="submitBtn"
           class="btn_submit"
@@ -42,10 +34,11 @@
           로그인
         </button>
       </form>
-      <a class="link_register" href="/templates/join_membership.html"
-        >이메일로 회원가입</a
-      >
+      <!-- link to join page -->
+      <a class="link_register" href="/templates/join_membership.html">
+        이메일로 회원가입
+      </a>
     </main>
-    <script src="../src/js/login.js" />
+    <script src="../src/js/login_email.js" />
   </body>
 </html>

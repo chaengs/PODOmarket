@@ -1,26 +1,34 @@
+// login flag
 const isLogined = sessionStorage.pic_isLogined;
 
 // 회원 서비스 페이지에 비 로그인 상태로 접근할 경우 splash로 이동
 if (!isLogined) {
   location.href = "./index.html";
 }
-
+// preview profile img
 const profileImg = document.querySelector(".img_profile");
+
+// input list
 const userName = document.querySelector("#userName");
 const userID = document.querySelector("#userID");
 const userDesc = document.querySelector("#userDesc");
-const err_userName = document.querySelector("#userNameError");
-const err_ID = document.querySelector("#userIDError");
-const err_Desc = document.querySelector("#userDescError");
 const submitBtn = document.querySelector(".btn_upload");
 const imgInput = document.querySelector("#img_profile");
 
+// error msg list
+const err_userName = document.querySelector("#userNameError");
+const err_ID = document.querySelector("#userIDError");
+const err_Desc = document.querySelector("#userDescError");
+
+// sessionStorage
 let registerImgUrl = sessionStorage.getItem("pic_userImg"); // 이미지를 업로드 하지 않을 경우 기존이미지가 db에 들어간다.
 const token = sessionStorage.getItem("pic_token");
 const sessionAccountName = sessionStorage.getItem("pic_accountName");
 
+// account valid flag
 let validID = true;
 
+// token과 account name을 서버에 보내 my info를 받아온다.
 const getMyInfo = () => {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + token);
@@ -37,6 +45,7 @@ const getMyInfo = () => {
   )
     .then((response) => response.json())
     .then((result) => {
+      // 정보를 받아오는데 성공하면 input에 기본 value를 설정한다.
       const profile = result.profile;
       userName.value = profile.username;
       userID.value = profile.accountname;
@@ -48,6 +57,7 @@ const getMyInfo = () => {
     })
     .catch((error) => console.log("error", error));
 };
+
 getMyInfo();
 
 // username의 길이 유효성 검사
@@ -87,27 +97,29 @@ const checkIDValid = () => {
 // intro(자기소개)란이 공백인지 검사
 const checkDesc = () => (userDesc.value.length != 0 ? true : false);
 
-// input blur 시 실행
+// username의 text 길이 검사 후 조치
 const handleCheckUserName = () => {
   if (checkName()) err_userName.innerHTML = "";
   else err_userName.innerHTML = "*사용자 이름은 2~10자 이내여야 합니다.";
 };
 
-// input blur 시 실행
+// accountname의 유효성 검사
 const handleCheckUserID = () => {
   if (checkID()) {
+    // 1단계 ID의 정규표현식 검사 실시
     err_ID.innerHTML = "";
+    // 2단계 중복되는 accountname인지 검사
     checkIDValid();
   } else err_ID.innerHTML = "*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
 };
 
-// input blur 시 실행
+// intro 항목이 비어있는지 검사 후 조치
 const handleCheckUserDesc = () => {
   if (checkDesc()) err_Desc.innerHTML = "";
   else err_Desc.innerHTML = "*자신을 소개해 주세요.";
 };
 
-// input tag를  blur,input 시 실행
+// submit button 을 활성화/비활성화 하기 위한 검사
 const handleCheckInput = () => {
   console.log("good");
   function check() {
@@ -120,7 +132,7 @@ const handleCheckInput = () => {
       submitBtn.className = "btn_upload";
     }
   }
-  // fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
+  // validID fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
   setTimeout(check, 100);
 };
 
@@ -153,11 +165,13 @@ const imgUpload = () => {
       ).json();
     }
     fetcher().then((value) => {
+      // 기존 img url 이 들어있던 변수에 새로운 img url을 할당.
       registerImgUrl = value.filename;
     });
   }
 };
 
+// 서버에 유저정보를 put 으로 보내 유저 정보 수정
 const saveModification = () => {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + token);
@@ -182,6 +196,7 @@ const saveModification = () => {
   fetch("http://146.56.183.55:5050/user", requestOptions)
     .then((response) => response.json())
     .then((result) => {
+      // err일 경우 message를 객체에 넣어서 보내준다.
       if (!result.message) {
         alert("프로필이 성공정으로 수정되었습니다.");
         sessionStorage.setItem("pic_accountName", result.user.accountname);

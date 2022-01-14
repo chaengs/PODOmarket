@@ -13,15 +13,18 @@
       <h1 class="title">프로필 설정</h1>
       <p class="title_desc">나중에 언제든지 변경할 수 있습니다.</p>
       <form>
+        <!-- input wrap profile img -->
         <div class="relative_wrap">
+          <!-- 이미지를 둥굴게 처리하기 위한 wrap -->
           <div class="border_wrap">
+            <!-- 프로필 이미지 업로드하면 미리보기 이미지로 변경-->
             <img
               class="img_profile"
               src="../src/images/join/basic-profile-img.png"
               alt="profile-img"
-              accept="image/*"
             />
           </div>
+          <!-- file input을 hidden으로 숨기고 label과 연결 -->
           <label for="img_profile">
             <img
               class="img_upload_btn"
@@ -29,15 +32,15 @@
               alt="profile-img"
             />
           </label>
+          <input
+            type="file"
+            id="img_profile"
+            hidden
+            accept="image/*"
+            onchange="setProfile(event)"
+          />
         </div>
-
-        <input
-          type="file"
-          id="img_profile"
-          hidden
-          accept="image/*"
-          onchange="setProfile(event)"
-        />
+        <!-- input wrap - username -->
         <div class="input_wrap">
           <label for="userName">사용자 이름</label>
           <input
@@ -48,6 +51,7 @@
           />
           <p id="userNameError" class="err_msg"></p>
         </div>
+        <!-- input wrap - accountname -->
         <div class="input_wrap">
           <label for="userID">계정 ID</label>
           <input
@@ -58,6 +62,7 @@
           />
           <p id="userIDError" class="err_msg"></p>
         </div>
+        <!-- input wrap - intro -->
         <div class="input_wrap">
           <label for="userDesc">소개</label>
           <input
@@ -68,6 +73,7 @@
           />
           <p id="userDescError" class="err_msg"></p>
         </div>
+        <!-- submit button -->
         <button
           class="btn_submit"
           type="button"

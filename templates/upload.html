@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="../src/css/upload.css" />
   </head>
   <body>
+    <!-- header 상단바 -->
     <header>
+      <!-- feed로 돌아가는 link -->
       <a href="feed.html">
         <img
           class="btn_back"
@@ -17,6 +19,7 @@
           alt=""
         />
       </a>
+      <!-- submit button -->
       <button
         class="btn_upload"
         type="button"
@@ -26,7 +29,8 @@
         업로드
       </button>
     </header>
-    <section class="content_wrap">
+    <main class="content_wrap">
+      <!-- profile img radius처리를 위한 wrap -->
       <div class="img_wrap">
         <img
           id="profileImg"
@@ -35,7 +39,9 @@
           alt="profile"
         />
       </div>
+      <!-- textarea, imgs_warp을 flex column으로 정렬하기 위한 wrapping-->
       <div>
+        <!-- input textarea -->
         <textarea
           class="content_text"
           name="content"
@@ -44,7 +50,11 @@
           onkeyup="resize(this)"
           placeholder="게시글 입력하기.."
         ></textarea>
+        <!-- imgs-wrap -->
+        <!-- 이미지 추가 시 single, multi로 분기를 나눠 다른 레이아웃으로 innertext -->
         <div class="imgs_wrap"></div>
+        <!-- 업로드 버튼 하단 아래로 fixed -->
+        <!-- file input을 hidden으로 숨기고 label과 연결 -->
         <label class="img_upload_btn" for="img_upload" tabindex="0">
           <img
             class="img_upload_btn"
@@ -61,7 +71,7 @@
           hidden
         />
       </div>
-    </section>
+    </main>
     <script src="../src/js/upload.js" />
   </body>
 </html>

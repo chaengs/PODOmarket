@@ -9,14 +9,17 @@
     <link rel="stylesheet" href="../src/css/profile_modification.css" />
   </head>
   <body>
+    <!--  header: 상단바 -->
     <header>
-      <a href="feed.html">
+      <!-- mypage.html로 이동 -->
+      <a href="mypage.html">
         <img
           class="btn_back"
           src="../src/images/upload/icon-arrow-left.png"
           alt=""
         />
       </a>
+      <!-- submit button -->
       <button
         class="btn_upload"
         type="button"
@@ -28,8 +31,11 @@
     </header>
     <main class="main">
       <form>
+        <!-- input wrap profile img -->
         <div class="relative_wrap">
+          <!-- 이미지를 둥굴게 처리하기 위한 wrap -->
           <div class="border_wrap">
+            <!-- 프로필 이미지 업로드하면 미리보기 이미지로 변경-->
             <img
               class="img_profile"
               src="../src/images/join/basic-profile-img.png"
@@ -37,6 +43,7 @@
               accept="image/*"
             />
           </div>
+          <!-- file input을 hidden으로 숨기고 label과 연결 -->
           <label for="img_profile">
             <img
               class="img_upload_btn"
@@ -44,14 +51,15 @@
               alt="profile-img"
             />
           </label>
+          <input
+            type="file"
+            id="img_profile"
+            hidden
+            accept="image/*"
+            onchange="setProfile(event)"
+          />
         </div>
-        <input
-          type="file"
-          id="img_profile"
-          hidden
-          accept="image/*"
-          onchange="setProfile(event)"
-        />
+        <!-- input wrap - username -->
         <div class="input_wrap">
           <label for="userName">사용자 이름</label>
           <input
@@ -62,6 +70,7 @@
           />
           <p id="userNameError" class="err_msg"></p>
         </div>
+        <!-- input wrap - accountname -->
         <div class="input_wrap">
           <label for="userID">계정 ID</label>
           <input
@@ -72,6 +81,7 @@
           />
           <p id="userIDError" class="err_msg"></p>
         </div>
+        <!-- input wrap - intro -->
         <div class="input_wrap">
           <label for="userDesc">소개</label>
           <input

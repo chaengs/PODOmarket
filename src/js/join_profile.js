@@ -5,17 +5,25 @@ if (isLogined) {
   location.href = "./index.html";
 }
 
-let profileImg = document.querySelector(".img_profile");
-let userName = document.querySelector("#userName");
-let userID = document.querySelector("#userID");
-let userDesc = document.querySelector("#userDesc");
-let err_userName = document.querySelector("#userNameError");
-let err_ID = document.querySelector("#userIDError");
-let err_Desc = document.querySelector("#userDescError");
-let submitBtn = document.querySelector(".btn_submit");
-let imgInput = document.querySelector("#img_profile");
-let registerImgUrl = "1641803765586.png";
+// preview profile img
+const profileImg = document.querySelector(".img_profile");
+
+// input list
+const userName = document.querySelector("#userName");
+const userID = document.querySelector("#userID");
+const userDesc = document.querySelector("#userDesc");
+const submitBtn = document.querySelector(".btn_submit");
+const imgInput = document.querySelector("#img_profile");
+
+// error msg list
+const err_userName = document.querySelector("#userNameError");
+const err_ID = document.querySelector("#userIDError");
+const err_Desc = document.querySelector("#userDescError");
+
 // 이미지를 업로드 하지 않을 경우 기본이미지가 db에 들어간다.
+let registerImgUrl = "1641803765586.png";
+
+// account valid flag
 let validID = true;
 
 // 이전페이지 쿠키를 가져온다.
@@ -27,7 +35,7 @@ const getCookie = function (name) {
 const email = getCookie("EMAIL");
 const pwd = getCookie("PWD");
 
-// 이전페이지에서의 쿠키가 없다면 로그인페이지로 강제 이동
+// 이전페이지에서의 쿠키가 없다면 비정상 접근으로 간주하여 로그인페이지로 강제 이동
 if (!email || !pwd) {
   alert("잘못된 접근입니다.");
   location.href = "./login.html";
@@ -67,27 +75,29 @@ const checkIDValid = () => {
 // intro(자기소개)란이 공백인지 검사
 const checkDesc = () => (userDesc.value.length != 0 ? true : false);
 
-// input blur 시 실행
+// username의 text 길이 검사 후 조치
 const handleCheckUserName = () => {
   if (checkName()) err_userName.innerHTML = "";
   else err_userName.innerHTML = "*사용자 이름은 2~10자 이내여야 합니다.";
 };
 
-// input blur 시 실행
+// accountname의 유효성 검사
 const handleCheckUserID = () => {
+  // 1단계 ID의 정규표현식 검사 실시
   if (checkID()) {
     err_ID.innerHTML = "";
+    // 2단계 중복되는 accountname인지 검사
     checkIDValid();
   } else err_ID.innerHTML = "*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
 };
 
-// input blur 시 실행
+// intro 항목이 비어있는지 검사 후 조치
 const handleCheckUserDesc = () => {
   if (checkDesc()) err_Desc.innerHTML = "";
   else err_Desc.innerHTML = "*자신을 소개해 주세요.";
 };
 
-// input tag를  blur,input 시 실행
+// submit button 을 활성화/비활성화 하기 위한 검사
 const handleCheckInput = () => {
   function check() {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
@@ -99,7 +109,7 @@ const handleCheckInput = () => {
       submitBtn.className = "btn_submit";
     }
   }
-  // fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
+  // validID fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
   setTimeout(check, 100);
 };
 
@@ -111,30 +121,35 @@ const setProfile = (event) => {
     profileImg.setAttribute("src", event.target.result);
   };
   reader.readAsDataURL(event.target.files[0]);
-  imgUpload();
 };
 
 // 이미지 db에 업로드 후 로그인 시 이용할 변수에 파일이름 할당.
 const imgUpload = () => {
-  const formdata = new FormData();
-  formdata.append("image", imgInput.files[0], "basic-profile-img.png");
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow",
-  };
-  async function fetcher() {
-    return (
-      await fetch("http://146.56.183.55:5050/image/uploadfile", requestOptions)
-    ).json();
+  if (imgInput.files.length) {
+    const formdata = new FormData();
+    formdata.append("image", imgInput.files[0], "basic-profile-img.png");
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    async function fetcher() {
+      return (
+        await fetch(
+          "http://146.56.183.55:5050/image/uploadfile",
+          requestOptions
+        )
+      ).json();
+    }
+    fetcher().then((value) => {
+      // 기존 img url 이 들어있던 변수에 새로운 img url을 할당.
+      registerImgUrl = value.filename;
+    });
   }
-  fetcher().then((value) => {
-    registerImgUrl = value.filename;
-  });
 };
 
-// 버튼이 활성화되면 버튼에 생기는 onClick event
-const handleOnSubmit = () => {
+// input을 서버에 보내 회원가입을 진행
+const join = () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -163,9 +178,17 @@ const handleOnSubmit = () => {
       // 회원가입 완료 쿠키삭제 후 로그인 페이지로 라우팅
       document.cookie = "EMAIL=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
       document.cookie = "PWD=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
+      alert("성공적으로 회원가입 되었습니다.");
       location.href = "./login_email.html";
     })
     .catch((error) => console.log("error", error));
+};
+
+// 버튼이 활성화되면 버튼에 생기는 onClick event
+const handleOnSubmit = () => {
+  imgUpload();
+  // 비동기 처리를 위한 setTimeout
+  setTimeout(join, 100);
 };
 
 userName.addEventListener("blur", handleCheckUserName);

@@ -5,14 +5,16 @@ if (isLogined) {
   location.href = "./index.html";
 }
 
-let email = document.querySelector("#email");
-let pwd = document.querySelector("#pwd");
-let email_err_msg = document.querySelector("#email_err_msg");
-let pwd_err_msg = document.querySelector("#pwd_err_msg");
-let submitBtn = document.querySelector(".btn_submit");
+//querySelector
+const email = document.querySelector("#email");
+const pwd = document.querySelector("#pwd");
+const email_err_msg = document.querySelector("#email_err_msg");
+const pwd_err_msg = document.querySelector("#pwd_err_msg");
+const submitBtn = document.querySelector(".btn_submit");
+// email check flag
 let emailCheck = false;
 
-// email이 중복되었는지 확인
+// email이 중복되었는지 서버에 value를 보내 확인
 const checkEmailValid = () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -44,6 +46,7 @@ const checkEmailValid = () => {
     })
     .catch((error) => console.log("error", error));
 };
+
 // Email 정규표현식 test
 const checkEmailFormet = () => {
   const regExp =
@@ -74,6 +77,7 @@ const handleCheckPwdLength = () => {
   }
 };
 
+// submit 버튼을 활성화 시키기 위한 조건 확인
 const handleCheckInput = () => {
   function to() {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
@@ -85,7 +89,7 @@ const handleCheckInput = () => {
       submitBtn.className = "btn_submit";
     }
   }
-  // fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
+  // email check fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
   setTimeout(to, 100);
 };
 
@@ -100,9 +104,11 @@ const handleOnSubmit = () => {
   location.href = "./join_profile.html";
 };
 
+// input list의 blur,input event를 감시하여 버튼 활성화/비활성화
 email.addEventListener("blur", handleChaeckEmail);
 email.addEventListener("blur", handleCheckInput);
 email.addEventListener("input", handleCheckInput);
+
 pwd.addEventListener("blur", handleCheckPwdLength);
 pwd.addEventListener("blur", handleCheckInput);
 pwd.addEventListener("input", handleCheckInput);

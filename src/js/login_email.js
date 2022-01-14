@@ -1,13 +1,15 @@
+// login flag
 const isLogined = sessionStorage.pic_isLogined;
 
 // 로그인, 회원가입 등의 페이지에 로그인 상태로 접근할 경우 splash로 이동
 if (isLogined) {
   location.href = "./index.html";
 }
+// querySelector
+const email = document.querySelector("#email");
+const pwd = document.querySelector("#pwd");
+const err_msg = document.querySelector("#emailError");
 
-let email = document.querySelector("#email");
-let pwd = document.querySelector("#pwd");
-let err_msg = document.querySelector("#emailError");
 // email 정규표현식 test
 const checkEmailFormet = () => {
   const regExp =
@@ -15,6 +17,7 @@ const checkEmailFormet = () => {
   return regExp.test(email.value);
 };
 
+// input list의 value를 확인하여 로그인 버튼 활성화/비활성화
 const handleCheckInput = () => {
   // email과 pwd를 입력했고 eamil 형식이 부합할 경우 button 활성화
   if (!!email.value && !!pwd.value && checkEmailFormet()) {
@@ -65,5 +68,6 @@ const handleOnSubmit = () => {
     .catch((error) => console.log("error", error));
 };
 
+// input을 감시하여 checkInput 함수 실행
 email.addEventListener("input", handleCheckInput);
 pwd.addEventListener("input", handleCheckInput);

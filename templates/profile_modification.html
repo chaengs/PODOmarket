@@ -17,7 +17,14 @@
           alt=""
         />
       </a>
-      <button class="btn_upload" type="button" onclick="" disabled>저장</button>
+      <button
+        class="btn_upload"
+        type="button"
+        onclick="handleOnSubmit()"
+        disabled
+      >
+        저장
+      </button>
     </header>
     <main class="main">
       <form>
@@ -72,6 +79,7 @@
             id="userDesc"
             name="userDesc"
             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+            accept="image/*"
           />
           <p id="userDescError" class="err_msg"></p>
         </div>

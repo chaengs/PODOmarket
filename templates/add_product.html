@@ -27,14 +27,14 @@
         <!-- input wrap profile img -->
         <p class="img_title">이미지 등록</p>
         <div class="relative_wrap">
-          <!-- 이미지를 둥굴게 처리하기 위한 wrap -->
-          <!-- 프로필 이미지 업로드하면 미리보기 이미지로 변경-->
-          <!-- <img
-              class="img_profile"
-              src="../src/images/join/basic-profile-img.png"
-              alt="profile-img"
-              accept="image/*"
-            /> -->
+          <!-- 상품 이미지 업로드하면 미리보기 이미지로 변경-->
+          <img
+            id="img_product"
+            class="img_product"
+            src="../src/images/product/default.png"
+            alt="product-img"
+            accept="image/*"
+          />
           <!-- file input을 hidden으로 숨기고 label과 연결 -->
           <label for="product_img">
             <img
@@ -48,7 +48,7 @@
             id="product_img"
             hidden
             accept="image/*"
-            onchange=""
+            onchange="setPreView(event)"
           />
         </div>
         <!-- input wrap - itemName -->
@@ -86,5 +86,6 @@
         </div>
       </form>
     </main>
+    <script src="../src/js/add_product.js" />
   </body>
 </html>

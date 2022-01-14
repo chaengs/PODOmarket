@@ -19,6 +19,25 @@
         </a>
         <a href=""><img src="../src/images/mypage/more-vertical.png" alt="더보기" class="img-more"></a>
     </header>
+    <!-- 독바 -->
+    <section class="bar-menu">
+        <button class="btn-home checked">
+            <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
+            <p>홈</p>
+        </button>
+        <button class="btn-chat">
+            <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
+            <p>채팅</p>
+        </button>
+        <button class="btn-new-post">
+            <img class="img-btn" onclick="{toUpload()}" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
+            <p>게시물 작성</p>
+        </button>
+        <button class="btn-profile">
+            <img class="img-btn" onclick="{toProfile()}" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+            <p>프로필</p>
+        </button>
+    </section>
     <!-- 내 프로필 시작 -->
     <main>
         <h1 class="txt-hide">계정 상세 페이지</h1>
@@ -51,8 +70,10 @@
     </main>
     <!-- 판매 중인 상품 -->
     <section class="item-wrap">
-        <h2>판매 중인 상품</h2>
-        <div class="item-container">
+        <h2 class="item-list">판매 중인 상품</h2>
+        <div class="items"></div>
+        <!-- <div class="item"></div> -->
+        <!-- <div class="item-container">
             <a href=""><img src="../src/images/mypage/mandarin1.jpg" alt="판매 중인 상품 사진"></a>
             <p class="item-tit">애월읍 노지 감귤</p>
             <p class="item-price">35,000원</p>
@@ -61,7 +82,7 @@
             <a href=""><img src="../src/images/mypage/mandarin2.jpg" alt="판매 중인 상품 사진"></a>
             <p class="item-tit">애월읍 한라봉 10kg...</p>
             <p class="item-price">45,000원</p>
-        </div>
+        </div> -->
     </section>
     <!-- 피드 상단 메뉴바 -->
     <nav class="post-nav">
@@ -81,25 +102,15 @@
         <img src="../src/images/mypage/mandarin2.jpg" alt="">
         <img src="../src/images/mypage/mandarin1.jpg" alt="">
     </article>
-    <!-- 하단 메뉴바 -->
-    <section class="bar-menu">
-        <div class="btn-home checked">
-            <img class="img-btn" src="../../src/images/menubar/icon-home-fill.png" alt="btn-home" />
-            <p>홈</p>
-        </div>
-        <div class="btn-chat">
-            <img class="img-btn" src="../../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
-            <p>채팅</p>
-        </div>
-        <div class="btn-new-post">
-            <img class="img-btn" src="../../src/images/menubar/icon-edit.png" alt="btn-new-post" />
-            <p>게시물 작성</p>
-        </div>
-        <div class="btn-profile">
-            <img class="img-btn" src="../../src/images/menubar/icon-user.png" alt="btn-home" />
-            <p>프로필</p>
-        </div>
-    </section>
     <script src="../src/js/mypage.js"></script>
+    <script>
+        const toUpload = () => {
+            location.href = "upload.html";
+        };
+        const toProfile = () => {
+            location.href = "mypage.html";
+        };
+    </script>
 </body>
+
 </html>

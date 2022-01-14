@@ -45,21 +45,16 @@ header {
     position: absolute;
     right: 16px;
 } */
-.follow-btn-orange {
-    background-color:#F26E22;
+.follow-btn-purple {
+    background-color:#7e3e9d;
     color: #FFFFFF;
-    width: 56px;
-    height: 28px;
-    border-radius: 26px;
-    font-size: 12px;
-    line-height: 15px;
-    position: absolute;
-    right: 16px;
 }
 .follow-btn-white {
     background-color: #FFFFFF;
     color: #767676;
     border: 1px solid #DBDBDB;
+}
+.follow-btn{
     width: 56px;
     height: 28px;
     border-radius: 26px;

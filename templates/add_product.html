@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIC: 상품 등록</title>
+    <link rel="stylesheet" href="../src/css/reset.css" />
+    <link rel="stylesheet" href="../src/css/add_product.css" />
+  </head>
+  <body>
+    <!--  header: 상단바 -->
+    <header>
+      <!-- mypage.html로 이동 -->
+      <a href="mypage.html">
+        <img
+          class="btn_back"
+          src="../src/images/upload/icon-arrow-left.png"
+          alt=""
+        />
+      </a>
+      <!-- submit button -->
+      <button
+        class="btn_upload"
+        type="button"
+        onclick="handleOnSubmit()"
+        disabled
+      >
+        저장
+      </button>
+    </header>
+    <main class="main">
+      <form>
+        <!-- input wrap profile img -->
+        <p class="img_title">이미지 등록</p>
+        <div class="relative_wrap">
+          <!-- 상품 이미지 업로드하면 미리보기 이미지로 변경-->
+          <img
+            id="img_product"
+            class="img_product"
+            src="../src/images/product/default.png"
+            alt="product-img"
+            accept="image/*"
+          />
+          <!-- file input을 hidden으로 숨기고 label과 연결 -->
+          <label for="product_img">
+            <img
+              class="img_upload_btn"
+              src="../src/images/product/img-button.png"
+              alt="product_img"
+            />
+          </label>
+          <input
+            type="file"
+            id="product_img"
+            hidden
+            accept="image/*"
+            onchange="setPreView(event)"
+          />
+        </div>
+        <!-- input wrap - itemName -->
+        <div class="input_wrap">
+          <label for="itemName">상품명</label>
+          <input
+            type="text"
+            id="itemName"
+            name="itemName"
+            placeholder="2~15자 이내여야 합니다."
+          />
+          <p id="itemNameError" class="err_msg"></p>
+        </div>
+        <!-- input wrap - accountname -->
+        <div class="input_wrap">
+          <label for="price">가격</label>
+          <input
+            type="text"
+            id="price"
+            name="price"
+            placeholder="숫자만 입력 가능합니다."
+          />
+          <p id="priceError" class="err_msg"></p>
+        </div>
+        <!-- input wrap - intro -->
+        <div class="input_wrap">
+          <label for="link">판매 링크</label>
+          <input
+            type="text"
+            id="link"
+            name="link"
+            placeholder="URL을 입력해 주세요."
+          />
+          <p id="linkError" class="err_msg"></p>
+        </div>
+      </form>
+    </main>
+    <script src="../src/js/add_product.js" />
+  </body>
+</html>

@@ -1,15 +1,47 @@
-let profileImg = document.querySelector(".img_profile");
-let userName = document.querySelector("#userName");
-let userID = document.querySelector("#userID");
-let userDesc = document.querySelector("#userDesc");
-let err_userName = document.querySelector("#userNameError");
-let err_ID = document.querySelector("#userIDError");
-let err_Desc = document.querySelector("#userDescError");
-let submitBtn = document.querySelector(".btn_submit");
-let imgInput = document.querySelector("#img_profile");
-let registerImgUrl = "1641803765586.png";
-// 이미지를 업로드 하지 않을 경우 기본이미지가 db에 들어간다.
+const profileImg = document.querySelector(".img_profile");
+const userName = document.querySelector("#userName");
+const userID = document.querySelector("#userID");
+const userDesc = document.querySelector("#userDesc");
+const err_userName = document.querySelector("#userNameError");
+const err_ID = document.querySelector("#userIDError");
+const err_Desc = document.querySelector("#userDescError");
+const submitBtn = document.querySelector(".btn_upload");
+const imgInput = document.querySelector("#img_profile");
+let registerImgUrl = "1641803765586.png"; // 이미지를 업로드 하지 않을 경우 기본이미지가 db에 들어간다.
+
+const token = sessionStorage.getItem("pic_token");
+const sessionAccountName = sessionStorage.getItem("pic_accountName");
+
 let validID = true;
+
+const getMyInfo = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch(
+    "http://146.56.183.55:5050/profile/" + sessionAccountName,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      const profile = result.profile;
+      userName.value = profile.username;
+      userID.value = profile.accountname;
+      userDesc.value = profile.intro;
+      profileImg.setAttribute(
+        "src",
+        "http://146.56.183.55:5050/" + profile.image
+      );
+    })
+    .catch((error) => console.log("error", error));
+};
+getMyInfo();
 
 // username의 길이 유효성 검사
 const checkName = () =>
@@ -71,10 +103,10 @@ const handleCheckInput = () => {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
     if (checkName() && checkID() && checkDesc() && validID) {
       submitBtn.removeAttribute("disabled");
-      submitBtn.className = "btn_submit activate";
+      submitBtn.className = "btn_upload activate";
     } else {
       submitBtn.setAttribute("disabled", true);
-      submitBtn.className = "btn_submit";
+      submitBtn.className = "btn_upload";
     }
   }
   // fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행

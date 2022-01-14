@@ -101,23 +101,6 @@ input::placeholder {
   margin-top: 6px;
 }
 
-.btn_submit {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  color: #fff;
-  padding: 13px 0;
-  width: 100%;
-  background-color: #c0a4ce;
-  border: none;
-  border-radius: 44px;
-  margin: 14px 0 20px 0;
-}
-
-.activate {
-  background-color: #7e3e9d;
-}
-
 .link_register {
   text-decoration: none;
   font-size: 12px;

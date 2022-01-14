@@ -21,7 +21,7 @@ const err_ID = document.querySelector("#userIDError");
 const err_Desc = document.querySelector("#userDescError");
 
 // sessionStorage
-let registerImgUrl = sessionStorage.getItem("pic_userImg"); // 이미지를 업로드 하지 않을 경우 기존이미지가 db에 들어간다.
+let sessionImgUrl = sessionStorage.getItem("pic_userImg"); // 이미지를 업로드 하지 않을 경우 기존이미지가 db에 들어간다.
 const token = sessionStorage.getItem("pic_token");
 const sessionAccountName = sessionStorage.getItem("pic_accountName");
 
@@ -165,7 +165,7 @@ const imgUpload = () => {
     }
     fetcher().then((value) => {
       // 기존 img url 이 들어있던 변수에 새로운 img url을 할당.
-      registerImgUrl = value.filename;
+      sessionImgUrl = value.filename;
     });
   }
 };
@@ -181,7 +181,7 @@ const saveModification = () => {
       username: userName.value,
       accountname: userID.value,
       intro: userDesc.value,
-      image: registerImgUrl,
+      image: sessionImgUrl,
     },
   });
 

@@ -14,9 +14,17 @@ const itemName = document.querySelector("#itemName");
 const price = document.querySelector("#price");
 const submitBtn = document.querySelector(".btn_upload");
 const link = document.querySelector("#link");
+const imgInput = document.querySelector("#product_img");
 
 // error msg list
 const itemNameErr = document.querySelector("#itemNameError");
+
+// sessionStorage
+const token = sessionStorage.getItem("pic_token");
+
+// fetch
+let imgUrl = "";
+let priceN = 0;
 
 // 이미지 업로드 시 미리보기 view 만들기
 const setPreView = (event) => {
@@ -50,8 +58,8 @@ const checkPrice = () => {
 
 // 숫자를 입력한 후 blur 하면 자동으로 원단위로 변환
 const changePriceForm = () => {
+  priceN = price.value.replace(/,/g, "") * 1;
   let arr = price.value.replace(/,/g, "").split("").reverse();
-
   let count =
     arr.length % 3 == 0
       ? parseInt(arr.length / 3) - 1
@@ -65,13 +73,69 @@ const changePriceForm = () => {
 
 const handleCheckInput = () => {
   // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
-  if (checkItemName() && price.value && link.value) {
+  if (checkItemName() && price.value && link.value && imgInput.files.length) {
     submitBtn.removeAttribute("disabled");
     submitBtn.className = "btn_upload activate";
   } else {
     submitBtn.setAttribute("disabled", true);
     submitBtn.className = "btn_upload";
   }
+};
+
+const imageUpload = () => {
+  const formdata = new FormData();
+  formdata.append("image", imgInput.files[0], "basic-profile-img.png");
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
+  };
+  async function fetcher() {
+    return (
+      await fetch("http://146.56.183.55:5050/image/uploadfile", requestOptions)
+    ).json();
+  }
+  fetcher().then((value) => {
+    // 변수에 img url을 할당.
+    imgUrl = value.filename;
+  });
+};
+
+const addProduct = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    product: {
+      itemName: itemName.value,
+      price: priceN,
+      link: link.value,
+      itemImage: imgUrl,
+    },
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("http://146.56.183.55:5050/product", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      if (!result.message) {
+        alert("상품이 정상적으로 등록되었습니다.");
+        location.href = "mypage.html";
+      }
+    })
+    .catch((error) => console.log("error", error));
+};
+
+const handleOnSubmit = () => {
+  imageUpload();
+  setTimeout(addProduct, 100);
 };
 
 itemName.addEventListener("blur", handleItemName);
@@ -81,3 +145,4 @@ price.addEventListener("blur", changePriceForm);
 itemName.addEventListener("input", handleCheckInput);
 price.addEventListener("input", handleCheckInput);
 link.addEventListener("input", handleCheckInput);
+imgInput.addEventListener("change", handleCheckInput);

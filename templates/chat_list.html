@@ -29,7 +29,7 @@
     </header>
     <!-- dock bar (menu) -->
     <section class="bar-menu">
-      <button class="btn-home">
+      <button class="btn-home" onclick="{toFeed()}">
         <img
           class="img-btn"
           src="../src/images/menubar/icon-home.png"
@@ -65,7 +65,7 @@
     <!-- main content -->
     <main>
       <!-- 접근성을 위한 tabindex -->
-      <span tabindex="0">
+      <a href="chat_room.html">
         <article class="chat">
           <div class="img_wrap">
             <img
@@ -83,9 +83,9 @@
             </div>
           </div>
         </article>
-      </span>
+      </ㅁ>
       <!-- chat 2 -->
-      <span tabindex="0">
+      <a href="chat_room.html">
         <article class="chat">
           <div class="img_wrap">
             <img
@@ -105,9 +105,9 @@
             </div>
           </div>
         </article>
-      </span>
+      </a>
       <!-- chat 3 -->
-      <span tabindex="0">
+      <a href="chat_room.html">
         <article class="chat">
           <div class="img_wrap">
             <img
@@ -126,9 +126,12 @@
             </div>
           </div>
         </article>
-      </span>
+      </a>
     </main>
     <script>
+      const toFeed = () => {
+        location.href = "feed.html";
+      }
       const toUpload = () => {
         location.href = "upload.html";
       };

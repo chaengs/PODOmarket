@@ -1,37 +1,54 @@
 const isLogined = sessionStorage.pic_isLogined;
 
-// 로그인, 회원가입 등의 페이지에 로그인 상태로 접근할 경우 splash로 이동
-if (isLogined) {
+// 회원 서비스 페이지에 비 로그인 상태로 접근할 경우 splash로 이동
+if (!isLogined) {
   location.href = "./index.html";
 }
 
-let profileImg = document.querySelector(".img_profile");
-let userName = document.querySelector("#userName");
-let userID = document.querySelector("#userID");
-let userDesc = document.querySelector("#userDesc");
-let err_userName = document.querySelector("#userNameError");
-let err_ID = document.querySelector("#userIDError");
-let err_Desc = document.querySelector("#userDescError");
-let submitBtn = document.querySelector(".btn_submit");
-let imgInput = document.querySelector("#img_profile");
-let registerImgUrl = "1641803765586.png";
-// 이미지를 업로드 하지 않을 경우 기본이미지가 db에 들어간다.
+const profileImg = document.querySelector(".img_profile");
+const userName = document.querySelector("#userName");
+const userID = document.querySelector("#userID");
+const userDesc = document.querySelector("#userDesc");
+const err_userName = document.querySelector("#userNameError");
+const err_ID = document.querySelector("#userIDError");
+const err_Desc = document.querySelector("#userDescError");
+const submitBtn = document.querySelector(".btn_upload");
+const imgInput = document.querySelector("#img_profile");
+
+let registerImgUrl = sessionStorage.getItem("pic_userImg"); // 이미지를 업로드 하지 않을 경우 기존이미지가 db에 들어간다.
+const token = sessionStorage.getItem("pic_token");
+const sessionAccountName = sessionStorage.getItem("pic_accountName");
+
 let validID = true;
 
-// 이전페이지 쿠키를 가져온다.
-const getCookie = function (name) {
-  const value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-  return value ? value[2] : null;
+const getMyInfo = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch(
+    "http://146.56.183.55:5050/profile/" + sessionAccountName,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      const profile = result.profile;
+      userName.value = profile.username;
+      userID.value = profile.accountname;
+      userDesc.value = profile.intro;
+      profileImg.setAttribute(
+        "src",
+        "http://146.56.183.55:5050/" + profile.image
+      );
+    })
+    .catch((error) => console.log("error", error));
 };
-
-const email = getCookie("EMAIL");
-const pwd = getCookie("PWD");
-
-// 이전페이지에서의 쿠키가 없다면 로그인페이지로 강제 이동
-if (!email || !pwd) {
-  alert("잘못된 접근입니다.");
-  location.href = "./login.html";
-}
+getMyInfo();
 
 // username의 길이 유효성 검사
 const checkName = () =>
@@ -55,7 +72,10 @@ const checkIDValid = () => {
     .then((result) => {
       validID = true;
       result.map((item) => {
-        if (item.accountname == userID.value) {
+        if (
+          item.accountname == userID.value &&
+          sessionAccountName != userID.value
+        ) {
           err_ID.innerHTML = "*이미 존재하는 아이디 입니다.";
           validID = false;
         }
@@ -89,14 +109,15 @@ const handleCheckUserDesc = () => {
 
 // input tag를  blur,input 시 실행
 const handleCheckInput = () => {
+  console.log("good");
   function check() {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
     if (checkName() && checkID() && checkDesc() && validID) {
       submitBtn.removeAttribute("disabled");
-      submitBtn.className = "btn_submit activate";
+      submitBtn.className = "btn_upload activate";
     } else {
       submitBtn.setAttribute("disabled", true);
-      submitBtn.className = "btn_submit";
+      submitBtn.className = "btn_upload";
     }
   }
   // fetch 함수의 비동기 처리때문에 setTimeout으로 .1s 후 실행
@@ -111,37 +132,39 @@ const setProfile = (event) => {
     profileImg.setAttribute("src", event.target.result);
   };
   reader.readAsDataURL(event.target.files[0]);
-  imgUpload();
 };
 
 // 이미지 db에 업로드 후 로그인 시 이용할 변수에 파일이름 할당.
 const imgUpload = () => {
-  const formdata = new FormData();
-  formdata.append("image", imgInput.files[0], "basic-profile-img.png");
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow",
-  };
-  async function fetcher() {
-    return (
-      await fetch("http://146.56.183.55:5050/image/uploadfile", requestOptions)
-    ).json();
+  if (imgInput.files.length) {
+    const formdata = new FormData();
+    formdata.append("image", imgInput.files[0], "basic-profile-img.png");
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    async function fetcher() {
+      return (
+        await fetch(
+          "http://146.56.183.55:5050/image/uploadfile",
+          requestOptions
+        )
+      ).json();
+    }
+    fetcher().then((value) => {
+      registerImgUrl = value.filename;
+    });
   }
-  fetcher().then((value) => {
-    registerImgUrl = value.filename;
-  });
 };
 
-// 버튼이 활성화되면 버튼에 생기는 onClick event
-const handleOnSubmit = () => {
+const saveModification = () => {
   const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
     user: {
-      email: email,
-      password: pwd,
       username: userName.value,
       accountname: userID.value,
       intro: userDesc.value,
@@ -150,7 +173,7 @@ const handleOnSubmit = () => {
   });
 
   const requestOptions = {
-    method: "POST",
+    method: "PUT",
     headers: myHeaders,
     body: raw,
     redirect: "follow",
@@ -158,14 +181,22 @@ const handleOnSubmit = () => {
 
   fetch("http://146.56.183.55:5050/user", requestOptions)
     .then((response) => response.json())
-    .then((result) => console.log(result))
-    .then(() => {
-      // 회원가입 완료 쿠키삭제 후 로그인 페이지로 라우팅
-      document.cookie = "EMAIL=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
-      document.cookie = "PWD=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
-      location.href = "./login_email.html";
+    .then((result) => {
+      if (!result.message) {
+        alert("프로필이 성공정으로 수정되었습니다.");
+        sessionStorage.setItem("pic_accountName", result.user.accountname);
+        sessionStorage.setItem("pic_userName", result.user.username);
+        sessionStorage.setItem("pic_userImg", result.user.image);
+        location.reload();
+      }
     })
     .catch((error) => console.log("error", error));
+};
+
+// 버튼이 활성화되면 버튼에 생기는 onClick event
+const handleOnSubmit = () => {
+  imgUpload();
+  setTimeout(saveModification, 100);
 };
 
 userName.addEventListener("blur", handleCheckUserName);
@@ -180,3 +211,5 @@ userDesc.addEventListener("blur", handleCheckInput);
 userName.addEventListener("input", handleCheckInput);
 userDesc.addEventListener("input", handleCheckInput);
 userID.addEventListener("input", handleCheckInput);
+
+imgInput.addEventListener("change", handleCheckInput);

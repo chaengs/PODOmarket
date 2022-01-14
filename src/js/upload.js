@@ -10,8 +10,11 @@ const imgBlock = document.querySelector(".imgs_wrap");
 const textArea = document.querySelector("#content");
 const uploadBtn = document.querySelector(".btn_upload");
 const token = sessionStorage.getItem("pic_token");
+const profileUrl = sessionStorage.getItem("pic_userImg");
+const profileImg = document.querySelector("#profileImg");
 let imgUrl = "";
 
+profileImg.setAttribute("src", "http://146.56.183.55:5050/" + profileUrl);
 // conent textarea 글자수에 따라 높이 조절
 const resize = (obj) => {
   obj.style.height = "1px";

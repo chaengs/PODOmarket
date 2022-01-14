@@ -42,14 +42,17 @@ const handleOnSend = () => {
   handleCheckMsg();
 };
 
+// modal wrap hidden 제거
 const openModal = () => {
   modalWrap.removeAttribute("hidden");
 };
 
+// modal wrap set hidden
 const closeModal = () => {
   modalWrap.setAttribute("hidden", true);
 };
 
+// 채팅방 나가기 버튼 클릭 시 채팅 리스트로 이동
 const outRoom = () => {
   location.href = "chat_list.html";
 };

@@ -22,12 +22,13 @@
         </a>
         <p class="chatroom_title">애월읍 위니브 감귤농장</p>
       </div>
-      <a href=""
-        ><img
+      <button class="more_btn" type="button">
+        <img
           src="../src/images/mypage/more-vertical.png"
           alt="더보기"
           class="img-more"
-      /></a>
+        />
+      </button>
     </header>
     <!-- dock bar (chat) -->
     <section class="bar-menu">
@@ -36,12 +37,19 @@
           <img src="../src/images/chat/img-button.png" alt="" />
         </label>
         <input type="file" id="img_upload" hidden accept="image/*" />
-        <input class="input_msg" type="text" placeholder="메시지 입력하기.." />
+        <input
+          id="input_msg"
+          class="input_msg"
+          type="text"
+          placeholder="메시지 입력하기.."
+        />
       </div>
-      <button class="send_btn">전송</button>
+      <button id="send_btn" class="send_btn" disabled onclick="handleOnSend()">
+        전송
+      </button>
     </section>
     <!-- main content -->
-    <main>
+    <main id="main">
       <article class="other_chat">
         <img
           class="profile_img"
@@ -80,5 +88,6 @@
         <div class="bubble my_bubble">네</div>
       </article>
     </main>
+    <script src="../src/js/chat_room.js" />
   </body>
 </html>

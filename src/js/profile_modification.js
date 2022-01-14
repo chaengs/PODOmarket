@@ -121,7 +121,6 @@ const handleCheckUserDesc = () => {
 
 // submit button 을 활성화/비활성화 하기 위한 검사
 const handleCheckInput = () => {
-  console.log("good");
   function check() {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
     if (checkName() && checkID() && checkDesc() && validID) {

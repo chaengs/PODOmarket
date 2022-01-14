@@ -13,7 +13,7 @@
     <!-- search section -->
     <header>
       <div class="header_wrap">
-        <a href="feed.html">
+        <a href="chat_list.html">
           <img
             class="btn-back"
             src="../src/images/search/icon-arrow-left.png"
@@ -27,6 +27,7 @@
           src="../src/images/mypage/more-vertical.png"
           alt="더보기"
           class="img-more"
+          onclick="openModal()"
         />
       </button>
     </header>
@@ -88,6 +89,13 @@
         <div class="bubble my_bubble">네</div>
       </article>
     </main>
+    <div id="modal-wrap" class="model_wrap" hidden>
+      <div class="modal_out" onclick="closeModal()"></div>
+      <div class="modal">
+        <div class="modal_bar"></div>
+        <button class="outBtn" onclick="outRoom()">채팅방 나가기</button>
+      </div>
+    </div>
     <script src="../src/js/chat_room.js" />
   </body>
 </html>

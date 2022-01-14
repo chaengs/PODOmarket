@@ -9,10 +9,15 @@ if (!isLogined) {
 // input list
 const inputMsg = document.querySelector("#input_msg");
 const sendBtn = document.querySelector("#send_btn");
-const mainBox = document.querySelector("#main");
 
+// elements
+const mainBox = document.querySelector("#main");
+const modalWrap = document.querySelector("#modal-wrap");
+
+// 메시지를 입력했으면 true 반환
 const checkMsg = () => (inputMsg.value.length ? "true" : false);
 
+// 메시지 입력에 따른 전송버튼의 활성화/비활성화
 const handleCheckMsg = () => {
   if (checkMsg()) {
     sendBtn.removeAttribute("disabled");
@@ -23,6 +28,7 @@ const handleCheckMsg = () => {
   }
 };
 
+// 전송버튼을 누르면 말풍선 랜더링 시키기
 const handleOnSend = () => {
   const date = new Date();
   const time = date.getHours() + ":" + date.getMinutes() + "";
@@ -34,6 +40,18 @@ const handleOnSend = () => {
   `;
   inputMsg.value = "";
   handleCheckMsg();
+};
+
+const openModal = () => {
+  modalWrap.removeAttribute("hidden");
+};
+
+const closeModal = () => {
+  modalWrap.setAttribute("hidden", true);
+};
+
+const outRoom = () => {
+  location.href = "chat_list.html";
 };
 
 inputMsg.addEventListener("input", handleCheckMsg);

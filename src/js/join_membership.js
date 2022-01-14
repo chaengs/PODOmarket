@@ -77,7 +77,6 @@ const handleCheckPwdLength = () => {
 const handleCheckInput = () => {
   function to() {
     // 유효성 검사를 모두 통과하면 button을 활성화 시킨다.
-    console.log(!!email.value, !!pwd.value, CheckPwdLength(), emailCheck);
     if (!!email.value && !!pwd.value && CheckPwdLength() && emailCheck) {
       submitBtn.removeAttribute("disabled");
       submitBtn.className = "btn_submit activate";

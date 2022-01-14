@@ -76,7 +76,6 @@ const handleCheckUserName = () => {
 // input blur 시 실행
 const handleCheckUserID = () => {
   if (checkID()) {
-    console.log("1");
     err_ID.innerHTML = "";
     checkIDValid();
   } else err_ID.innerHTML = "*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";

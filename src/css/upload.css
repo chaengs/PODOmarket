@@ -34,6 +34,15 @@ header {
   gap: 12px;
 }
 
+.img_wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 0.5px solid #bdbdbd;
+}
+
 .img_profile {
   width: 42px;
   height: 42px;

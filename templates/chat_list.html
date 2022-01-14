@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="../src/css/reset.css" />
+    <link rel="stylesheet" href="../src/css/menubar.css" />
+    <link rel="stylesheet" href="../src/css/chat_list.css" />
+  </head>
+
+  <body>
+    <!-- search section -->
+    <header>
+      <a href="feed.html">
+        <img
+          class="btn-back"
+          src="../src/images/search/icon-arrow-left.png"
+          alt="뒤로가기"
+        />
+      </a>
+      <a href=""
+        ><img
+          src="../src/images/mypage/more-vertical.png"
+          alt="더보기"
+          class="img-more"
+      /></a>
+    </header>
+    <!-- dock bar (menu) -->
+    <section class="bar-menu">
+      <button class="btn-home">
+        <img
+          class="img-btn"
+          src="../src/images/menubar/icon-home.png"
+          alt="btn-home"
+        />
+        <p>홈</p>
+      </button>
+      <button class="btn-chat">
+        <img
+          class="img-btn"
+          src="../src/images/menubar/icon-message-circle-fill.png"
+          alt="btn-chat"
+        />
+        <p>채팅</p>
+      </button>
+      <button class="btn-new-post" onclick="{toUpload()}">
+        <img
+          class="img-btn"
+          src="../src/images/menubar/icon-edit.png"
+          alt="btn-new-post"
+        />
+        <p>게시물 작성</p>
+      </button>
+      <button class="btn-profile" onclick="{toProfile()}">
+        <img
+          class="img-btn"
+          src="../src/images/menubar/icon-user.png"
+          alt="btn-home"
+        />
+        <p>프로필</p>
+      </button>
+    </section>
+    <!-- main content -->
+    <main>
+      <!-- 접근성을 위한 tabindex -->
+      <span tabindex="0">
+        <article class="chat">
+          <div class="img_wrap">
+            <img
+              class="profile_img"
+              src="../src/images/chat/basic-profile-img.png"
+              alt=""
+            />
+            <div class="newChat"></div>
+          </div>
+          <div class="text_wrap">
+            <h2 class="chat_title">애월읍 위니브 감귤농장</h2>
+            <div class="flex_wrap">
+              <p class="chat_content">이번에 정정 언제하맨마씸?</p>
+              <p class="chat_date">2020.10.25</p>
+            </div>
+          </div>
+        </article>
+      </span>
+      <!-- chat 2 -->
+      <span tabindex="0">
+        <article class="chat">
+          <div class="img_wrap">
+            <img
+              class="profile_img"
+              src="../src/images/chat/basic-profile-img.png"
+              alt=""
+            />
+            <div class="newChat"></div>
+          </div>
+          <div class="text_wrap">
+            <h2 class="chat_title">누구네 농장 친환경 한라봉</h2>
+            <div class="flex_wrap">
+              <p class="chat_content">
+                내 차는 내가 평가한다. 오픈 이벤트에 참여 하...
+              </p>
+              <p class="chat_date">2020.10.25</p>
+            </div>
+          </div>
+        </article>
+      </span>
+      <!-- chat 3 -->
+      <span tabindex="0">
+        <article class="chat">
+          <div class="img_wrap">
+            <img
+              class="profile_img"
+              src="../src/images/chat/basic-profile-img.png"
+              alt=""
+            />
+          </div>
+          <div class="text_wrap">
+            <h2 class="chat_title">제주감귤마을</h2>
+            <div class="flex_wrap">
+              <p class="chat_content">
+                깊은 어둠의 존재감, 롤스로이스 뉴 블랙 배지...
+              </p>
+              <p class="chat_date">2020.10.25</p>
+            </div>
+          </div>
+        </article>
+      </span>
+    </main>
+    <script>
+      const toUpload = () => {
+        location.href = "upload.html";
+      };
+      const toProfile = () => {
+        location.href = "mypage.html";
+      };
+    </script>
+  </body>
+</html>

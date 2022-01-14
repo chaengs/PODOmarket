@@ -65,7 +65,10 @@ const checkIDValid = () => {
     .then((result) => {
       validID = true;
       result.map((item) => {
-        if (item.accountname == userID.value) {
+        if (
+          item.accountname == userID.value &&
+          sessionAccountName != userID.value
+        ) {
           err_ID.innerHTML = "*이미 존재하는 아이디 입니다.";
           validID = false;
         }

@@ -1,0 +1,22 @@
+header {
+  padding: 12px 12px 12px 16px;
+  border-bottom: 0.5px solid #dbdbdb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.bar-menu {
+  position: fixed;
+  /* top: calc(100% - 70px); */
+  bottom: 0;
+  width: 390px;
+  border-top: 0.5px solid #dbdbdb;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  background-color: #ffffff;
+  z-index: 10;
+}

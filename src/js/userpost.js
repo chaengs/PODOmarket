@@ -1,4 +1,5 @@
 const likeButtons = document.querySelectorAll(".like > button");
+// const commentButtons = document.querySelectorAll(".comment-btn");
 
 let hasClicked = false;
 
@@ -9,7 +10,7 @@ const handleLike = (event) => {
   const likeCount = likeBtn.nextElementSibling;
   // console.log(likeCount)
   let count = parseInt(likeCount.textContent);
-  console.log(count)
+  // console.log(count)
 
   if (!hasClicked) {
     count += 1;
@@ -24,9 +25,16 @@ const handleLike = (event) => {
     likeBtn.classList.remove("like-btn-on");
     likeBtn.classList.add("default");
   }
-}
+};
 
+// const goToPostDetail = () => {
+//   location.href = "../postDetail.html";
+// };
 
 likeButtons.forEach((btn) => {
   btn.addEventListener("click", handleLike);
-})
+});
+
+// commentButtons.forEach((btn) => {
+//   btn.addEventListener("click", goToPostDetail)
+// });

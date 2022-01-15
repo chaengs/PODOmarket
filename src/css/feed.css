@@ -38,17 +38,21 @@ main {
   color: #ffffff;
   border-radius: 44px;
   border: none;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
 }
 
-main::before {
+.section-feed-new-user::before {
   content: "";
   position: absolute;
-  background-image: url(../images/feed/symbol-logo.png);
-  width: 74px;
-  height: 89px;
-  top: 226px;
-  left: 158px;
+  background-image: url(../images/splash/logo_purple.png);
+  width: 100%;
+  height: 100%;
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  bottom: 98px;
 } 
+
 

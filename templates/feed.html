@@ -70,12 +70,21 @@
       </section>
     </main>
     <script>
+      const searchBtn = document.querySelector(".search-btn");
+      const searchFeedBtn = document.querySelector(".btn-search-feed");
+      
       const toUpload = () => {
         location.href = "upload.html";
       };
       const toProfile = () => {
         location.href = "mypage.html";
       };
+
+      const openSearch = () => {
+          location.href = "search.html";
+        };
+        searchBtn.addEventListener("click", openSearch);
+        searchFeedBtn.addEventListener("click", openSearch);
     </script>
   </body>
 </html>

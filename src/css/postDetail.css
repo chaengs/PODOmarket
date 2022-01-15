@@ -1,0 +1,140 @@
+body {
+  width: 100%;
+  min-width: 390px;
+  font-size: 14px;
+}
+
+main.post-detail-container {
+  padding: 0; 
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  align-items: center;
+  height: calc(100% - 108px);
+  overflow-y: scroll;
+}
+
+.page-detail-header {
+  padding: 13px 12px 13px 16px;
+  border-bottom: 0.5px solid #dbdbdb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+}
+
+.setting-logout-btn {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-image: url(../images/postdetail/bar-menu.png);
+}
+
+.post-area { 
+  padding: 20px 16px 0;
+  margin: 0 auto;
+}
+
+.new-comment-container {
+  position: fixed;
+  bottom: 0;
+  border-top: 0.5px solid #dbdbdb;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  width: 100%;
+  height: 60px;
+}
+.new-comment-container button {
+  font-size: 14px;
+  color: #C4C4C4;
+  font-weight: 500;
+  background-color: transparent;
+  padding: 0;
+}
+
+
+/* comment area */
+.comment-area-container {
+  border-top: 1px solid #DBDBDB;
+  width: 100%;
+}
+.comments-container {
+  width: 390px;
+  padding: 20px 16px 66px;
+  margin: 0 auto;
+}
+.comment-container {
+  margin-bottom: 16px;
+}
+.comment-container .user-info-container{
+  display: flex;
+  position: relative;
+}
+.comment-container img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0.5px solid #DBDBDB;
+}
+.comment-user-info {
+  margin: 6px 6px 0 12px;
+  line-height: 18px;
+}
+.comment-user-info a {
+  font-weight: 500;
+}
+.comment-user-info span {
+  margin-left: 6px;
+  font-size: 10px;
+  color: #767676;
+}
+.comment-txt {
+  margin: 4px 0 0 48px;
+  line-height: 18px;
+}
+.comment-edit-btn {
+  width: 20px;
+  height: 20px;
+  top: 4px;
+  position: absolute;
+  right: 0;
+
+  cursor: pointer;
+  background-image: url(../images/postdetail/comment-menu.png);
+}
+
+/* write new comment */
+.create-comment img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0.5px solid #DBDBDB;
+}
+#comment-txt {
+  width: calc(100% - 98px);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  margin: 0 18px;
+  border: none;
+}
+#comment-txt::placeholder {
+  color: #C4C4C4;
+}
+#comment-txt:focus {
+  outline: 1px;
+}
+.comment-submit-btn {
+  cursor: pointer;
+}
+
+
+/* when input is active */
+.active {
+  color: #F26E22;
+}
+
+.hidden {
+  display: none;
+}

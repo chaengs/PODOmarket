@@ -1,8 +1,15 @@
-header {
-  width: 390px;
-  /* border-bottom: 0.5px solid #dbdbdb; */
+main {
+  margin-top: 48px;
+  width: 100%;
 }
 
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #ffffff;
+}
 .feed-search-container {
   padding: 0 16px;
   border-bottom: 0.5px solid #dbdbdb;
@@ -10,17 +17,6 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 48px;
-}
-
-#feed-container {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 16px;
-  height: calc(100% - 108px);
-  overflow-y: scroll;
-  width: 390px;
 }
 .search-bar {
   border: none;
@@ -40,32 +36,39 @@ header {
   cursor: pointer;
 }
 
+#feed-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 0;
+  height: calc(100% - 108px);
+  overflow-y: scroll;
+}
 
+/* modals */
 /* post edit/delete modal */
 .modal {
   position: relative;
-  width: 390px;
-  height: 100%;
-  z-index: 20;
 }
 .modal-layer {
   position: fixed;
-  top: 0;
   left: 0;
-  width: 390px;
+  top: 0;
+  width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.2);
-  z-index: -1;
+  z-index: 10;
 }
 
 .modal-content {
   position: fixed;
+  left: 0;
   bottom: 0;
-  width: 390px;
-  height: 138px;
+  width: 100%;
   background-color: #ffffff;
   border-radius: 10px 10px 0 0;
-  z-index: 10;
+  z-index: 50;
   padding-bottom: 10px;
 }
 
@@ -76,63 +79,57 @@ header {
   border-radius: 5px;
   margin:16px auto;
 }
-.delete-btn,
-.edit-btn {
-  display: block;
-  padding: 14px 0 14px 26px;
-  width: fit-content;
-}
 
+.modal-content ul li a,
+.modal-content ul li a{
+  display: block;
+  line-height: 18px;
+  padding: 14px 26px 14px;
+  font-size: 14px;
+}
 .modal-btn a:hover {
   color: #7E3E9D;
   font-weight: 500;
 }
 
-.modal-delete {
+.modal-check {
   position: fixed;
   width: 252px;
   height: 110px;
   background-color: #ffffff;
-  left: 70px;
+  left: 50%;
+  transform: translateX(-50%);
   top: 50%;
   border-radius: 10px;
   z-index: 20;
-  bottom: 100px;
-  display: flex;
-  flex-direction: column;
   text-align: center;
   overflow: hidden;
   border: 1px solid #DBDBDB;
 }
-
-.modal-delete p {
+.modal-check p {
   margin: 22px auto;
   font-size: 16px;
   font-weight: 500;
 }
-
-.cancel-delete-btn {
+.check-btn {
   display: flex;
-}
-
-.cancel-btn,
-.delete-btn-final {
-  width: fit-content;
-  line-height: 18px;
-  font-weight: 400;
-  padding: 14px 49.3px;
-  background-color: #ffffff;
   border-top: 1px solid #DBDBDB;
 }
-
-.cancel-delete-btn a:hover{
+.check-btn a {
+  line-height: 18px;
+  padding: 14px 0;
+  width: 50%;
+  background-color: #ffffff;
+}
+.check-btn a:hover{
   color: #7E3E9D;
   font-weight: 500;
 }
 
-.cancel-btn {
+.check-btn a:nth-child(1) {
   border-right: 1px solid #DBDBDB;
 }
+
 
 /* make behind modal darker when modal's opened */
 .modal-bg {

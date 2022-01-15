@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>피드 화면</title>
-    <link rel="stylesheet" href="../src/css/reset.css">
-    <link rel="stylesheet" href="../src/css/menubar.css" />
-    <link rel="stylesheet" href="../src/css/feedpage.css">
-    <link rel="stylesheet" href="../src/css/userpost.css">
-    <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>피드 화면</title>
+  <link rel="stylesheet" href="../src/css/reset.css">
+  <link rel="stylesheet" href="../src/css/menubar.css" />
+  <link rel="stylesheet" href="../src/css/userpost.css">
+  <link rel="stylesheet" href="../src/css/feedpage.css">
+  <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div id="app">
     <!-- search section -->
     <header>
       <article class="feed-search-container">
         <p class="search-bar">계정 검색</p>
-        <button class="search-btn" type="button">
-        <span class="txt-hide">계정검색 버튼</span>
+        <button type="button" class="search-btn">
+          <span class="txt-hide">계정검색 버튼</span>
         </button>
       </article>
       <!-- dock bar (menu) -->
@@ -43,84 +46,23 @@
     <!-- feed section -->
     <main id="feed-container">
       <article class="post">
-        <h2 class="txt-hide">포스트</h2>
+        <h2 class="txt-hide">포스팅 카드</h2>
         <section class="post-card">
           <nav class="user-info">
             <a href="javascript:void(0)" class="post-card-profile">
               <img src="../src/images/search/default_profile.png" alt="user-profile-img">
             </a>
-            <ul class="user">
-              <li>
-                <a href="javascript:void(0)">
-                  <span class="user-name">애월읍 위니브 감귤농장</span>
-                  <span class="user-id">@weniv_Mandarin</span>
-                </a>
-              </li>
-            </ul>
-            <ul class="edit-btn-container">
-              <li>
-                <a href="javascript:void(0)" class="post-edit-btn">
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="post-content-container">
-            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은
-              쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다.
-              피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.</p>
-            <div class="post-content-img">
-              <!-- 이미지 여러개 들어 올 수도 있을 것 같아서 일단 div에 넣음 -->
-              <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
-            </div>
-            <ul class="like-comment-container">
-              <li class="like">
-                <button type="button" class="default">
-                  <span class="txt-hide">좋아요 버튼</span>
-                </button>
-                <span>58</span>
-              </li>
-              <li class="comment">
-                <button>
-                  <span class="txt-hide">코멘트 버튼</span>
-                </button>
-                <span>12</span>
-              </li>
-            </ul>
-            <p class="post-date">2022년 1월 3일</p>
-          </div>
-        </section>
-      </article>
-
-      <article class="post">
-        <h2 class="txt-hide">포스트</h2>
-        <section class="post-card">
-          <nav class="user-info">
-            <a href="javascript:void(0)" class="post-card-profile">
-              <img src="../src/images/search/default_profile.png" alt="user-profile-img">
+            <a href="javascript:void(0)" class="user">
+              <span class="user-name">애월읍 위니브 감귤농장</span>
+              <span class="user-id">@weniv_Mandarin</span>
             </a>
-            <ul class="user">
-              <li>
-                <a href="javascript:void(0)">
-                  <span class="user-name">애월읍 위니브 감귤농장</span>
-                  <span class="user-id">@weniv_Mandarin</span>
-                </a>
-              </li>
-            </ul>
-            <ul class="edit-btn-container">
-              <li>
-                <a href="javascript:void(0)" class="post-edit-btn">
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                </a>
-              </li>
-            </ul>
+            <button class="post-edit-btn">
+              <span class="txt-hide">더보기 버튼</span>
+            </button>
           </nav>
           <div class="post-content-container">
-            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘
+            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한
+              새워 다 둘
               애기 많은
               쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다.
               피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.</p>
@@ -136,59 +78,7 @@
                 <span>58</span>
               </li>
               <li class="comment">
-                <button>
-                  <span class="txt-hide">코멘트 버튼</span>
-                </button>
-                <span>12</span>
-              </li>
-            </ul>
-            <p class="post-date">2022년 1월 3일</p>
-          </div>
-        </section>
-      </article>
-
-      <article class="post">
-        <h2 class="txt-hide">포스트</h2>
-        <section class="post-card">
-          <nav class="user-info">
-            <a href="javascript:void(0)" class="post-card-profile">
-              <img src="../src/images/search/default_profile.png" alt="user-profile-img">
-            </a>
-            <ul class="user">
-              <li>
-                <a href="javascript:void(0)">
-                  <span class="user-name">애월읍 위니브 감귤농장</span>
-                  <span class="user-id">@weniv_Mandarin</span>
-                </a>
-              </li>
-            </ul>
-            <ul class="edit-btn-container">
-              <li>
-                <a href="javascript:void(0)" class="post-edit-btn">
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="post-content-container">
-            <p class="post-content-txt">벌써 같이 하늘에는 별 강아지, 까닭입니다. 피어나듯이 사랑과 부끄러운 것은 나의 있습니다. 릴케 지나가는 흙으로 남은 까닭입니다. 말 가난한 새워 다 둘 애기 많은
-              쉬이 까닭입니다. 하나 별에도 자랑처럼 거외다.
-              피어나듯이 이름과, 무엇인지 청춘이 같이 헤일 까닭입니다.</p>
-            <div class="post-content-img">
-              <!-- 이미지 여러개 들어 올 수도 있을 것 같아서 일단 div에 넣음 -->
-              <img src="../src/images/userpost/sample-posting-img.png" alt="feed-posting-image">
-            </div>
-            <ul class="like-comment-container">
-              <li class="like">
-                <button type="button" class="default">
-                  <span class="txt-hide">좋아요 버튼</span>
-                </button>
-                <span class="like-count">58</span>
-              </li>
-              <li class="comment">
-                <button>
+                <button type="button" class="comment-btn">
                   <span class="txt-hide">코멘트 버튼</span>
                 </button>
                 <span>12</span>
@@ -200,7 +90,7 @@
       </article>
     </main>
 
-    <!-- modal -->
+    <!-- modal - if it's my post-->
     <div class="modal hidden">
       <div class="modal-content hidden">
         <div class="btn-to-close"></div>
@@ -211,15 +101,20 @@
       </div>
       <div class="modal-layer"></div>
     </div>
-    <!-- modal-delete -->
-    <div class="modal-delete hidden">
+    <!-- modal-check (delete) -->
+    <div class="modal-check hidden">
       <p>게시글을 삭제할까요?</p>
-      <div class="cancel-delete-btn">
+      <div class="check-btn">
         <a href="javascript:void(0)" class="cancel-btn">취소</a>
         <a href="javascript:void(0)" class="delete-btn-final">삭제</a>
       </div>
     </div>
-    <script src="../src/js/userpost.js"></script>
-    <script src="../src/js/feedpage.js"></script>
-  </body>
+  </div>
+
+
+
+  <script src="../src/js/userpost.js"></script>
+  <script src="../src/js/feedpage.js"></script>
+</body>
+
 </html>

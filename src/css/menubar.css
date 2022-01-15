@@ -6,13 +6,16 @@
   position: fixed;
   /* top: calc(100% - 70px); */
   bottom: 0;
-  width: 390px;
+  width: 100%;
+  min-width: 390px;
   border-top: 0.5px solid #dbdbdb;
   font-size: 10px;
   line-height: 14px;
   letter-spacing: 0em;
   text-align: center;
   background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-evenly;
   z-index: 10;
 }
 

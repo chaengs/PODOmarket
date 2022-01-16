@@ -99,10 +99,14 @@ nav.user-info {
 }
 
 .post-content-img {
-  width: 304px;
+  overflow: auto;
+  white-space: nowrap;
 }
 .post-content-img img {
-  width: 100%;
+  width: 304px;
+  height: 228px;
+  border-radius: 10px;
+  border: 0.5px solid #DBDBDB;
 }
 
 .like-comment-container  {

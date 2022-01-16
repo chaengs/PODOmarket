@@ -14,6 +14,7 @@ const token = sessionStorage.getItem("pic_token");
 const itemList = document.querySelector(".item-list");
 const itemWrap = document.querySelector(".item-wrap");
 const postImgWrap = document.querySelector(".post-img-wrap");
+const postNav = document.querySelector(".post-nav");
 
 const myHeaders = new Headers();
 myHeaders.append("Authorization", "Bearer " + token);
@@ -36,7 +37,7 @@ fetch(url + "/profile/" + sessionAccountName, requestOptions)
     });
 
 // 판매중인상품
-fetch(url + "/profile/" + sessionAccountName, requestOptions)
+fetch(url + "/product/" + sessionAccountName, requestOptions)
     .then(res => res.json())
     .then(res => {
         if (res.data != 0) {
@@ -121,7 +122,9 @@ fetch(url + "/post/" + sessionAccountName + "/userpost", requestOptions)
             }
             document.querySelector(".posts").innerHTML = input;
         } else {
+            postNav.classList.add("txt-hide");
             postImgWrap.style.height = 0;
+            postImgWrap.style.padding = 0;
         }
     }).catch(err => {
         console.log("fetch error", err);

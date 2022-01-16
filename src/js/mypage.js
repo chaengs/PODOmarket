@@ -23,8 +23,20 @@ const requestOptions = {
     headers: myHeaders,
 };
 
+// 프로필 정보 넣기
+fetch(url + "/profile/" + sessionAccountName, requestOptions)
+    .then(res => res.json())
+    .then(res => {
+        const profile = res.profile;
+        document.querySelector(".profile-img").setAttribute("src", profile.image);
+        document.querySelector(".profile-name").innerHTML = profile.username;
+        document.querySelector(".profile-id").innerHTML = '@' + profile.accountname;
+    }).catch(err => {
+        console.log("fetch error", err);
+    });
+
 // 판매중인상품
-fetch(url + "/product/" + sessionAccountName, requestOptions)
+fetch(url + "/profile/" + sessionAccountName, requestOptions)
     .then(res => res.json())
     .then(res => {
         if (res.data != 0) {
@@ -102,7 +114,7 @@ fetch(url + "/post/" + sessionAccountName + "/userpost", requestOptions)
                                 <span>12</span>
                             </li>
                         </ul>
-                        <p class="post-date">${post[i].createdAt}}</p>
+                        <p class="post-date">${post[i].createdAt.slice(0, 4)}년 ${post[i].createdAt.slice(5, 7)}월 ${post[i].createdAt.slice(8, 10)}일</p>
                     </div>
                 </section>
                 `

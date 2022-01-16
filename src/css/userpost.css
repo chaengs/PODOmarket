@@ -97,8 +97,8 @@ nav.user-info {
   white-space: nowrap;
 }
 .post-content-img img {
-  width: 304px;
-  height: 228px;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   border: 0.5px solid #DBDBDB;
 }

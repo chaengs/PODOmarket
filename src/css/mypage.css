@@ -159,7 +159,7 @@ main .profile-img {
 }
 .post-img-wrap .posts {
   height: 404px;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 .post-img-wrap .post-img-list {
   width: 114px;

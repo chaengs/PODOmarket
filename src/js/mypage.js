@@ -25,7 +25,7 @@ const requestOptions = {
 };
 
 // 프로필 정보 넣기
-fetch(url + "/profile/" + sessionAccountName, requestOptions)
+fetch(url+"/profile/"+sessionAccountName, requestOptions)
     .then(res => res.json())
     .then(res => {
         const profile = res.profile;
@@ -37,7 +37,7 @@ fetch(url + "/profile/" + sessionAccountName, requestOptions)
     });
 
 // 판매중인상품
-fetch(url + "/product/" + sessionAccountName, requestOptions)
+fetch(url+"/product/"+sessionAccountName, requestOptions)
     .then(res => res.json())
     .then(res => {
         if (res.data != 0) {
@@ -66,7 +66,7 @@ fetch(url + "/product/" + sessionAccountName, requestOptions)
 
 // 게시글 목록형
 const postList = () => {
-    fetch(url + "/post/" + sessionAccountName + "/userpost", requestOptions)
+    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
         .then(res => res.json())
         .then(res => {
             const post = res.post;
@@ -136,7 +136,7 @@ postList();
 
 //게시글 앨범형
 const postAlbum = () => {
-    fetch(url + "/post/" + sessionAccountName + "/userpost", requestOptions)
+    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
         .then(res => res.json())
         .then(res => {
             const post = res.post;

@@ -61,36 +61,27 @@ fetch(url + "/post/" + sessionAccountName + "/userpost", requestOptions)
             for (let i = 0; i < post.length; i++) {
                 input +=
                     `
-                    <section class="post-card">
-                    <nav class="user-info">
+                        <section class="post-card">
+                        <nav class="user-info">
                         <a href="javascript:void(0)" class="post-card-profile">
                             <img src="${post[i].author.image}" alt="user-profile-img">
                         </a>
-                        <ul class="user">
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <span class="user-name">${post[i].author.username}</span>
-                                    <span class="user-id">@${post[i].author.accountname}</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="edit-btn-container">
-                            <li>
-                                <a href="javascript:void(0)" class="post-edit-btn">
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="post-content-container">
+                        <a href="javascript:void(0)" class="user">
+                            <span class="user-name">${post[i].author.username}</span>
+                            <span class="user-id">@${post[i].author.accountname}</span>
+                        </a>
+                        <button type="button" class="post-edit-btn">
+                            <span class="txt-hide">더보기 버튼</span>
+                        </button>
+                        </nav>
+                        <div class="post-content-container">
                         <p class="post-content-txt">${post[i].content}</p>
                         <div class="post-content-img">
-                `
+                    `
                 const images = post[i].image.split(',');
                 for (let i = 0; i < images.length; i++) {
-                    input += `
+                    input +=
+                        `
                         <img src="${images[i]}" alt="feed-posting-image">
                     `
                 }

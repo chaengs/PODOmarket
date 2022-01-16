@@ -3,8 +3,22 @@
 }
 
 body {
-  font-size: 14px;
+  width: 100%;
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+button {
+  background-color: transparent;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  min-width: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
 }
 
 a {
@@ -21,25 +35,10 @@ a {
 }
 
 .post {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 34px;
 }
-
 .post-card {
-  width: 100%
-}
-
-.post-card-profile {
-  display: inline-block;
-  width: 42px;
-  height: 42px;
-}
-.post-card-profile img {
-  width: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 0.5px solid #DBDBDB;
+  width: 358px;
 }
 
 nav.user-info {
@@ -47,11 +46,20 @@ nav.user-info {
   display: flex;
   position: relative;
 }
-
+.post-card-profile {
+  width: 42px;
+  height: 42px;
+}
+.post-card-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 0.5px solid #DBDBDB;
+}
 .user-info .user {
   margin-left: 12px;
 }
-
 .user span {
   display: block;
 }
@@ -65,32 +73,18 @@ nav.user-info {
   line-height: 14px;
   margin-top: 2px;
 }
-
-.edit-btn-container {
+.post-edit-btn {
   position: absolute;
   right: 0;
   top: 4px;
-}
-
-.post-edit-btn {
   width: 18px;
   height: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   cursor: pointer;
-}
-.dot {
-  width: 1.5px;
-  height: 1.5px;
-  border-radius: 50%;
-  background-color: #C4C4C4;
+  background-image: url(../images/userpost/post-menu.png);
 }
 
 .post-content-container {
   padding-left: 54px;
-  
 }
 .post-content-txt {
   margin: 16px 0;
@@ -113,7 +107,6 @@ nav.user-info {
   display: flex;
   margin: 12px 0 16px 0;
 }
-
 .like-comment-container li {
   display: flex;
   align-items: center;
@@ -123,16 +116,12 @@ nav.user-info {
 .like-comment-container li.like {
   margin-right: 18.5px;
 }
-
 .like-comment-container li button {
-  border: none;
   background-color: transparent;
-  padding: 0;
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
-
 .like button.default {
   background-image: url(../images/userpost/like-icon.png);
 }
@@ -140,6 +129,7 @@ nav.user-info {
   background-image: url(../images/userpost/like-btn-on.png);
   animation: like 0.5s;
 }
+
 @keyframes like {
   0%   { transform: scale(1); }
   90%   { transform: scale(1.2); }
@@ -149,11 +139,9 @@ nav.user-info {
 .like-comment-container .comment button {
   background-image: url(../images/userpost/comment-icon.png);
 }
-
 .like-comment-container li span {
   margin: 4px 0 0 6px;
   font-size: 12px;
-  font-weight: 400;
 }
 
 p.post-date {
@@ -162,117 +150,12 @@ p.post-date {
   margin-bottom: 4px;
 }
 
-
-
-/* comment area */
-.horizontal-bar {
-  width: 390px;
-  height: 1px;
-  background-color: #DBDBDB;
-}
-.thin {
-  height: 0.5px;
-}
-
-.comments-container {
-  width: 390px;
-  padding: 20px 16px 66px;
-}
-
-.comment .user-info-container{
-  display: flex;
-  position: relative;
-}
-
-.comment img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 0.5px solid #DBDBDB;
-}
-.comment-user-info {
-  margin: 6px 6px 0 12px;
-  line-height: 18px;
-}
-.comment-user-info a {
-  font-weight: 500;
-}
-.comment-user-info span {
-  margin-left: 6px;
-  font-size: 10px;
-  color: #767676;
-}
-.comment-txt {
-  margin: 4px 0 0 48px;
-  line-height: 18px;
-}
-
-.comment-edit-btn {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  top: 4px;
-  position: absolute;
-  right: 0;
-}
-
-.comment-edit-btn .dot {
-  width: 2px;
-  height: 2px;
-  background-color: #767676;
-  border-radius: 50%;
-  border: 1px solid #767676;
-}
-
-
-.create-comment {
-  width: 390px;
-}
-.new-comment-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  width: 100%;
-  height: 60px;
-}
-.create-comment img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 0.5px solid #DBDBDB;
-}
-
-#comment-txt {
-  width: calc(100% - 98px);
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
-  margin: 0 18px;
-  border: none;
-}
-#comment-txt::placeholder {
-  color: #C4C4C4;
-}
-#comment-txt:focus {
-  outline: 1px;
-}
-
-.new-comment-container button {
-  color: #C4C4C4;
-  font-weight: 500;
-  background-color: transparent;
-  padding: 0;
-}
-
 /* when input is active */
 .active {
   color: #F26E22;
 }
 
+/* to hide element */
 .hidden {
   display: none;
 }

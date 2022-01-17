@@ -135,6 +135,7 @@ const imgUpload = () => {
       .then((result) => {
         // 사진이 여러장일 경우를 대비해 "1.png,2.png,3.png" 형식이 되도록 해주고 imgUrl 변수에 넣어준다.
         imgUrl = result.map((item) => item.filename).join();
+        
       })
       .catch((error) => console.log("error", error));
   }

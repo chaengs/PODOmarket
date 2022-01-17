@@ -70,13 +70,14 @@ const postList = () => {
     fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
         .then(res => res.json())
         .then(res => {
+            // console.log(res);
             const post = res.post;
             let input = '';
             if (post.length > 0) {
                 for (let i = 0; i < post.length; i++) {
                     input +=
                     `
-                        <section class="post-card">
+                    <section class="post-card">
                             <nav class="user-info">
                                 <a href="javascript:void(0)" class="post-card-profile">
                                     <img src="http://146.56.183.55:5050/${post[i].author.image}" alt="user-profile-img">
@@ -92,13 +93,11 @@ const postList = () => {
                             <div class="post-content-container">
                                 <p class="post-content-txt">${post[i].content}</p>
                             <div class="post-content-img">
-                    `
+                            `
                     const images = post[i].image.split(',')
                     for (let i = 0; i < images.length; i++) {
                         input +=
-                        `
-                            <img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">
-                        `
+                        `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
                     }
                     input +=
                     `
@@ -146,7 +145,7 @@ const postAlbum = () => {
                     const firstImage = post[i].image.split(',')[0];
                     input +=
                     `
-                        <img src="${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
+                        <img src="http://146.56.183.55:5050/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
                     `
                 }
                 document.querySelector(".posts").innerHTML = input;

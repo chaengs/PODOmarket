@@ -29,9 +29,10 @@ fetch(url+"/profile/"+sessionAccountName, requestOptions)
     .then(res => res.json())
     .then(res => {
         const profile = res.profile;
-        document.querySelector(".profile-img").setAttribute("src", profile.image);
+        document.querySelector("#profile-img").setAttribute("src", url+"/"+profile.image);
         document.querySelector(".profile-name").innerHTML = profile.username;
         document.querySelector(".profile-id").innerHTML = '@' + profile.accountname;
+        document.querySelector(".profile-info").innerHTML = profile.intro;
     }).catch(err => {
         console.log("fetch error", err);
     });
@@ -78,7 +79,7 @@ const postList = () => {
                         <section class="post-card">
                             <nav class="user-info">
                                 <a href="javascript:void(0)" class="post-card-profile">
-                                    <img src="${post[i].author.image}" alt="user-profile-img">
+                                    <img src="http://146.56.183.55:5050/${post[i].author.image}" alt="user-profile-img">
                                 </a>
                                 <a href="javascript:void(0)" class="user">
                                     <span class="user-name">${post[i].author.username}</span>
@@ -96,7 +97,7 @@ const postList = () => {
                     for (let i = 0; i < images.length; i++) {
                         input +=
                         `
-                            <img src="${images[i]}" alt="게시물 사진">
+                            <img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">
                         `
                     }
                     input +=
@@ -127,7 +128,6 @@ const postList = () => {
                 postImgWrap.style.height = 0;
                 postImgWrap.style.padding = 0;
             }
-            console.log(post.length);
         }).catch(err => {
             console.log("fetch error", err);
         });

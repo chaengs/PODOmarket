@@ -39,6 +39,8 @@ main .profile-wrap .profile-txt {
 }
 main .profile-img img {
   width: 110px;
+  height: 110px;
+  border-radius: 50%;
   position: relative;
   top: -70px;
 }

@@ -129,6 +129,30 @@ fetch("http://146.56.183.55:5050/post/feed/?limmit=100", requestOptions)
 
         feedContainer.append(postItem);
 
+        // 포스팅 이미지 슬라이드
+        const slideBtn = document.querySelectorAll(".slide-btn");
+        const handleImgSlider = (e) => {   
+          const currentBtn = e.target;
+          const buttons = e.target.parentNode;
+          let myIndex;
+          const findMyIndex = (currentBtn) => {
+            for(let i=0; i < buttons.childNodes.length; i++) {
+              if(currentBtn.parentNode.childNodes[i] === currentBtn) {
+                myIndex = i;        
+              }
+              currentBtn.parentNode.childNodes[i].classList.remove("active")
+            }
+            currentBtn.classList.add("active");            
+            const slider = currentBtn.parentNode.parentNode.querySelector(".img-slide-container");
+            // console.log(slider);
+            slider.style.transform = `translateX(-${304 * myIndex}px)`;
+          }
+          findMyIndex(currentBtn);
+        } 
+        slideBtn.forEach((btn) => {
+          btn.addEventListener("click", handleImgSlider)
+        })
+    
 
         // 포스팅 상세 버튼 클릭
         const postEditBtn = document.querySelectorAll(".post-edit-btn");

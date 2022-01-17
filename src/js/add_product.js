@@ -82,23 +82,28 @@ const handleCheckInput = () => {
   }
 };
 
-const imageUpload = () => {
+const imageUpload = async () => {
   const formdata = new FormData();
+
   formdata.append("image", imgInput.files[0], "basic-profile-img.png");
+
   const requestOptions = {
     method: "POST",
     body: formdata,
     redirect: "follow",
   };
-  async function fetcher() {
-    return (
-      await fetch("http://146.56.183.55:5050/image/uploadfile", requestOptions)
-    ).json();
-  }
-  fetcher().then((value) => {
-    // 변수에 img url을 할당.
-    imgUrl = value.filename;
-  });
+  return await fetch(
+    "http://146.56.183.55:5050/image/uploadfile",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      return result.filename;
+    })
+    .then((res) => {
+      imgUrl = res;
+    })
+    .catch((error) => console.log("error", error));
 };
 
 const addProduct = () => {
@@ -134,8 +139,9 @@ const addProduct = () => {
 };
 
 const handleOnSubmit = () => {
-  imageUpload();
-  setTimeout(addProduct, 100);
+  imageUpload().then(() => {
+    addProduct();
+  });
 };
 
 itemName.addEventListener("blur", handleItemName);

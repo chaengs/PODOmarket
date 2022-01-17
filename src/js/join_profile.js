@@ -124,7 +124,7 @@ const setProfile = (event) => {
 };
 
 // 이미지 db에 업로드 후 로그인 시 이용할 변수에 파일이름 할당.
-const imgUpload = () => {
+const imgUpload = async () => {
   if (imgInput.files.length) {
     const formdata = new FormData();
     formdata.append("image", imgInput.files[0], "basic-profile-img.png");
@@ -133,18 +133,18 @@ const imgUpload = () => {
       body: formdata,
       redirect: "follow",
     };
-    async function fetcher() {
-      return (
-        await fetch(
-          "http://146.56.183.55:5050/image/uploadfile",
-          requestOptions
-        )
-      ).json();
-    }
-    fetcher().then((value) => {
-      // 기존 img url 이 들어있던 변수에 새로운 img url을 할당.
-      registerImgUrl = value.filename;
-    });
+    return await fetch(
+      "http://146.56.183.55:5050/image/uploadfile",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        return result.filename;
+      })
+      .then((res) => {
+        registerImgUrl = res;
+      })
+      .catch((error) => console.log("error", error));
   }
 };
 
@@ -186,9 +186,9 @@ const join = () => {
 
 // 버튼이 활성화되면 버튼에 생기는 onClick event
 const handleOnSubmit = () => {
-  imgUpload();
-  // 비동기 처리를 위한 setTimeout
-  setTimeout(join, 100);
+  imgUpload().then(() => {
+    join();
+  });
 };
 
 userName.addEventListener("blur", handleCheckUserName);

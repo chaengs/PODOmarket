@@ -116,7 +116,7 @@ const dataExist = () => {
 };
 
 // 이미지 업로드
-const imgUpload = () => {
+const imgUpload = async () => {
   if (fileInput.files.length) {
     const formdata = new FormData();
     // 이미지가 여러장일 경우를 대비하여 files의 길이만큼 formdata를 붙힌다.
@@ -130,12 +130,14 @@ const imgUpload = () => {
       redirect: "follow",
     };
 
-    fetch("http://146.56.183.55:5050/image/uploadfiles", requestOptions)
+    return await fetch(
+      "http://146.56.183.55:5050/image/uploadfiles",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         // 사진이 여러장일 경우를 대비해 "1.png,2.png,3.png" 형식이 되도록 해주고 imgUrl 변수에 넣어준다.
         imgUrl = result.map((item) => item.filename).join();
-        
       })
       .catch((error) => console.log("error", error));
   }
@@ -167,9 +169,13 @@ const postUpload = () => {
 };
 
 const handleOnSubmit = () => {
-  imgUpload();
-  // 비동기 처리를 위한 setTimeout
-  setTimeout(postUpload, 100);
+  imgUpload()
+    .then((res) => {
+      imgUrl = res;
+    })
+    .then(() => {
+      postUpload();
+    });
 };
 
 textArea.addEventListener("input", dataExist);

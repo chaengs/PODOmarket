@@ -1,4 +1,4 @@
-function follow() {
+const follow = () => {
     let btn_follow = document.querySelector(".follow-btn");
     if (btn_follow.innerText === '팔로우') {
         btn_follow.innerText = '취소';
@@ -95,18 +95,13 @@ const postList = () => {
                             <div class="post-content-img">
                             `
                     let images = post[i].image
-                    if (images != 'undefined' && images != null) {
+                    if (images) {
                         images = images.split(',');
                         for (let i = 0; i < images.length; i++) {
                             input +=
                             `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
                         }
                     }
-                    // const images = post[i].image.split(',')
-                    // for (let i = 0; i < images.length; i++) {
-                    //     input +=
-                    //     `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
-                    // }
                     input +=
                     `
                             </div>
@@ -150,11 +145,14 @@ const postAlbum = () => {
             let input = '';
             if (post.length > 0) {
                 for (let i = 0; i < post.length; i++) {
-                    const firstImage = post[i].image.split(',')[0];
-                    input +=
-                    `
-                        <img src="http://146.56.183.55:5050/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
-                    `
+                    let firstImage = post[i].image;
+                    if (firstImage) {
+                        firstImage = firstImage.split(',')[0]
+                        input +=
+                        `
+                            <img src="http://146.56.183.55:5050/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
+                        `
+                    }
                 }
                 document.querySelector(".posts").innerHTML = input;
             } else {

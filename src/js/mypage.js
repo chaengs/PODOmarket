@@ -94,11 +94,19 @@ const postList = () => {
                                 <p class="post-content-txt">${post[i].content}</p>
                             <div class="post-content-img">
                             `
-                    const images = post[i].image.split(',')
-                    for (let i = 0; i < images.length; i++) {
-                        input +=
-                        `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
+                    let images = post[i].image
+                    if (images != 'undefined' && images != null) {
+                        images = images.split(',');
+                        for (let i = 0; i < images.length; i++) {
+                            input +=
+                            `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
+                        }
                     }
+                    // const images = post[i].image.split(',')
+                    // for (let i = 0; i < images.length; i++) {
+                    //     input +=
+                    //     `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
+                    // }
                     input +=
                     `
                             </div>

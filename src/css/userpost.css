@@ -42,7 +42,7 @@ a {
 }
 
 nav.user-info {
-  margin-top: 4px;
+  margin: 4px 0 16px 0;
   display: flex;
   position: relative;
 }
@@ -87,7 +87,7 @@ nav.user-info {
   padding-left: 54px;
 }
 .post-content-txt {
-  margin: 16px 0;
+  margin-bottom: 16px;
   line-height: 18px;
   font-weight: 400;
 }

@@ -5,10 +5,10 @@ const commentEditBtn = document.querySelector(".comment-edit-btn");
 
 // 취소 버튼 핸들링
 const handleCancel = () => {
-    const modal = document.querySelector(".modal");
-    const modalCheck = document.querySelector(".modal-check");
-    modal.remove();
-    modalCheck.remove();
+  const modal = document.querySelector(".modal");
+  const modalCheck = document.querySelector(".modal-check");
+  modal.remove();
+  modalCheck.remove();
 }
 
 // 재확인 하는 모달
@@ -16,22 +16,22 @@ const openCheckModal = (event) => {
   console.log(event.target)
   const buttonClicked = event.target;
   const app = document.querySelector("#app");
-  const checkModal = document.createElement("div"); 
+  const checkModal = document.createElement("div");
   checkModal.classList.add("modal-check");
   let checkQuestion = "";
   let option = [];
 
-  if(buttonClicked.classList.contains("logout-btn")) {
+  if (buttonClicked.classList.contains("logout-btn")) {
     checkQuestion = "로그아웃 하시겠어요?"
     option.push("취소");
     option.push("로그아웃");
   }
-  if(buttonClicked.classList.contains("report-post")) {
+  if (buttonClicked.classList.contains("report-post")) {
     checkQuestion = "게시글을 신고하시겠어요?"
     option.push("취소");
     option.push("신고");
   }
-   if(buttonClicked.classList.contains("report-comment")) {
+  if (buttonClicked.classList.contains("report-comment")) {
     checkQuestion = "신고하시겠어요?"
     option.push("취소");
     option.push("신고");
@@ -57,20 +57,20 @@ const openModal = (event) => {
   console.log(event.target)
   const buttonClicked = event.target;
   const app = document.querySelector("#app");
-  const modal = document.createElement("div"); 
+  const modal = document.createElement("div");
   modal.classList.add("modal")
   let option = [];
   let reportClass = ""
 
-  if(buttonClicked.classList.contains("setting-logout-btn")) {
+  if (buttonClicked.classList.contains("setting-logout-btn")) {
     option.push("설정 및 개인정보");
     option.push("로그아웃");
   }
-  if(buttonClicked.classList.contains("post-edit-btn")) {
+  if (buttonClicked.classList.contains("post-edit-btn")) {
     option.push("신고");
     reportClass = "report-post";
   }
-  if(buttonClicked.classList.contains("comment-edit-btn")) {
+  if (buttonClicked.classList.contains("comment-edit-btn")) {
     option.push("신고하기")
     reportClass = "report-comment"
   }
@@ -79,28 +79,28 @@ const openModal = (event) => {
     <div class="modal-content">
       <div class="btn-to-close"></div>
       <ul>
-      ${ (option.length > 1) ? 
-        `<li class="modal-btn"><a href="javascript:void(0)" class="to-setting-btn">${option[0]}</a></li>
-        <li class="modal-btn"><a href="javascript:void(0)" class="logout-btn">${option[1]}</a></li>` : 
-        `<li class="modal-btn"><a href="javascript:void(0)" class=${reportClass}>${option[0]}</a></li>`}
+      ${(option.length > 1) ?
+      `<li class="modal-btn"><a href="javascript:void(0)" class="to-setting-btn">${option[0]}</a></li>
+        <li class="modal-btn"><a href="javascript:void(0)" class="logout-btn">${option[1]}</a></li>` :
+      `<li class="modal-btn"><a href="javascript:void(0)" class=${reportClass}>${option[0]}</a></li>`}
       </ul>
     </div>
     <div class="modal-layer"></div>
   `
   modal.innerHTML = modalHtml;
   app.append(modal);
-    
-  const logoutBtn = document.querySelector(".logout-btn");
-  const reportPost= document.querySelector(".report-post");
-  const reportComment= document.querySelector(".report-comment");
 
-  if(logoutBtn) {
+  const logoutBtn = document.querySelector(".logout-btn");
+  const reportPost = document.querySelector(".report-post");
+  const reportComment = document.querySelector(".report-comment");
+
+  if (logoutBtn) {
     logoutBtn.addEventListener("click", openCheckModal)
   }
-  if(reportPost) {
+  if (reportPost) {
     reportPost.addEventListener("click", openCheckModal);
   }
-  if(reportComment) {
+  if (reportComment) {
     reportComment.addEventListener("click", openCheckModal);
   }
 }

@@ -39,6 +39,8 @@ main .profile-wrap .profile-txt {
 }
 main .profile-img img {
   width: 110px;
+  height: 110px;
+  border-radius: 50%;
   position: relative;
   top: -70px;
 }
@@ -157,7 +159,11 @@ main .profile-img {
 .post-img-wrap {
   padding: 12px;
 }
-.post-img-wrap img {
+.post-img-wrap .posts {
+  height: 404px;
+  overflow: scroll;
+}
+.post-img-wrap .post-img-list {
   width: 114px;
   height: 114px;
   margin: 2px 2px;

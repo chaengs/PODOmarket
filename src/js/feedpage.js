@@ -1,16 +1,5 @@
 const searchBtn = document.querySelector(".search-btn");
-const commentButtons = document.querySelectorAll(".comment-btn");
-
 const postEditBtn = document.querySelectorAll(".post-edit-btn");
-const modal = document.querySelector(".modal");
-const modalContent = document.querySelector(".modal-content");
-const deletePostBtn = document.querySelector(".delete-btn");
-const modalCheck = document.querySelector(".modal-check");
-const cancelBtn = document.querySelector(".cancel-btn");
-const finalDeleteBtn = document.querySelector(".delete-btn-final");
-
-const modalLayer = document.querySelector(".modal-layer");
-
 
 // API 에서 팔로우 하고 있는 사람들의 피드 불러오기
 const url = "http://146.56.183.55:5050";
@@ -26,22 +15,28 @@ const requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://146.56.183.55:5050/post/feed/?limmit=100", requestOptions)
+fetch(`${url}/post/feed/?limit=100`, requestOptions)
   .then(response => response.json())
   .then(result => {
     // console.log(result.posts)
+    if (!result) { 
+        // 팔로잉 하는 사람이 없을 경우 피드 첫화면으로
+       location.href = "./feed.html";
+      }
     if(result) {
-      result.posts.forEach((post) => {     
+      result.posts.forEach((post) => {
+        // console.log(post);
         const postItem = document.createElement("article");
         postItem.classList.add("post");
+
         // 포스트에 있는 유저 프로필 이미지
         let profilePic = post.author.image;
         if(!profilePic.includes("http")) {
-          profilePic = `http://146.56.183.55:5050/${profilePic}`;
+          profilePic = `${url}/${profilePic}`;
         }
         // ""들어간 string에서 ""제거
         const content = post.content.replaceAll(/^"|"$/g, ""); 
-        
+
         // 포스트 작성일
         const date = post.createdAt.slice(0,10);
         let [year, month, day] = date.split("-");
@@ -72,25 +67,31 @@ fetch("http://146.56.183.55:5050/post/feed/?limmit=100", requestOptions)
               </button>
             </nav>
             <div class="post-content-container">
-              <p class="post-content-txt">${content}</p>
-              <div class="post-content-img">
-              <div class="img-slide-container">`
+              ${content ? `<p class="post-content-txt">${content}</p>` : ""}
+              ${ post.image? `<div class="post-content-img">  
+              <div class="img-slide-container">` : ""}
+        `
 
-         // 포스팅 이미지 불러오기
+        // 포스팅 이미지 불러오기
         const images = post.image;
-        if (images.length === 1) {
+
+        // 이미지가 있는 경우
+        if(images) {
+          const imgArr = images.split(",");
+          let imgCount = imgArr.length;
+          
+          if (imgCount === 1) {
             // 포스트 이미지 1개 일때  
-            postHTML += `<img src="http://146.56.183.55:5050/${images}" alt="feed-posting-image">`
-          } else if(images.length > 1) {
+            postHTML += `<img src ="${url}/${images}" alt="feed-posting-image"></div></div>`
+          } else if(imgCount > 1) {
             // 포스트 이미지 1개 이상
-            const imgArr = images.split(",");
-            let imgCount = 0;
             imgArr.forEach((img) => {
-              postHTML += `<img src="http://146.56.183.55:5050/${img}" alt="feed-posting-image">`
-              imgCount = imgArr.length;
-          })
-  
-          postHTML += `</div>`
+              postHTML += `
+                <img src="${url}/${img}" alt="feed-posting-image">`
+            })
+            postHTML += `</div>`
+          }
+    
           // 포스트 이미지 여러개 일 때 슬라이드 버튼
           if(imgCount > 1) {
             postHTML += `<div class="slide-buttons">` 
@@ -99,17 +100,16 @@ fetch("http://146.56.183.55:5050/post/feed/?limmit=100", requestOptions)
               postHTML += `<span class="slide-btn active"></span>`
             } else {
               postHTML += `<span class="slide-btn"></span>`
-            }            
+            }          
           }
-          postHTML +=`</div>`
+          postHTML +=`</div></div>`
           }
         }
 
-        postHTML += `
-        </div>
-        <ul class="like-comment-container">
+        postHTML += `  
+              <ul class="like-comment-container">
                 <li class="like">
-                  <button type="button" class="default">
+                  <button type="button" class="default likebtn">
                     <span class="txt-hide">좋아요 버튼</span>
                   </button>
                   <span>${post.heartCount}</span>
@@ -126,116 +126,198 @@ fetch("http://146.56.183.55:5050/post/feed/?limmit=100", requestOptions)
           </section>
         `
         postItem.innerHTML = postHTML;
-
         feedContainer.append(postItem);
-
-        // 포스팅 이미지 슬라이드
-        const slideBtn = document.querySelectorAll(".slide-btn");
-        const handleImgSlider = (e) => {   
-          const currentBtn = e.target;
-          const buttons = e.target.parentNode;
-          let myIndex;
-          const findMyIndex = (currentBtn) => {
-            for(let i=0; i < buttons.childNodes.length; i++) {
-              if(currentBtn.parentNode.childNodes[i] === currentBtn) {
-                myIndex = i;        
-              }
-              currentBtn.parentNode.childNodes[i].classList.remove("active")
-            }
-            currentBtn.classList.add("active");            
-            const slider = currentBtn.parentNode.parentNode.querySelector(".img-slide-container");
-            // console.log(slider);
-            slider.style.transform = `translateX(-${304 * myIndex}px)`;
-          }
-          findMyIndex(currentBtn);
-        } 
-        slideBtn.forEach((btn) => {
-          btn.addEventListener("click", handleImgSlider)
-        })
-    
-
-        // 포스팅 상세 버튼 클릭
-        const postEditBtn = document.querySelectorAll(".post-edit-btn");
-        postEditBtn.forEach((button) => {
-          button.addEventListener("click", openModal)
-        })
       })
-
-      if (!result) { 
-        // 팔로잉 하는 사람이 없을 경우 피드 첫화면으로
-       location.href = "./feed.html";
-      }
-
-    }
+      
+      handleDomElement(feedContainer, result); // handleDomeElement function 안에서 dom요소 접근가능
+      // return result;
+    }    
   })
-  .catch(error => console.log('error', error))
-  //  에러여도 feed.html에 있게 하기 ///
-  
+  .catch(error => {
+    console.log('error', error)
+    // 에러여도 feed.html에 있게 하기 
+    location.href = "./feed.html";
+  })
 
 
+// DOM element - domElements, api data - feed로 받음 (element선택가능)
+let feedData;
+function handleDomElement(domElements, feed) {
+  // console.log(data)
+  // console.log(feed)
+  feedData = feed;
+
+  // 포스팅 이미지 슬라이드
+  const slideButtons = document.querySelectorAll(".slide-btn");    
+  const handleImgSlider = (e) => {   
+    const currentBtn = e.target;
+    const buttons = e.target.parentNode;
+    let currentIndex;
+    const findActiveBtn = (currentBtn) => {
+      for(let i=0; i < slideButtons.length; i++) {
+        if(buttons.childNodes[i] === currentBtn) {
+          currentIndex = i;        
+        }
+        buttons.childNodes[i].classList.remove("active")
+      }
+      currentBtn.classList.add("active");            
+      const slider = buttons.parentNode.querySelector(".img-slide-container");
+      slider.style.transform = `translateX(-${304 * currentIndex}px)`;
+    }
+    findActiveBtn(currentBtn);
+  } 
+  slideButtons.forEach((btn) => {
+    btn.addEventListener("click", handleImgSlider)
+  })
+
+  // 코멘트 버튼 클릭시 해당 포스팅의 postDetail 페이지로 이동 
+  const commentButtons = document.querySelectorAll(".comment-btn");
+  const goToPostDetail = (event) => {
+    location.href = "./postDetail.html";
+    const currentBtn = event.target;
+    const index = [...commentButtons].indexOf(currentBtn)
+    clickedPost = feed.posts[index];
+    // 코멘트버튼 클릭한 해당포스트 정보 로컬스토리지에 저장
+    localStorage.setItem("clicked-post", JSON.stringify(clickedPost))
+  };   
+  commentButtons.forEach((btn) => {
+    btn.addEventListener("click", goToPostDetail)
+  });
+
+  const postEditBtn = document.querySelectorAll(".post-edit-btn")
+  console.log(postEditBtn)
+  postEditBtn.forEach((button) => {
+    button.addEventListener("click", openModal)
+  })
+}
 
 
+// 모달 취소버튼 핸들링
+const handleCancel = (e) => {
+  e.preventDefault();
+  const modal = document.querySelector(".modal");
+  const modalCheck = document.querySelector(".modal-check");
+  modal.remove();
+  modalCheck.remove();
+}
 
-
-
-
-
-const handleModal = () => {
-  let isModalClicked = true;
-  if(isModalClicked) {
-    modal.classList.toggle("hidden");
-    modalContent.classList.toggle("hidden");
+// 모달 신고버튼 핸들링
+let postToReport;
+const handleReport = () => {
+  // console.log(postToReport); // 신고할 포스트의 인덱스
+  // console.log(feedData.posts); // 전체포스트 데이터
+  const postId = feedData.posts[postToReport].id;
+// 신고
+fetch(`${url}/post/${postId}/report`, {
+  method: 'POST',
+  headers: myHeaders,
+  redirect: 'follow'
+})
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+    const modal = document.querySelector(".modal");
+    const modalCheck = document.querySelector(".modal-check");
+    modal.remove();
+    modalCheck.remove();
+    alert("해당 게시물을 신고 하였습니다.")
   }
-}
-const openModal = () => {
-  modal.classList.toggle("hidden");
-  modalContent.classList.toggle("hidden");
-}
-
-const handleDelete = () => {
-  modalCheck.classList.toggle("hidden");
-  modalContent.classList.toggle("hidden")
+  
+  )
+  .catch(error => console.log('error', error));
 }
 
-const handleCancel = () => {
-  modalCheck.classList.toggle("hidden");
-  modal.classList.toggle("hidden");
+// 재확인 하는 모달
+const openCheckModal = (event) => {
+  const buttonClicked = event.target;
+  const app = document.querySelector("#app");
+  const checkModal = document.createElement("div"); 
+  checkModal.classList.add("modal-check");
+
+  let modalHtml = `
+    <p>게시글을 신고하시겠어요?</p>
+    <div class="check-btn">
+      <a href="javascript:void(0)" class="cancel-btn">취소</a>
+      <a href="javascript:void(0)" class="report-final">신고</a>
+    </div>
+  `
+  checkModal.innerHTML = modalHtml;
+  app.append(checkModal)
+
+  const cancelBtn = document.querySelector(".check-btn > .cancel-btn");
+  const reportBtn = document.querySelector(".report-final");
+
+  cancelBtn.addEventListener("click", handleCancel)
+  reportBtn.addEventListener("click", handleReport);
+
 }
 
-const handleFinalDelete = () => {
-  modalCheck.classList.toggle("hidden");
-  modal.classList.toggle("hidden");
+// 포스트 상세 버튼 클릭하면 나오는 첫 번째 모달 창
+const openModal = (event) => {
+  // console.log(event.target);
+  const app = document.querySelector("#app");
+  const modal = document.createElement("div"); 
+  modal.classList.add("modal")
+  const postEditBtn = document.querySelectorAll(".post-edit-btn");
+  const clickedBtn = event.target;
+  postToReport = [...postEditBtn].indexOf(clickedBtn);
+
+
+  let modalHTML = `
+   <div class="modal">
+      <div class="modal-content">
+        <div class="btn-to-close"></div>
+        <ul>
+          <li class="modal-btn"><a href="javascript:void(0)" class="report-post">신고</a></li>
+        </ul>
+      </div>
+      <div class="modal-layer"></div>
+    </div>
+  `
+  modal.innerHTML = modalHTML;
+  app.append(modal);
+
+  const reportPost= document.querySelector(".report-post");
+  if(reportPost) {
+    reportPost.addEventListener("click", openCheckModal);
+  }
+
+  const closeModal = () => {
+    const modalCheck = document.querySelector(".modal-check");
+    const modalContent = document.querySelector(".modal-content");
+    const modal = document.querySelector(".modal");
+    if (!modalCheck) {    
+      modal.classList.add("hidden");
+      modalContent.classList.add("hidden");
+    }
+    modal.remove();
+  }
+  const modalLayer = document.querySelector(".modal-layer");
+  modalLayer.addEventListener("click", closeModal);
 }
 
+
+// 돋보기(서치) 아이콘 클릭시
 const openSearch = () => {
   location.href = "search.html"
 }
-
-const closeModal = () => {
-  if (modalCheck.classList.contains("hidden")) {
-    modal.classList.add("hidden")
-    modalContent.classList.add("hidden");
-  } 
-}
-
-const goToPostDetail = () => {
-  location.href = "./postDetail.html";
-};
-
-postEditBtn.forEach((button) => {
-  button.addEventListener("click", openModal)
-})
-
-
-deletePostBtn.addEventListener("click", handleDelete)
-cancelBtn.addEventListener("click", handleCancel);
-finalDeleteBtn.addEventListener("click", handleFinalDelete)
-
 searchBtn.addEventListener("click", openSearch)
 
-commentButtons.forEach((btn) => {
-  btn.addEventListener("click", goToPostDetail)
-});
+// 독바 메뉴 클릭시 해당 페이지로 이동
+const chatBtn = document.querySelector(".btn-chat");
+const newPostBtn = document.querySelector(".btn-new-post");
+const profileBtn = document.querySelector(".btn-profile");
 
+const goToChat = () => {
+  location.href = "chat_room.html";
+}
+const uploadNewPost = () => {
+  location.href = "upload.html";
+}
+const goToProfile = () => {
+  location.href = "mypage.html";
+}
 
-modalLayer.addEventListener("click", closeModal);
+chatBtn.addEventListener("click", goToChat);
+newPostBtn.addEventListener("click", uploadNewPost);
+profileBtn.addEventListener("click", goToProfile);

@@ -149,7 +149,10 @@ app.addEventListener("click", handleDomClick)
 // API로 코멘트 불러오기 (코멘트 리스트)
 const myHeaders = new Headers();
 myHeaders.append("Authorization", `Bearer ${token}`);
+myHeaders.append("Content-Type", "application/json");
 
+let commentHTML;
+const getComments = () => {
 fetch(`${url}/post/${postInfo.id}/comments`, {
   method: 'GET',
   headers: myHeaders,
@@ -157,15 +160,12 @@ fetch(`${url}/post/${postInfo.id}/comments`, {
   })
   .then(response => response.json())
   .then(result => {
-    // console.log(result.comments);
     // api에서 코멘트 정보 가져와서 화면에 코멘트 요소 생성
-    const commentContainer = document.querySelector(".comments-container");
-    if(result.comments) {    
       result.comments.forEach((commentItem) => {
-        // console.log(commentItem)     
+        const commentContainer = document.querySelector(".comments-container");
         const comment =  document.createElement("article");
         comment.classList.add("comment-container");
-        let commentHTML = `
+        commentHTML = `
           <h2 class="txt-hide">코멘트</h2>
           <div class="user-info-container">
             <!-- 유저 프로필 이미지 -->
@@ -184,9 +184,98 @@ fetch(`${url}/post/${postInfo.id}/comments`, {
         comment.innerHTML = commentHTML;    
         commentContainer.append(comment);   
       })
+      return result;
+    // }
+  })
+  .then((result) => {
+    let commentCount = result.comments.length;
+    // 댓글이 1개 이상인 경우 (새로 추가되면)
+    let commentsList = result.comments;
+    if(commentCount > 1) {
+      // 댓글생성일 기준으로 정렬
+      commentsList.sort((a,b) => a.createdAt.localeCompare(b.createdAt))
     }
+    return commentsList;
+  })
+  .then((result) => {
+    const existingComment = document.querySelectorAll(".comments-container > article")
+    // 기존 댓글들 삭제하고 다시 생성 해야 여러개 복제 안됨
+    existingComment.forEach((comment) => {
+      comment.remove();
+    })
+    // 댓글 화면에 디스플레이
+    result.forEach((commentItem) => {
+    // console.log(commentItem)
+    const commentContainer = document.querySelector(".comments-container");
+    const comment =  document.createElement("article");
+    comment.classList.add("comment-container");
+    commentHTML = `
+      <h2 class="txt-hide">코멘트</h2>
+      <div class="user-info-container">
+        <!-- 유저 프로필 이미지 -->
+        <a href="">
+          <img src="${url}/${commentItem.author.image}" alt="user-profile-picture" />
+        </a>
+        <div class="comment-user-info">
+          <a href="">${commentItem.author.username}</a><span>· 5분 전</span>
+        </div>
+        <button class="comment-edit-btn">
+          <span class="txt-hide">더보기 버튼</span>
+        </button>
+      </div>
+      <p class="comment-txt">${commentItem.content}</p>
+    `
+    comment.innerHTML = commentHTML;    
+    commentContainer.append(comment);   
+
+    const commentBtn = document.querySelector(".comment-btn");
+    const commentNum = commentBtn.nextElementSibling;
+    commentNum.textContent = result.length;
+  })
   })
   .catch(error => console.log('error', error));
+
+}
+
+getComments();
+
+
+// 댓글 작성 
+const commentInput = document.querySelector("#comment-txt");
+const submitBtn = document.querySelector(".comment-submit-btn");
+let newComment;
+
+const getCommentInput = (event) => {
+  const { value } = event.target;
+  newComment = value;
+}
+ 
+const writeNewComment = () => {
+  const raw = JSON.stringify({
+    "comment": {
+      "content": `${newComment}`
+    }
+  });
+  fetch(`${url}/post/${postInfo.id}/comments`, {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  })
+    .then(response => response.text())
+    .then(result => {
+      // console.log(result)
+      getComments();
+      commentInput.value = "";
+    })
+    .catch(error => console.log('error', error));
+}
+
+commentInput.addEventListener("keyup", getCommentInput);
+submitBtn.addEventListener("click", writeNewComment);
+
+
+
 
 
 
@@ -205,7 +294,6 @@ const handleReportComment = () => {
   })
     .then(response => response.text())
     .then(result => {
-      // console.log(result)
       const modal = document.querySelector(".modal");
       const modalCheck = document.querySelector(".modal-check");
       modal.remove();
@@ -226,7 +314,6 @@ const handleReportPost = () => {
   })
   .then(response => response.json())
   .then(result => {
-    // console.log(result)
     const modal = document.querySelector(".modal");
     const modalCheck = document.querySelector(".modal-check");
     modal.remove();
@@ -238,7 +325,6 @@ const handleReportPost = () => {
 
 // 셋팅(사용자 정보 수정) 페이지로 이동
 const goToSetting = () => {
-  console.log("세팅페이지로가기")
   location.href = "./profile_modification.html";
   const modal = document.querySelector(".modal");
   const modalCheck = document.querySelector(".modal-check");

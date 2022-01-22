@@ -125,6 +125,10 @@ main.post-detail-container {
 #comment-txt:focus {
   outline: 1px;
 }
+#comment-txt:focus + button.comment-submit-btn{
+  color: #7E3E9D;
+  font-weight: 700;
+}
 .comment-submit-btn {
   cursor: pointer;
 }

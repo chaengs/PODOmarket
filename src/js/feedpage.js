@@ -185,7 +185,7 @@ function handleDomElement(domElements, feed) {
   });
 
   const postEditBtn = document.querySelectorAll(".post-edit-btn")
-  console.log(postEditBtn)
+  // console.log(postEditBtn)
   postEditBtn.forEach((button) => {
     button.addEventListener("click", openModal)
   })
@@ -198,7 +198,9 @@ const handleCancel = (e) => {
   const modal = document.querySelector(".modal");
   const modalCheck = document.querySelector(".modal-check");
   modal.remove();
-  modalCheck.remove();
+  if(modalCheck) {
+         modalCheck.remove();
+      }
 }
 
 // 모달 신고버튼 핸들링
@@ -284,13 +286,11 @@ const openModal = (event) => {
 
   const closeModal = () => {
     const modalCheck = document.querySelector(".modal-check");
-    const modalContent = document.querySelector(".modal-content");
     const modal = document.querySelector(".modal");
-    if (!modalCheck) {    
-      modal.classList.add("hidden");
-      modalContent.classList.add("hidden");
-    }
     modal.remove();
+    if(modalCheck) {
+      modalCheck.remove();
+    }  
   }
   const modalLayer = document.querySelector(".modal-layer");
   modalLayer.addEventListener("click", closeModal);

@@ -54,9 +54,9 @@ const search = () => {
       const userCardHTML = `
       <article>
         <img class="img-profile" src="${profilePic}" alt="유저 프로필 이미지" />
-        <a href="">
+        <a href="javascript:void(0)">
           <div class="wrap-profile-desc">
-            <p class="profile-nick-name"><span>애월읍</span> 위니브 감귤농장</p>
+            <p class="profile-nick-name">${user.username}</p>
             <p class="profile-id">${user.accountname}</p>
           </div>
         </a>
@@ -92,7 +92,7 @@ const search = () => {
       const userCardHTML = `
       <article>
         <img class="img-profile" src="${profilePic}" alt="유저 프로필 이미지" />
-        <a href="">
+        <a href="javascript:void(0)">
           <div class="wrap-profile-desc">
             <p class="profile-nick-name">${user.username}</p>
             <p class="profile-id">${user.accountname}</p>

@@ -1,8 +1,11 @@
 const url = "http://146.56.183.55:5050";
 const token = sessionStorage.getItem("pic_token");
+const userId = sessionStorage.getItem("pic_userId");
 const clickedPost = localStorage.getItem("clicked-post");
 const postInfo = JSON.parse(clickedPost)
+let commentsListArr = [];
 // console.log(postInfo)
+
 
 // 클릭된 포스트 정보 디스플레이
 const displayClickedPost = (postInfo) => {
@@ -129,7 +132,8 @@ slideButtons.forEach((btn) => {
 const app = document.querySelector("#app");
 
 // 모달 버튼들 핸들링
-let commentEditClickedIndex;
+let commentClickedIndex;
+let isMyComment = false;
 const handleDomClick = (event) => {
   const clickedBtn = event.target;
   if(clickedBtn.classList.contains("setting-logout-btn")){
@@ -137,10 +141,18 @@ const handleDomClick = (event) => {
   } else if(clickedBtn.classList.contains("post-edit-btn")){
     openModal(clickedBtn);
   } else if(clickedBtn.classList.contains("comment-edit-btn")) {   
-    openModal(clickedBtn);
     const buttons = document.querySelectorAll(".comment-edit-btn");
     const index = [...buttons].indexOf(clickedBtn)
-    commentEditClickedIndex = index;
+    commentClickedIndex = index;
+    commentAuthorId = commentsListArr[index].author._id;
+    // 클릭한 댓글이 내가 쓴 댓글인 경우
+    if(commentAuthorId === userId) {
+      isMyComment = true;
+      openModal(clickedBtn);
+    } else {
+      isMyComment = false;
+      openModal(clickedBtn);
+    }
   }
 }
 app.addEventListener("click", handleDomClick)
@@ -149,7 +161,13 @@ app.addEventListener("click", handleDomClick)
 // API로 코멘트 불러오기 (코멘트 리스트)
 const myHeaders = new Headers();
 myHeaders.append("Authorization", `Bearer ${token}`);
+myHeaders.append("Content-Type", "application/json");
 
+let commentHTML;
+
+let commentsPrevious;
+let commentsCurrent;
+const getComments = () => {
 fetch(`${url}/post/${postInfo.id}/comments`, {
   method: 'GET',
   headers: myHeaders,
@@ -157,15 +175,12 @@ fetch(`${url}/post/${postInfo.id}/comments`, {
   })
   .then(response => response.json())
   .then(result => {
-    // console.log(result.comments);
     // api에서 코멘트 정보 가져와서 화면에 코멘트 요소 생성
-    const commentContainer = document.querySelector(".comments-container");
-    if(result.comments) {    
       result.comments.forEach((commentItem) => {
-        // console.log(commentItem)     
+        const commentContainer = document.querySelector(".comments-container");
         const comment =  document.createElement("article");
         comment.classList.add("comment-container");
-        let commentHTML = `
+        commentHTML = `
           <h2 class="txt-hide">코멘트</h2>
           <div class="user-info-container">
             <!-- 유저 프로필 이미지 -->
@@ -184,19 +199,134 @@ fetch(`${url}/post/${postInfo.id}/comments`, {
         comment.innerHTML = commentHTML;    
         commentContainer.append(comment);   
       })
+    return result;
+  })
+  .then((result) => {
+    let commentCount = result.comments.length;
+    // 댓글이 1개 이상인 경우 작성일순으로 정렬
+    let commentsList = result.comments;
+    if(commentCount >= 1) {
+      // 댓글생성일 기준으로 정렬
+      commentsList.sort((a,b) => a.createdAt.localeCompare(b.createdAt))
+      commentsListArr = commentsList;
+      
     }
+    return result;
+  })
+  .then((result) =>{
+    const existingComment = document.querySelectorAll(".comments-container > article")
+    // 기존 댓글들 삭제하고 다시 생성 해야 여러개 복제 안됨
+    existingComment.forEach((comment) => {
+      comment.remove();
+    })
+
+    // 댓글 화면에 디스플레이
+    if(result.comments.length >= 0) {
+      result.comments.forEach((commentItem) => {
+      const commentContainer = document.querySelector(".comments-container");
+      const comment =  document.createElement("article");
+      comment.classList.add("comment-container");
+      commentHTML = `
+        <h2 class="txt-hide">코멘트</h2>
+        <div class="user-info-container">
+          <!-- 유저 프로필 이미지 -->
+          <a href="">
+            <img src="${url}/${commentItem.author.image}" alt="user-profile-picture" />
+          </a>
+          <div class="comment-user-info">
+            <a href="">${commentItem.author.username}</a><span>· 5분 전</span>
+          </div>
+          <button class="comment-edit-btn">
+            <span class="txt-hide">더보기 버튼</span>
+          </button>
+        </div>
+        <p class="comment-txt">${commentItem.content}</p>
+      `
+      comment.innerHTML = commentHTML;    
+      commentContainer.append(comment); 
+    })
+    const commentBtn = document.querySelector(".comment-btn");
+    const commentNum = commentBtn.nextElementSibling;
+    commentNum.textContent = result.comments.length;
+  }
   })
   .catch(error => console.log('error', error));
+
+}
+
+getComments();
+
+
+// 댓글 작성 
+const commentInput = document.querySelector("#comment-txt");
+const submitBtn = document.querySelector(".comment-submit-btn");
+let newComment;
+
+const getCommentInput = (event) => {
+  const { value } = event.target;
+  newComment = value;
+}
+ 
+const writeNewComment = () => {
+  const raw = JSON.stringify({
+    "comment": {
+      "content": `${newComment}`
+    }
+  });
+  fetch(`${url}/post/${postInfo.id}/comments`, {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  })
+    .then(response => response.text())
+    .then(result => {
+      // console.log(result)
+      // 댓글작성하면 다시 댓글정보 가져오기
+      getComments();
+      commentInput.value = "";
+    })
+    .catch(error => console.log('error', error));
+}
+
+commentInput.addEventListener("keyup", getCommentInput);
+submitBtn.addEventListener("click", writeNewComment);
+
+
+
 
 
 
 ////////////// 모달 모음
 
+// 모달 삭제버튼 핸들링 (댓글 삭제)
+const handleDeleteComment = () => {
+  const postId = postInfo.id;
+  const comments = commentsListArr;
+  const commentId = [...comments][commentClickedIndex].id;
+
+  fetch(`${url}/post/${postId}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: myHeaders,
+    redirect: 'follow'
+  })
+  .then(response => response.text())
+  .then(result => {
+    const modal = document.querySelector(".modal");
+    const modalCheck = document.querySelector(".modal-check");
+    modal.remove();
+    modalCheck.remove();
+    // 댓글 삭제하면 다시 댓글정보 가져오기
+    getComments();
+  })
+  .catch(error => console.log('error', error));
+}
+
 // 모달 신고버튼 핸들링 (댓글 신고)
 const handleReportComment = () => {
   const postId = postInfo.id;
   const comments = postInfo.comments;
-  const commentId = [...comments][commentEditClickedIndex]
+  const commentId = [...comments][commentClickedIndex]
 
   fetch(`${url}/post/${postId}/comments/${commentId}/report`, {
     method: 'POST',
@@ -205,11 +335,12 @@ const handleReportComment = () => {
   })
     .then(response => response.text())
     .then(result => {
-      // console.log(result)
       const modal = document.querySelector(".modal");
       const modalCheck = document.querySelector(".modal-check");
       modal.remove();
-      modalCheck.remove();
+      if(modalCheck) {
+         modalCheck.remove();
+      }    
       alert("해당 댓글을 신고 하였습니다.")
     })
     .catch(error => console.log('error', error));
@@ -226,7 +357,6 @@ const handleReportPost = () => {
   })
   .then(response => response.json())
   .then(result => {
-    // console.log(result)
     const modal = document.querySelector(".modal");
     const modalCheck = document.querySelector(".modal-check");
     modal.remove();
@@ -238,7 +368,6 @@ const handleReportPost = () => {
 
 // 셋팅(사용자 정보 수정) 페이지로 이동
 const goToSetting = () => {
-  console.log("세팅페이지로가기")
   location.href = "./profile_modification.html";
   const modal = document.querySelector(".modal");
   const modalCheck = document.querySelector(".modal-check");
@@ -252,6 +381,7 @@ const handleLogout = () => {
   sessionStorage.removeItem("pic_token");
   sessionStorage.removeItem("pic_accountName");
   sessionStorage.removeItem("pic_userName");
+  sessionStorage.removeItem("pic_userId");
   sessionStorage.removeItem("pic_userImg");
   location.href = "./login.html";
 
@@ -288,6 +418,11 @@ const openCheckModal = (event) => {
     option.push("취소");
     option.push("삭제");
   }
+  if(buttonClicked.classList.contains("delete-comment")) {
+    checkQuestion = "댓글을 삭제할까요?"
+    option.push("취소");
+    option.push("삭제");
+  }
   if(buttonClicked.classList.contains("report-post")) {
     checkQuestion = "게시글을 신고하시겠어요?"
     option.push("취소");
@@ -311,7 +446,11 @@ const openCheckModal = (event) => {
       modalHtml += `<a href="javascript:void(0)" class="report-comment-final">${option[1]}</a>`
     }
   } else if(option[1] === "삭제") {
+    if(checkQuestion === "댓글을 삭제할까요?") {
+      modalHtml += `<a href="javascript:void(0)" class="delete-comment-final">${option[1]}</a>`
+    } else {
     modalHtml += `<a href="javascript:void(0)" class="delete-final">${option[1]}</a>`
+    }
   } else if(option[1] === "로그아웃") {
     modalHtml += `<a href="javascript:void(0)" class="logout-final">${option[1]}</a>`
   }
@@ -337,6 +476,10 @@ const openCheckModal = (event) => {
   if(reportCommentBtn) {
     reportCommentBtn.addEventListener("click", handleReportComment);
   }
+  const deleteCommentBtn = document.querySelector(".delete-comment-final");
+  if(deleteCommentBtn) {
+    deleteCommentBtn.addEventListener("click", handleDeleteComment);
+  }
 }
 
 // 버튼 클릭하면 나오는 첫 번째 모달 창
@@ -346,6 +489,7 @@ const openModal = (clickedBtn) => {
   const app = document.querySelector("#app");
   const modal = document.createElement("div"); 
   modal.classList.add("modal")
+  
   let option = [];
   let classToAdd = ""
   let isMyPost = false;
@@ -365,8 +509,13 @@ const openModal = (clickedBtn) => {
     }
   } 
   if(buttonClicked.classList.contains("comment-edit-btn")) {
-    option.push("신고하기")
-    classToAdd = "report-comment"
+    if(!isMyComment) {
+      option.push("신고하기")
+      classToAdd = "report-comment"
+    } else if(isMyComment) {
+      option.push("삭제하기")
+      classToAdd = "delete-comment"
+    }
   }
   if(buttonClicked.classList.contains("delete-btn")) {
     option.push("삭제")
@@ -392,6 +541,7 @@ const openModal = (clickedBtn) => {
   const reportPost= document.querySelector(".report-post");
   const reportComment= document.querySelector(".report-comment");
   const deleteBtn = document.querySelector(".delete-btn");
+  const deleteCommentBtn = document.querySelector(".delete-comment");
 
 
   if(logoutBtn) {
@@ -405,6 +555,9 @@ const openModal = (clickedBtn) => {
   }
   if(deleteBtn) {
     deleteBtn.addEventListener("click", openCheckModal);
+  }
+  if(deleteCommentBtn){
+    deleteCommentBtn.addEventListener("click", openCheckModal)
   }
 
   // 게시글 수정버튼 클릭시 수정페이지로 이동
@@ -421,13 +574,11 @@ const openModal = (clickedBtn) => {
   // 모달 레이어(백그라운드) 클릭하면 모달창 닫힘
   const closeModal = () => {
     const modalCheck = document.querySelector(".modal-check");
-    const modalContent = document.querySelector(".modal-content");
     const modal = document.querySelector(".modal");
-    if (!modalCheck) {    
-      modal.classList.add("hidden");
-      modalContent.classList.add("hidden");
-    }
     modal.remove();
+    if(modalCheck) {
+         modalCheck.remove();
+    }
   }
   const modalLayer = document.querySelector(".modal-layer");
   modalLayer.addEventListener("click", closeModal);

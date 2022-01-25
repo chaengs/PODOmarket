@@ -7,8 +7,8 @@
     <title></title>
     <link rel="stylesheet" href="../src/css/reset.css" />
     <link rel="stylesheet" href="../src/css/menubar.css" />
+    <link rel="stylesheet" href="../src/css/userpost.css">
     <link rel="stylesheet" href="../src/css/feed.css" />
-    <link rel="stylesheet" href="../src/css/feedpage.css" />
     <link
       href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
       rel="stylesheet"
@@ -17,74 +17,42 @@
   </head>
 
   <body>
-    <!-- search section -->
-    <header>
-      <article class="feed-search-container">
-        <p class="search-bar">계정 검색</p>
-        <button class="search-btn" type="button">
-          <span class="txt-hide">계정검색 버튼</span>
-        </button>
-      </article>
-      <!-- dock bar (menu) -->
-      <section class="bar-menu">
-        <button class="btn-home checked">
-          <img
-            class="img-btn"
-            src="../src/images/menubar/icon-home-fill.png"
-            alt="btn-home"
-          />
-          <p>홈</p>
-        </button>
-        <button class="btn-chat">
-          <img
-            class="img-btn"
-            src="../src/images/menubar/icon-message-circle.png"
-            alt="btn-chat"
-          />
-          <p>채팅</p>
-        </button>
-        <button class="btn-new-post" onclick="{toUpload()}">
-          <img
-            class="img-btn"
-            src="../src/images/menubar/icon-edit.png"
-            alt="btn-new-post"
-          />
-          <p>게시물 작성</p>
-        </button>
-        <button class="btn-profile" onclick="{toProfile()}">
-          <img
-            class="img-btn"
-            src="../src/images/menubar/icon-user.png"
-            alt="btn-home"
-          />
-          <p>프로필</p>
-        </button>
-      </section>
-    </header>
-    <!-- first feed page for new user -->
-    <main>
-      <h1 class="txt-hide">피드 첫 화면</h1>
-      <section class="section-feed-new-user">
-        <h2 class="feed-title">유저를 검색해 팔로우 해보세요!</h2>
-        <button class="btn-search-feed">검색하기</button>
-      </section>
-    </main>
-    <script>
-      const searchBtn = document.querySelector(".search-btn");
-      const searchFeedBtn = document.querySelector(".btn-search-feed");
-      
-      const toUpload = () => {
-        location.href = "upload.html";
-      };
-      const toProfile = () => {
-        location.href = "mypage.html";
-      };
-
-      const openSearch = () => {
-          location.href = "search.html";
-        };
-        searchBtn.addEventListener("click", openSearch);
-        searchFeedBtn.addEventListener("click", openSearch);
-    </script>
+    <div id="app">
+      <!-- search section -->
+      <header>
+        <article class="feed-search-container">
+          <p class="search-bar">계정 검색</p>
+          <button class="search-btn" type="button">
+            <span class="txt-hide">계정검색 버튼</span>
+          </button>
+        </article>
+        <!-- dock bar (menu) -->
+        <section class="bar-menu">
+            <button class="btn-home checked">
+              <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
+              <p>홈</p>
+            </button>
+          <button class="btn-chat">
+            <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
+            <p>채팅</p>
+          </button>
+          <button class="btn-new-post">
+            <img class="img-btn" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
+            <p>게시물 작성</p>
+          </button>
+          <button class="btn-profile">
+            <img class="img-btn" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+            <p>프로필</p>
+          </button>
+        </section>
+      </header>
+      <main id="feed-container">
+        <h1 class="txt-hide">피드 화면</h1>
+        <!-- 팔로잉 하는 유저가 없다면 디폴트 화면 / 팔로우 하는 유저 및 피드 있는 경우 API에서 불러와서 피드 생성 (JS)-->
+      </main>
+    
+    </div>
+    <script src="../src/js/userpost.js"></script>
+    <script src="../src//js/feed.js"></script>   
   </body>
 </html>

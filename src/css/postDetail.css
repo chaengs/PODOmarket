@@ -4,6 +4,15 @@ body {
   font-size: 14px;
 }
 
+header {
+  width: 100%;
+}
+
+main {
+  margin-top: 48px;
+  width: 100%;
+}
+
 main.post-detail-container {
   padding: 0; 
   display: flex;
@@ -125,14 +134,12 @@ main.post-detail-container {
 #comment-txt:focus {
   outline: 1px;
 }
+#comment-txt:focus + button.comment-submit-btn{
+  color: #7E3E9D;
+  font-weight: 700;
+}
 .comment-submit-btn {
   cursor: pointer;
-}
-
-
-/* when input is active */
-.active {
-  color: #F26E22;
 }
 
 .hidden {

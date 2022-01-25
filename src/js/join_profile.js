@@ -21,7 +21,7 @@ const err_ID = document.querySelector("#userIDError");
 const err_Desc = document.querySelector("#userDescError");
 
 // 이미지를 업로드 하지 않을 경우 기본이미지가 db에 들어간다.
-let registerImgUrl = "1641803765586.png";
+let registerImgUrl = "1642573050179.png";
 
 // account valid flag
 let validID = true;

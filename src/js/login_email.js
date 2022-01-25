@@ -61,6 +61,7 @@ const handleOnSubmit = () => {
         sessionStorage.setItem("pic_token", result.user.token);
         sessionStorage.setItem("pic_accountName", result.user.accountname);
         sessionStorage.setItem("pic_userName", result.user.username);
+        sessionStorage.setItem("pic_userId", result.user._id);
         sessionStorage.setItem("pic_userImg", result.user.image);
         location.href = "./index.html";
       }

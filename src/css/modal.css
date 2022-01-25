@@ -1,0 +1,94 @@
+/* modals */
+/* post edit/delete modal */
+.modal {
+    position: relative;
+}
+.modal-layer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.modal-content {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px 10px 0 0;
+    z-index: 50;
+    padding-bottom: 10px;
+}
+
+.btn-to-close {
+    width: 50px;
+    height: 4px;
+    background-color: #DBDBDB;
+    border-radius: 5px;
+    margin:16px auto;
+}
+
+.modal-content ul li a,
+.modal-content ul li a{
+    display: block;
+    line-height: 18px;
+    padding: 14px 26px 14px;
+    font-size: 14px;
+}
+.modal-btn a:hover {
+    color: #7E3E9D;
+    font-weight: 500;
+}
+
+.modal-check {
+    position: fixed;
+    width: 252px;
+    height: 110px;
+    background-color: #ffffff;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    border-radius: 10px;
+    z-index: 20;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #DBDBDB;
+}
+.modal-check p {
+    margin: 22px auto;
+    font-size: 16px;
+    font-weight: 500;
+}
+.check-btn {
+    display: flex;
+    border-top: 1px solid #DBDBDB;
+}
+.check-btn a {
+    line-height: 18px;
+    padding: 14px 0;
+    width: 50%;
+    background-color: #ffffff;
+}
+.check-btn a:hover{
+    color: #7E3E9D;
+    font-weight: 500;
+}
+
+.check-btn a:nth-child(1) {
+    border-right: 1px solid #DBDBDB;
+}
+
+
+/* make behind modal darker when modal's opened */
+.modal-bg {
+    width: 390px;
+    background-color: rgba(0, 0, 0, .1);
+}
+/* for modals to hide or display */
+.hidden {
+    display: none;
+}

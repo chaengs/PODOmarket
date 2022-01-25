@@ -17,15 +17,19 @@ const postImgWrap = document.querySelector(".post-img-wrap");
 const postNav = document.querySelector(".post-nav");
 
 const myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer " + token);
+myHeaders.append("Authorization", `Bearer ${token}`);
 myHeaders.append("Content-type", "application/json")
 const requestOptions = {
     method: "GET",
     headers: myHeaders,
 };
 
+const checkMyProfile = () => {
+    // accountName과 session에 accountName이 같은지 비교
+}
+
 // 프로필 정보 넣기
-fetch(url+"/profile/"+sessionAccountName, requestOptions)
+fetch(`${url}/profile/${sessionAccountName}`, requestOptions)
     .then(res => res.json())
     .then(res => {
         const profile = res.profile;
@@ -38,7 +42,7 @@ fetch(url+"/profile/"+sessionAccountName, requestOptions)
     });
 
 // 판매중인상품
-fetch(url+"/product/"+sessionAccountName, requestOptions)
+fetch(`${url}/product/${sessionAccountName}`, requestOptions)
     .then(res => res.json())
     .then(res => {
         if (res.data != 0) {
@@ -49,7 +53,7 @@ fetch(url+"/product/"+sessionAccountName, requestOptions)
             for (let i = 0; i < product.length; i++) {
                 input += `
                     <div class="item-container">
-                        <a href=""><img src="${product[i].itemImage}" alt="판매 중인 상품 사진"></a>
+                        <a href=""><img src="${url}/${product[i].itemImage}" alt="판매 중인 상품 사진"></a>
                         <p class="item-tit">${product[i].itemName}</p>
                         <p class="item-price">${product[i].price}</p>
                     </div>
@@ -67,7 +71,7 @@ fetch(url+"/product/"+sessionAccountName, requestOptions)
 
 // 게시글 목록형
 const postList = () => {
-    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
+    fetch(`${url}/post/${sessionAccountName}/userpost/?limit=100&skip=0`, requestOptions)
         .then(res => res.json())
         .then(res => {
             // console.log(res);
@@ -99,7 +103,7 @@ const postList = () => {
                         images = images.split(',');
                         for (let i = 0; i < images.length; i++) {
                             input +=
-                            `<img src="http://146.56.183.55:5050/${images[i]}" alt="게시물 사진">`
+                            `<img src="${url}/${images[i]}" alt="게시물 사진">`
                         }
                     }
                     input +=
@@ -138,7 +142,7 @@ postList();
 
 //게시글 앨범형
 const postAlbum = () => {
-    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
+    fetch(`${url}/post/${sessionAccountName}/userpost/?limit=100&skip=0`, requestOptions)
         .then(res => res.json())
         .then(res => {
             const post = res.post;
@@ -150,7 +154,7 @@ const postAlbum = () => {
                         firstImage = firstImage.split(',')[0]
                         input +=
                         `
-                            <img src="http://146.56.183.55:5050/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
+                            <img src="${url}/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
                         `
                     }
                 }

@@ -1,7 +1,7 @@
 // DOM 조작하기 위한 변수들
 const searchBtn = document.querySelector(".search-btn");
 const postEditBtn = document.querySelectorAll(".post-edit-btn");
-const feedContainer = document.querySelector("#feed-container");
+const feedContainer = document.querySelector("#feed-container"); // main
 
 // API 이용하기 위한 변수들
 const url = "http://146.56.183.55:5050";
@@ -23,8 +23,10 @@ const displayFollowingFeed = () => {
 fetch(`${url}/post/feed/?limit=100`, requestOptions)
   .then(response => response.json())
   .then(result => {
+    console.log(result)
     // 팔로잉 하는 사람의 포스트가 없을 경우 기본 페이지 디스플레이
     if (result.posts.length === 0) { 
+      
       const defaultDisplay = document.createElement("section");
       defaultDisplay.classList.add("section-feed-new-user");
       const defaultHTML = `
@@ -159,6 +161,7 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
   })
 }
 
+// displayFollowingFeed();
 
 // DOM element - domElements, api data - feed로 받음 (element선택가능)
 let feedData;
@@ -216,13 +219,18 @@ function handleDomElement(domElements, feed) {
 fetch(`${url}/profile/${accountName}/following`, requestOptions)
   .then(response => response.json())
   .then(result => {
+    console.log(result)
     const sectionForNewUser = document.querySelector(".section-feed-new-user");
     //팔로잉 하는 유저가 있는 경우 디폴트 디스플레이 삭제
-    if(result[0].followingCount >= 1 && sectionForNewUser) {
-      sectionForNewUser.remove();
-    }
+    
     // 피드 불러오기
     displayFollowingFeed();
+
+    if(result.length !== 0) {
+      if(result[0].followingCount >= 1 && sectionForNewUser){
+        sectionForNewUser.remove();
+      }
+    }
   })
   .catch(error => console.log('error', error));
 

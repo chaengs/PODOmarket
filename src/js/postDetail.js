@@ -339,7 +339,7 @@ const handleReportComment = () => {
       const modalCheck = document.querySelector(".modal-check");
       modal.remove();
       if(modalCheck) {
-         modalCheck.remove();
+          modalCheck.remove();
       }    
       alert("해당 댓글을 신고 하였습니다.")
     })
@@ -577,7 +577,7 @@ const openModal = (clickedBtn) => {
     const modal = document.querySelector(".modal");
     modal.remove();
     if(modalCheck) {
-         modalCheck.remove();
+        modalCheck.remove();
     }
   }
   const modalLayer = document.querySelector(".modal-layer");

@@ -166,32 +166,46 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
 // DOM element - domElements, api data - feed로 받음 (element선택가능)
 let feedData;
 function handleDomElement(domElements, feed) {
-  // console.log(data)
+  // console.log(domElements)
   // console.log(feed)
   feedData = feed;
 
-  // 포스팅 이미지 슬라이드
-  const slideButtons = document.querySelectorAll(".slide-btn");    
-  const handleImgSlider = (e) => {   
-    const currentBtn = e.target;
-    const buttons = e.target.parentNode;
-    let currentIndex;
-    const findActiveBtn = (currentBtn) => {
-      for(let i=0; i < slideButtons.length; i++) {
-        if(buttons.childNodes[i] === currentBtn) {
-          currentIndex = i;        
+// 포스팅 이미지 슬라이드
+const slideButtons = document.querySelectorAll(".slide-btn"); 
+const handleImgSlider = (e) => {
+
+  const currentBtn = e.target;
+  const buttonsParent = e.target.parentNode; // parent element of buttons
+  const allButtons = buttonsParent.childNodes;
+  let currentIndex;
+
+  const findActiveBtn = (currentBtn) => {   
+      for(let i=0; i < allButtons.length; i++) {
+        if(buttonsParent.childNodes[i] === currentBtn) {
+          currentIndex = i;  
+          if(!currentBtn.classList.contains("active")){
+            currentBtn.classList.add("active");
+          }   
+          if(!allButtons[i].classList.contains("active")) {
+            allButtons[i].classList.add("active")
+          }
+        } else if(buttonsParent.childNodes[i] !== currentBtn) {
+          if(allButtons[i].classList.contains("active")) {
+            allButtons[i].classList.remove("active")
+          }
         }
-        buttons.childNodes[i].classList.remove("active")
-      }
-      currentBtn.classList.add("active");            
-      const slider = buttons.parentNode.querySelector(".img-slide-container");
+      } 
+      const slider = buttonsParent.parentNode.querySelector(".img-slide-container");
       slider.style.transform = `translateX(-${304 * currentIndex}px)`;
     }
     findActiveBtn(currentBtn);
-  } 
-  slideButtons.forEach((btn) => {
-    btn.addEventListener("click", handleImgSlider)
-  })
+    const slider = buttonsParent.parentNode.querySelector(".img-slide-container");
+    slider.style.transform = `translateX(-${304 * currentIndex}px)`;
+  }
+  
+slideButtons.forEach((btn) => {
+  btn.addEventListener("click", handleImgSlider)
+})
 
   // 코멘트 버튼 클릭시 해당 포스팅의 postDetail 페이지로 이동 
   const commentButtons = document.querySelectorAll(".comment-btn");
@@ -208,7 +222,6 @@ function handleDomElement(domElements, feed) {
   });
 
   const postEditBtn = document.querySelectorAll(".post-edit-btn")
-  // console.log(postEditBtn)
   postEditBtn.forEach((button) => {
     button.addEventListener("click", openModal)
   })
@@ -219,7 +232,6 @@ function handleDomElement(domElements, feed) {
 fetch(`${url}/profile/${accountName}/following`, requestOptions)
   .then(response => response.json())
   .then(result => {
-    console.log(result)
     const sectionForNewUser = document.querySelector(".section-feed-new-user");
     //팔로잉 하는 유저가 있는 경우 디폴트 디스플레이 삭제
     
@@ -243,8 +255,8 @@ const handleCancel = (e) => {
   const modalCheck = document.querySelector(".modal-check");
   modal.remove();
   if(modalCheck) {
-         modalCheck.remove();
-      }
+    modalCheck.remove();
+  }
 }
 
 // 모달 신고버튼 핸들링
@@ -261,7 +273,6 @@ fetch(`${url}/post/${postId}/report`, {
 })
   .then(response => response.json())
   .then(result => {
-    console.log(result)
     const modal = document.querySelector(".modal");
     const modalCheck = document.querySelector(".modal-check");
     modal.remove();

@@ -1,3 +1,12 @@
+@keyframes slideUp {
+  from {
+      bottom: -30%;
+  }
+  to {
+      bottom: 0%;
+  }
+}
+
 body {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   font-size: 14px;
@@ -23,7 +32,6 @@ header {
   height: 1px;
   overflow: hidden;
 }
-
 
 /* default display
 (if current user isn't following anyone or there isn't and feed to show) */
@@ -126,6 +134,7 @@ header {
   border-radius: 10px 10px 0 0;
   z-index: 50;
   padding-bottom: 10px;
+  animation: slideUp .6s;
 }
 
 .btn-to-close {

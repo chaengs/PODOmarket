@@ -17,10 +17,12 @@
     <div id="app">
         <!-- 상단메뉴바 -->
         <header>
-            <a>
-                <img class="btn-back" src="../src/images/search/icon-arrow-left.png" alt="뒤로가기" />
-            </a>
-            <a href=""><img src="../src/images/mypage/more-vertical.png" alt="더보기" class="img-more setting-logout-btn"></a>
+          <a href="feed.html">
+            <img src="../src/images/search/icon-arrow-left.png" alt="go-back-button">
+          </a>
+          <button class="setting-logout-btn">
+            <span class="txt-hide">더보기 버튼</span>
+          </button>
         </header>
         <!-- 독바 -->
         <section class="bar-menu">
@@ -88,7 +90,8 @@
         </article>
     </div>
     <script src="../src/js/mypage.js"></script>
-    <script src="../src/js/mypageModal.js"></script>
+    <script src="../templates/modal/modal.js"></script>
+    <!-- <script src="../src/js/mypageModal.js"></script> -->
     <script>
         const toUpload = () => {
             location.href = "upload.html";

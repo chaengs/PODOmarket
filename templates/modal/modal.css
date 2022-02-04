@@ -1,4 +1,13 @@
 /* modals */
+@keyframes slideUp {
+    from {
+        bottom: -30%;
+    }
+    to {
+        bottom: 0%;
+    }
+  }
+
 /* post edit/delete modal */
 .modal {
     position: relative;
@@ -22,6 +31,7 @@
     border-radius: 10px 10px 0 0;
     z-index: 50;
     padding-bottom: 10px;
+    animation: slideUp .6s;
 }
 
 .btn-to-close {
@@ -34,14 +44,14 @@
 
 .modal-content ul li a,
 .modal-content ul li a{
-    display: block;
-    line-height: 18px;
-    padding: 14px 26px 14px;
-    font-size: 14px;
+  display: block;
+  line-height: 18px;
+  padding: 14px 26px 14px;
+  font-size: 14px;
 }
 .modal-btn a:hover {
-    color: #7E3E9D;
-    font-weight: 500;
+  color: #7E3E9D;
+  font-weight: 500;
 }
 
 .modal-check {

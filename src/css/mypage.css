@@ -18,6 +18,13 @@ header {
   background-color: #ffffff;
 }
 
+.setting-logout-btn {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-image: url(../images/postdetail/bar-menu.png);
+}
+
 main {
   background-color: #ffffff;
   height: 314px;

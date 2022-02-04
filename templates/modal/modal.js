@@ -5,7 +5,6 @@ const settingLogoutBtn = document.querySelector(".setting-logout-btn");
 const modal = document.querySelector(".modal");
 
 
-
 // 셋팅(사용자 정보 수정) 페이지로 이동
 const goToSetting = () => {
   // console.log("세팅페이지로가기")
@@ -63,7 +62,7 @@ const openCheckModal = (event) => {
     option.push("취소");
     option.push("신고");
   }
-
+  
   //댓글 신고
   if(buttonClicked.classList.contains("report-comment")) {
     checkQuestion = "신고하시겠어요?"
@@ -128,7 +127,6 @@ const openModal = (event) => {
   const previousElement = event.target.previousElementSibling; 
   const currentPostUserIdEl = previousElement.querySelector(".user-id");
 
-
   let option = [];
   let classToAdd = ""
   let classesToAdd = [];
@@ -138,7 +136,6 @@ const openModal = (event) => {
     option.push("설정 및 개인정보");
     option.push("로그아웃");
   }
-
   if(currentPostUserIdEl) {
     const currentPostUserId = currentPostUserIdEl.textContent.split("@")[1];
     const postEditBtn = document.querySelectorAll(".post-edit-btn");
@@ -193,6 +190,7 @@ const openModal = (event) => {
   const editPost = document.querySelector(".edit-post");
   const deletePost = document.querySelector(".delete-post");
 
+  
   if(logoutBtn) {
     logoutBtn.addEventListener("click", openCheckModal);
   }
@@ -212,17 +210,11 @@ const openModal = (event) => {
     deletePost.addEventListener("click", openCheckModal);
   }
 
-  // 게시글 수정버튼 클릭시 수정페이지로 이동
-  const editBtn = document.querySelector(".edit-btn");
-  if(editBtn) {
-    // 필요하면 추가하세요
-  }
   // 셋팅(정보수정) 버튼 클릭시 수정페이지로 이동
   const toSettingBtn = document.querySelector(".to-setting-btn");
   if(toSettingBtn) {
     toSettingBtn.addEventListener("click", goToSetting);
   }
-  
   // 모달 레이어(백그라운드) 클릭하면 모달창 닫힘
   const closeModal = () => {
     const modalCheck = document.querySelector(".modal-check");
@@ -236,19 +228,8 @@ const openModal = (event) => {
   }
   const modalLayer = document.querySelector(".modal-layer");
   modalLayer.addEventListener("click", closeModal);
-
-  handleModalTransition();
 }
 
-
-const handleModalTransition = () => {
-  const modalBtns = document.querySelectorAll(".modal-btn") 
-  if(modalBtns) {
-    console.log(modalBtns)
-    modalBtns.forEach(menu => menu.classList.add("active"));
-    // modalContent.style.marginBottom = 0;
-  }
-}
-
-
+// 세팅&로그아웃 버튼 핸들링
 settingLogoutBtn.addEventListener("click", openModal);
+

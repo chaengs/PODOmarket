@@ -180,11 +180,6 @@ p.post-date {
   margin-bottom: 4px;
 }
 
-/* when input is active */
-.active {
-  color: #F26E22;
-}
-
 /* to hide element */
 .hidden {
   display: none;

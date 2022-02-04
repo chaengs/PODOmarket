@@ -10,81 +10,88 @@
     <link rel="stylesheet" href="../src/css/userpost.css">
     <link rel="stylesheet" href="../src/css/menubar.css">
     <link rel="stylesheet" href="../src/css/mypage.css">
+    <link rel="stylesheet" href="../templates/modal/modal.css">
 </head>
 
 <body>
-    <!-- 상단메뉴바 -->
-    <header>
-        <a>
-            <img class="btn-back" src="../src/images/search/icon-arrow-left.png" alt="뒤로가기" />
-        </a>
-        <a href=""><img src="../src/images/mypage/more-vertical.png" alt="더보기" class="img-more"></a>
-    </header>
-    <!-- 독바 -->
-    <section class="bar-menu">
-        <button class="btn-home checked">
-            <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
-            <p>홈</p>
-        </button>
-        <button class="btn-chat">
-            <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
-            <p>채팅</p>
-        </button>
-        <button class="btn-new-post">
-            <img class="img-btn" onclick="{toUpload()}" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
-            <p>게시물 작성</p>
-        </button>
-        <button class="btn-profile">
-            <img class="img-btn" onclick="{toProfile()}" src="../src/images/menubar/icon-user.png" alt="btn-home" />
-            <p>프로필</p>
-        </button>
-    </section>
-    <!-- 내 프로필 시작 -->
-    <main>
-        <h1 class="txt-hide">계정 상세 페이지</h1>
-        <div class="profile-wrap">
-            <div>
-                <a href="./followerList.html">
-                    <p class="profile-num">2950</p>
-                </a>
-                <p class="profile-txt">followers</p>
+    <div id="app">
+        <!-- 상단메뉴바 -->
+        <header>
+            <a href="feed.html">
+                <img src="../src/images/search/icon-arrow-left.png" alt="go-back-button">
+            </a>
+            <button class="setting-logout-btn">
+                <span class="txt-hide">더보기 버튼</span>
+              </button>
+        </header>
+        <!-- 독바 -->
+        <section class="bar-menu">
+            <button class="btn-home checked">
+                <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
+                <p>홈</p>
+            </button>
+            <button class="btn-chat">
+                <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
+                <p>채팅</p>
+            </button>
+            <button class="btn-new-post">
+                <img class="img-btn" onclick="{toUpload()}" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
+                <p>게시물 작성</p>
+            </button>
+            <button class="btn-profile">
+                <img class="img-btn" onclick="{toProfile()}" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+                <p>프로필</p>
+            </button>
+        </section>
+        <!-- 내 프로필 시작 -->
+        <main>
+            <h1 class="txt-hide">계정 상세 페이지</h1>
+            <div class="profile-wrap">
+                <div>
+                    <a href="./followerList.html">
+                        <p class="profile-num">2950</p>
+                    </a>
+                    <p class="profile-txt">followers</p>
+                </div>
+                <div>
+                    <a href="./followingList.html">
+                        <p class="profile-num">128</p>
+                    </a>
+                    <p class="profile-txt">followings</p>
+                </div>
             </div>
-            <div>
-                <a href="./followingList.html">
-                    <p class="profile-num">128</p>
-                </a>
-                <p class="profile-txt">followings</p>
+            <div class="profile-img"><img src="../src/images/mypage/basic-profile-img.png" alt="프로필 이미지" id="profile-img"></div>
+            <div class="profile-container">
+                <p class="profile-name"></p>
+                <p class="profile-id"></p>
+                <p class="profile-info"></p>
             </div>
-        </div>
-        <div class="profile-img"><img src="../src/images/mypage/basic-profile-img.png" alt="프로필 이미지" id="profile-img"></div>
-        <div class="profile-container">
-            <p class="profile-name"></p>
-            <p class="profile-id"></p>
-            <p class="profile-info"></p>
-        </div>
-        <!-- 팔로우와 공유하기 -->
-        <div class="profile-social">
-            <a href=""><img src="../src/images/mypage/icon-message-circle.png" alt="메세지 보내기"></a>
-            <button type="button" onclick="follow()" class="follow-btn">팔로우</button>
-            <a href=""><img src="../src/images/mypage/icon-share.png" alt="계정 공유하기"></a>
-        </div>
-    </main>
-    <!-- 판매 중인 상품 -->
-    <section class="item-wrap">
-        <h2 class="item-list">판매 중인 상품</h2>
-        <div class="items"></div>
-    </section>
-    <!-- 피드 상단 메뉴바 -->
-    <nav class="post-nav">
-        <img src="../src/images/mypage/icon-post-album-on.png" alt="게시글 앨범형으로 보기" onclick="postAlbum()">
-        <img src="../src/images/mypage/icon-post-list-on.png" alt="게시글 목록으로 보기" onclick="postList()">
-    </nav>
-    <!-- 목록형으로 보기 -->
-    <article class="post-img-wrap">
-        <h3 class="txt-hide">게시글 모아보기</h3>
-        <div class="posts"></div>
-    </article>
+            <!-- 팔로우와 공유하기 -->
+            <div class="profile-social">
+                <a href=""><img src="../src/images/mypage/icon-message-circle.png" alt="메세지 보내기"></a>
+                <button type="button" onclick="follow()" class="follow-btn">팔로우</button>
+                <a href=""><img src="../src/images/mypage/icon-share.png" alt="계정 공유하기"></a>
+            </div>
+        </main>
+        <!-- 판매 중인 상품 -->
+        <section class="item-wrap">
+            <h2 class="item-list">판매 중인 상품</h2>
+            <div class="items"></div>
+        </section>
+        <!-- 피드 상단 메뉴바 -->
+        <nav class="post-nav">
+            <img src="../src/images/mypage/icon-post-album-on.png" alt="게시글 앨범형으로 보기" onclick="postAlbum()">
+            <img src="../src/images/mypage/icon-post-list-on.png" alt="게시글 목록으로 보기" onclick="postList()">
+        </nav>
+        <!-- 목록형으로 보기 -->
+        <article class="post-img-wrap">
+            <h3 class="txt-hide">게시글 모아보기</h3>
+            <div class="posts"></div>
+        </article>
+    </div>
     <script src="../src/js/mypage.js"></script>
+    <script src="../templates/modal/modal.js"></script>
+    <!-- <script src="../src/js/mypageModal.js"></script> -->
     <script>
         const toUpload = () => {
             location.href = "upload.html";

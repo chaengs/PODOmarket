@@ -67,12 +67,14 @@ fetch(url+"/product/"+sessionAccountName, requestOptions)
 
 // 게시글 목록형
 const postsContainer = document.querySelector(".posts");
-const postList = () => {
+const postList = (hasLiked) => {
     fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
         .then(res => res.json())
         .then(result => {
             // 포스트가 하나라도 있을 경우 
-            if(result) {
+            // console.log(result)
+            if(result.post.length >= 1) {
+              if(hasLiked === undefined) {
                 result.post.forEach((item) => {
                 // console.log(item);
                 const postItem = document.createElement("article");
@@ -158,7 +160,7 @@ const postList = () => {
                 postHTML += `  
                       <ul class="like-comment-container">
                         <li class="like">
-                          <button type="button" class="default likebtn">
+                          <button type="button" id="likebtn" class=${item.hearted === true? "like-btn-on" : "default"}>
                             <span class="txt-hide">좋아요 버튼</span>
                           </button>
                           <span>${item.heartCount}</span>
@@ -177,8 +179,9 @@ const postList = () => {
                 postItem.innerHTML = postHTML;
                 postsContainer.append(postItem);
               })
-              handleDomElement(postImgWrap, result);
-            }    
+            } 
+            handleDomElement(postImgWrap, result);
+          }   
         }).catch(err => {
             console.log("fetch error", err);
         });
@@ -186,12 +189,13 @@ const postList = () => {
 postList();
 
 
+
 let feedData;
 function handleDomElement(domElements, feed) {
 //   console.log(domElements)
 //   console.log(feed)
   feedData = feed;
-
+  console.log(feedData)
 // 포스팅 이미지 슬라이드
 const slideButtons = document.querySelectorAll(".slide-btn"); 
 const handleImgSlider = (e) => {
@@ -238,6 +242,7 @@ slideButtons.forEach((btn) => {
     clickedPost = feed.post[index];
     // console.log(clickedPost)
     // 코멘트버튼 클릭한 해당포스트 정보 로컬스토리지에 저장
+    localStorage.setItem("clicked-post-id", clickedPost.id)
     localStorage.setItem("clicked-post", JSON.stringify(clickedPost))
   };   
   commentButtons.forEach((btn) => {
@@ -250,6 +255,78 @@ slideButtons.forEach((btn) => {
   })
 }
 
+// 라이크 핸들링
+const app = document.querySelector("#app");
+const handleLikeClick = (event) => {
+  const clickedBtn = event.target;
+  if(clickedBtn.id === "likebtn") {
+    applyLike(clickedBtn);
+  }
+}
+app.addEventListener("click", handleLikeClick)
+
+// 클릭시 좋아요 및 좋아요 취소
+const applyLike = (clickedBtn) => {
+  // console.log(feedData)
+  // console.log(clickedBtn)
+  const likeButtons = document.querySelectorAll("#likebtn");
+  const index = [...likeButtons].indexOf(clickedBtn);
+  clickedPost = feedData.post[index];
+  // console.log(clickedPost)
+  const postId = clickedPost.id;
+  const likeCountElement = clickedBtn.nextElementSibling;
+  let count = parseInt(likeCountElement.textContent);
+
+  if(clickedPost.hearted === true) {
+    // 이미 좋아요 한 경우에는 좋아요 - (취소)
+    const requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  fetch(`${url}/post/${postId}/unheart`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      count -= 1;
+      likeCountElement.textContent = count;
+      clickedBtn.classList.remove("like-btn-on");
+      clickedBtn.classList.add("default");
+      if(clickedBtn.classList.contains("like-active")) {
+        clickedBtn.classList.remove("like-active");
+      }
+      localStorage.setItem("clicked-post", JSON.stringify(result.post));
+      // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
+      // console.log(result)
+      const hasLiked = result.post.hearted;
+      console.log(hasLiked)
+      postList(hasLiked);
+      
+    })
+    .catch(error => console.log('error', error));
+  } else if(clickedPost.hearted !== true) {
+    // 좋아요 안한 경우 좋아요 +
+    const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  fetch(`${url}/post/${postId}/heart`, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    count += 1;
+    likeCountElement.textContent = count;
+    clickedBtn.classList.remove("default");
+    clickedBtn.classList.add("like-btn-on");
+    clickedBtn.classList.add("like-active"); // 클릭시 애니메이션 위해 추가(새로 피드 렌더링 되면 없어짐)
+    localStorage.setItem("clicked-post", JSON.stringify(result.post));
+    const hasLiked = result.post.hearted;
+    console.log(hasLiked)
+    postList(hasLiked);
+   
+  })
+  .catch(error => console.log('error', error));
+  }
+}
 
 
 

@@ -19,14 +19,13 @@ const requestOptions = {
 
 
 // 팔로우 하고 있는 사람들의 피드 불러오기 
-const displayFollowingFeed = () => {
+const displayFollowingFeed = (hasLiked) => {
 fetch(`${url}/post/feed/?limit=100`, requestOptions)
   .then(response => response.json())
   .then(result => {
     // console.log(result)
     // 팔로잉 하는 사람의 포스트가 없을 경우 기본 페이지 디스플레이
-    if (result.posts.length === 0) { 
-      
+    if (result.posts.length === 0){     
       const defaultDisplay = document.createElement("section");
       defaultDisplay.classList.add("section-feed-new-user");
       const defaultHTML = `
@@ -39,6 +38,8 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
     }
     // 팔로잉 하는 사람의 포스트가 하나라도 있을 경우 
     if(result.posts.length >= 1) {
+      // console.log(hasLiked)
+      if(hasLiked === undefined) {
       result.posts.forEach((post) => {
         // console.log(post);
         const postItem = document.createElement("article");
@@ -143,9 +144,11 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
         postItem.innerHTML = postHTML;
         feedContainer.append(postItem);
       })
+    }
       handleDomElement(feedContainer, result); // handleDomeElement function 안에서 dom요소 접근가능
     }
   })
+  
   .catch(error => {
     console.log('error', error)
     // 에러여도 디폴트 화면 보여주기
@@ -380,7 +383,7 @@ const applyLike = (clickedBtn) => {
   const likeButtons = document.querySelectorAll("#likebtn");
   const index = [...likeButtons].indexOf(clickedBtn);
   clickedPost = feedData.posts[index];
-  // console.log(clickedPost)
+
   const postId = clickedPost.id;
   const likeCountElement = clickedBtn.nextElementSibling;
   let count = parseInt(likeCountElement.textContent);
@@ -404,7 +407,8 @@ const applyLike = (clickedBtn) => {
       }
       localStorage.setItem("clicked-post", JSON.stringify(result.post));
       // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
-      displayFollowingFeed();
+      const hasLiked = result.post.hearted;
+      displayFollowingFeed(hasLiked);
     })
     .catch(error => console.log('error', error));
   } else if(clickedPost.hearted !== true) {
@@ -423,7 +427,8 @@ const applyLike = (clickedBtn) => {
     clickedBtn.classList.add("like-btn-on");
     clickedBtn.classList.add("like-active"); // 클릭시 애니메이션 위해 추가(새로 피드 렌더링 되면 없어짐)
     localStorage.setItem("clicked-post", JSON.stringify(result.post));
-    displayFollowingFeed();
+    const hasLiked = result.post.hearted;
+    displayFollowingFeed(hasLiked)
   })
   .catch(error => console.log('error', error));
   }

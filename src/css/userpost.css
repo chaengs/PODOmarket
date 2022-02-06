@@ -157,6 +157,9 @@ nav.user-info {
 }
 .like-btn-on {
   background-image: url(../images/userpost/like-btn-on.png);
+}
+
+.like-active {
   animation: like 0.5s;
 }
 

@@ -23,7 +23,7 @@ const displayFollowingFeed = () => {
 fetch(`${url}/post/feed/?limit=100`, requestOptions)
   .then(response => response.json())
   .then(result => {
-    console.log(result)
+    // console.log(result)
     // 팔로잉 하는 사람의 포스트가 없을 경우 기본 페이지 디스플레이
     if (result.posts.length === 0) { 
       
@@ -124,7 +124,7 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
         postHTML += `  
               <ul class="like-comment-container">
                 <li class="like">
-                  <button type="button" class="default likebtn">
+                  <button type="button" id="likebtn" class=${post.hearted === true? "like-btn-on" : "default"}>
                     <span class="txt-hide">좋아요 버튼</span>
                   </button>
                   <span>${post.heartCount}</span>
@@ -144,7 +144,7 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
         feedContainer.append(postItem);
       })
       handleDomElement(feedContainer, result); // handleDomeElement function 안에서 dom요소 접근가능
-    }    
+    }
   })
   .catch(error => {
     console.log('error', error)
@@ -208,6 +208,7 @@ slideButtons.forEach((btn) => {
 })
 
   // 코멘트 버튼 클릭시 해당 포스팅의 postDetail 페이지로 이동 
+  let clickedPost;
   const commentButtons = document.querySelectorAll(".comment-btn");
   const goToPostDetail = (event) => {
     location.href = "./postDetail.html";
@@ -358,15 +359,69 @@ const openSearch = () => {
 }
 searchBtn.addEventListener("click", openSearch)
 
+// JS로 생성되는 모달 버튼 & 좋아요 클릭 핸들링 
 const app = document.querySelector("#app");
-// JS로 생성되는 모달 버튼 핸들링
 const handleDomClick = (event) => {
   const clickedBtn = event.target;
   if(clickedBtn.classList.contains("search-user-btn")){
     openSearch();
   }
+  if(clickedBtn.id === "likebtn") {
+    applyLike(clickedBtn);
+  }
 }
 app.addEventListener("click", handleDomClick)
+
+// 클릭시 좋아요 및 좋아요 취소
+const applyLike = (clickedBtn) => {
+  // console.log(feedData)
+  // console.log(clickedBtn)
+  const likeButtons = document.querySelectorAll("#likebtn");
+  const index = [...likeButtons].indexOf(clickedBtn);
+  clickedPost = feedData.posts[index];
+  // console.log(clickedPost)
+  const postId = clickedPost.id;
+  const likeCountElement = clickedBtn.nextElementSibling;
+  let count = parseInt(likeCountElement.textContent);
+
+  if(clickedPost.hearted === true) {
+    // 이미 좋아요 한 경우에는 좋아요 - (취소)
+    const requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  fetch(`${url}/post/${postId}/unheart`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      count -= 1;
+      likeCountElement.textContent = count;
+      clickedBtn.classList.remove("like-btn-on");
+      clickedBtn.classList.add("default");
+      // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
+      displayFollowingFeed();
+    })
+    .catch(error => console.log('error', error));
+  } else if(clickedPost.hearted !== true) {
+    // 좋아요 안한 경우 좋아요 +
+    const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  fetch(`${url}/post/${postId}/heart`, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    count += 1;
+    likeCountElement.textContent = count;
+    clickedBtn.classList.remove("default");
+    clickedBtn.classList.add("like-btn-on");
+    clickedBtn.classList.add("like-active"); // 클릭시 애니메이션 위해 추가(새로 피드 렌더링 되면 없어짐)
+    displayFollowingFeed();
+  })
+  .catch(error => console.log('error', error));
+  }
+}
 
 
 // 독바 메뉴 클릭시 해당 페이지로 이동

@@ -2,7 +2,9 @@ const url = "http://146.56.183.55:5050";
 const token = sessionStorage.getItem("pic_token");
 const userId = sessionStorage.getItem("pic_userId");
 const postId = localStorage.getItem("clicked-post-id");
+const goBackBtn = document.querySelector(".go-back-button");
 let commentsListArr = [];
+
 
 // 포스트 상세 데이터 가져오기
 const getPostData = () => {
@@ -646,3 +648,16 @@ const openModal = (clickedBtn) => {
   const modalLayer = document.querySelector(".modal-layer");
   modalLayer.addEventListener("click", closeModal);
 }
+
+// 뒤로가기 (내포스팅인 경우 마이페이지 / 다른사람 글일 경우 피드페이지로 이동)
+const goBackToPreviousPage = () => {
+  const postData = localStorage.getItem("clicked-post");
+  const postInfo = JSON.parse(postData);
+  // 내포스팅인 경우
+  if(userId === postInfo.author._id) {
+    location.href = "./mypage.html";
+  } else {
+    location.href = "./feed.html";
+  }
+}
+goBackBtn.addEventListener("click", goBackToPreviousPage);

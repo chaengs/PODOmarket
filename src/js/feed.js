@@ -398,6 +398,9 @@ const applyLike = (clickedBtn) => {
       likeCountElement.textContent = count;
       clickedBtn.classList.remove("like-btn-on");
       clickedBtn.classList.add("default");
+      if(clickedBtn.classList.contains("like-active")) {
+        clickedBtn.classList.remove("like-active");
+      }
       // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
       displayFollowingFeed();
     })
@@ -422,7 +425,6 @@ const applyLike = (clickedBtn) => {
   .catch(error => console.log('error', error));
   }
 }
-
 
 // 독바 메뉴 클릭시 해당 페이지로 이동
 const chatBtn = document.querySelector(".btn-chat");

@@ -161,7 +161,6 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
   })
 }
 
-// displayFollowingFeed();
 
 // DOM element - domElements, api data - feed로 받음 (element선택가능)
 let feedData;
@@ -216,7 +215,9 @@ slideButtons.forEach((btn) => {
     const index = [...commentButtons].indexOf(currentBtn)
     clickedPost = feed.posts[index];
     // 코멘트버튼 클릭한 해당포스트 정보 로컬스토리지에 저장
-    localStorage.setItem("clicked-post", JSON.stringify(clickedPost))
+    const clickedPostId = clickedPost.id;
+    localStorage.setItem("clicked-post-id", clickedPostId);
+    localStorage.setItem("clicked-post", JSON.stringify(clickedPost));
   };   
   commentButtons.forEach((btn) => {
     btn.addEventListener("click", goToPostDetail)
@@ -401,6 +402,7 @@ const applyLike = (clickedBtn) => {
       if(clickedBtn.classList.contains("like-active")) {
         clickedBtn.classList.remove("like-active");
       }
+      localStorage.setItem("clicked-post", JSON.stringify(result.post));
       // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
       displayFollowingFeed();
     })
@@ -420,6 +422,7 @@ const applyLike = (clickedBtn) => {
     clickedBtn.classList.remove("default");
     clickedBtn.classList.add("like-btn-on");
     clickedBtn.classList.add("like-active"); // 클릭시 애니메이션 위해 추가(새로 피드 렌더링 되면 없어짐)
+    localStorage.setItem("clicked-post", JSON.stringify(result.post));
     displayFollowingFeed();
   })
   .catch(error => console.log('error', error));

@@ -1,14 +1,34 @@
 const url = "http://146.56.183.55:5050";
 const token = sessionStorage.getItem("pic_token");
 const userId = sessionStorage.getItem("pic_userId");
-const clickedPost = localStorage.getItem("clicked-post");
-const postInfo = JSON.parse(clickedPost)
+const postId = localStorage.getItem("clicked-post-id");
 let commentsListArr = [];
-// console.log(postInfo)
 
+// 포스트 상세 데이터 가져오기
+const getPostData = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+fetch(`${url}/post/${postId}`, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    const postData = result.post;
+    localStorage.setItem("clicked-post", JSON.stringify(postData));
+  })
+  .catch(error => console.log('error', error));
+}
 
 // 클릭된 포스트 정보 디스플레이
-const displayClickedPost = (postInfo) => {
+const displayClickedPost = () => {
+  getPostData();
+  const postData = localStorage.getItem("clicked-post");
+  const postInfo = JSON.parse(postData);
+  // console.log(postInfo)
+  // console.log(postDetail)
   const postContainer = document.querySelector(".post");
   const post = document.createElement("section");
   post.classList.add("post-card");
@@ -80,7 +100,7 @@ const displayClickedPost = (postInfo) => {
         postHTML += `  
               <ul class="like-comment-container">
                 <li class="like">
-                  <button type="button" class="default">
+                  <button type="button" id="likebtn" class=${postInfo.hearted === true? "like-btn-on" : "default"}>
                     <span class="txt-hide">좋아요 버튼</span>
                   </button>
                   <span>${postInfo.heartCount}</span>
@@ -95,12 +115,10 @@ const displayClickedPost = (postInfo) => {
               <p class="post-date">${year}년 ${month}월 ${day}일</p>
             </div>
         `
-
   post.innerHTML = postHTML;
   postContainer.append(post);
 }
-
-displayClickedPost(postInfo);
+displayClickedPost();
 
 
 // 포스팅 이미지 슬라이드
@@ -127,11 +145,9 @@ slideButtons.forEach((btn) => {
 })
 
 
-
 // 이벤트 위임 - 상위요소에 이벤트를 주면 하위요소까지 다 선택 가능!
 const app = document.querySelector("#app");
-
-// 모달 버튼들 핸들링
+// 모달 버튼 & 좋아요 클릭 핸들링 
 let commentClickedIndex;
 let isMyComment = false;
 const handleDomClick = (event) => {
@@ -153,10 +169,61 @@ const handleDomClick = (event) => {
       isMyComment = false;
       openModal(clickedBtn);
     }
+  } else if(clickedBtn.id === "likebtn") {
+    applyLike(clickedBtn);
   }
+
 }
 app.addEventListener("click", handleDomClick)
 
+// 클릭시 좋아요 및 좋아요 취소
+const applyLike = (clickedBtn) => {
+  getPostData();
+  const postData = localStorage.getItem("clicked-post");
+  const postInfo = JSON.parse(postData);
+  // console.log(postInfo)
+  const likeCountElement = clickedBtn.nextElementSibling;
+  let count = parseInt(likeCountElement.textContent);
+  if(postInfo.hearted === true) {
+    // 이미 좋아요 한 경우에는 좋아요 - (취소)
+    const requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  fetch(`${url}/post/${postId}/unheart`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      count -= 1;
+      likeCountElement.textContent = count;
+      clickedBtn.classList.remove("like-btn-on");
+      clickedBtn.classList.add("default");
+      localStorage.setItem("clicked-post", JSON.stringify(result.post));
+      if(clickedBtn.classList.contains("like-active")) {
+        clickedBtn.classList.remove("like-active");
+      }
+    })
+    .catch(error => console.log('error', error));
+  } else if(postInfo.hearted !== true) {
+    // 좋아요 안한 경우 좋아요 +
+    const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  fetch(`${url}/post/${postId}/heart`, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    count += 1;
+    likeCountElement.textContent = count;
+    clickedBtn.classList.remove("default");
+    clickedBtn.classList.add("like-btn-on");
+    clickedBtn.classList.add("like-active"); // 클릭시 애니메이션 위해 추가(새로 피드 렌더링 되면 없어짐)
+    localStorage.setItem("clicked-post", JSON.stringify(result.post));
+  })
+  .catch(error => console.log('error', error));
+  }
+}
 
 // API로 코멘트 불러오기 (코멘트 리스트)
 const myHeaders = new Headers();
@@ -168,7 +235,7 @@ let commentHTML;
 let commentsPrevious;
 let commentsCurrent;
 const getComments = () => {
-fetch(`${url}/post/${postInfo.id}/comments`, {
+fetch(`${url}/post/${postId}/comments`, {
   method: 'GET',
   headers: myHeaders,
   redirect: 'follow'
@@ -251,9 +318,7 @@ fetch(`${url}/post/${postInfo.id}/comments`, {
   }
   })
   .catch(error => console.log('error', error));
-
 }
-
 getComments();
 
 
@@ -273,7 +338,7 @@ const writeNewComment = () => {
       "content": `${newComment}`
     }
   });
-  fetch(`${url}/post/${postInfo.id}/comments`, {
+  fetch(`${url}/post/${postId}/comments`, {
     method: 'POST',
     headers: myHeaders,
     body: raw,
@@ -295,13 +360,10 @@ submitBtn.addEventListener("click", writeNewComment);
 
 
 
-
-
 ////////////// 모달 모음
-
 // 모달 삭제버튼 핸들링 (댓글 삭제)
 const handleDeleteComment = () => {
-  const postId = postInfo.id;
+  // const postId = postInfo.id;
   const comments = commentsListArr;
   const commentId = [...comments][commentClickedIndex].id;
 
@@ -324,7 +386,8 @@ const handleDeleteComment = () => {
 
 // 모달 신고버튼 핸들링 (댓글 신고)
 const handleReportComment = () => {
-  const postId = postInfo.id;
+  // const postId = postInfo.id;
+
   const comments = postInfo.comments;
   const commentId = [...comments][commentClickedIndex]
 
@@ -348,7 +411,7 @@ const handleReportComment = () => {
 
 // 모달 신고버튼 핸들링 (게시글 신고)
 const handleReportPost = () => {
-  const postId = postInfo.id;
+  // const postId = postInfo.id;
   //신고
   fetch(`${url}/post/${postId}/report`, {
     method: 'POST',

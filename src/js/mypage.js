@@ -322,7 +322,7 @@ const applyLike = (clickedBtn) => {
     const hasLiked = result.post.hearted;
     console.log(hasLiked)
     postList(hasLiked);
-   
+
   })
   .catch(error => console.log('error', error));
   }

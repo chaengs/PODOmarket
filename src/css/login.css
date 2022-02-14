@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
 * {
   box-sizing: border-box;
@@ -51,6 +52,11 @@ body {
 
 .img_logo {
   width: 120px;
+}
+
+.logo_wrap p {
+  font-family: 'Black Han Sans', sans-serif;
+  margin-top: 10px;
 }
 
 .login_wrap {

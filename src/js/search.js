@@ -83,9 +83,10 @@ const search = () => {
       let profilePic = user.image;
       if(!profilePic.includes("http")) {
           profilePic = `${url}/${profilePic}`;
-      } else if(profilePic.includes("null")) {
-        profilePic = "../src/images/search/default_profile.png";
-      }
+      } 
+      // else if(profilePic.includes("null")) {
+      //   profilePic = "../src/images/search/default_profile.png";
+      // }
       const userCard = document.createElement("article");
       
 
@@ -95,7 +96,7 @@ const search = () => {
         <a href="javascript:void(0)">
           <div class="wrap-profile-desc">
             <p class="profile-nick-name">${user.username}</p>
-            <p class="profile-id">${user.accountname}</p>
+            <p class="profile-id" onclick="sendName()">${user.accountname}</p>
           </div>
         </a>
       </article>
@@ -116,5 +117,3 @@ const search = () => {
   })
   .catch(error => console.log('error', error));
 }
-
-

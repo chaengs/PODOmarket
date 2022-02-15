@@ -12,20 +12,17 @@
   <body>
     <!-- search input section -->
     <header>
-      <a href="feed.html">
-        <img
-        class="btn-back"
-        src="../src/images/search/icon-arrow-left.png"
-        alt="뒤로가기"
-        />
-      </a>
+      <button type="button" class="btn-back">
+        <img src="../src/images/search/icon-arrow-left.png"
+        alt="뒤로가기">
+      </button>
       <input class="search-input" type="text" placeholder="계정검색" />
     </header>
     <!-- search result section -->
     <main>
-      <div class="container">
+      <section class="container">
       <!-- user object - 검색시 js로 불러옴 -->
-      </div>
+      </section>
     </main>
     <!-- menubar module -->
     <section class="bar-menu">
@@ -62,6 +59,7 @@
         <p>프로필</p>
       </button>
     </section>
+    <script src="../src/js/module.js"></script>
     <script src="../src/js/search.js"></script>
   </body>
 </html>

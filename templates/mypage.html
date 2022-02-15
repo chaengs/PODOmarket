@@ -17,9 +17,10 @@
     <div id="app">
         <!-- 상단메뉴바 -->
         <header>
-            <a href="feed.html">
-            <img src="../src/images/search/icon-arrow-left.png" alt="go-back-button">
-            </a>
+            <button type="button" class="btn-back">
+                <img src="../src/images/search/icon-arrow-left.png"
+                alt="뒤로가기">
+            </button>
             <button class="setting-logout-btn">
                 <span class="txt-hide">더보기 버튼</span>
             </button>
@@ -27,19 +28,19 @@
         <!-- 독바 -->
         <section class="bar-menu">
             <button class="btn-home checked">
-                <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
+                <img class="img-btn home-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
                 <p>홈</p>
             </button>
             <button class="btn-chat">
-                <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
+                <img class="img-btn chat-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
                 <p>채팅</p>
             </button>
             <button class="btn-new-post">
-                <img class="img-btn" onclick="{toUpload()}" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
+                <img class="img-btn upload-btn" onclick="{toUpload()}" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
                 <p>게시물 작성</p>
             </button>
             <button class="btn-profile">
-                <img class="img-btn" onclick="{toProfile()}" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+                <img class="img-btn profile-btn" onclick="{toProfile()}" src="../src/images/menubar/icon-user.png" alt="btn-home" />
                 <p>프로필</p>
             </button>
         </section>
@@ -89,9 +90,9 @@
             <div class="posts"></div>
         </article>
     </div>
+    <script src="../src/js/module.js"></script>
     <script src="../src/js/mypage.js"></script>
     <script src="../templates/modal/modal.js"></script>
-    <!-- <script src="../src/js/mypageModal.js"></script> -->
     <script>
         const toUpload = () => {
             location.href = "upload.html";

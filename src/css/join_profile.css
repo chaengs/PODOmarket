@@ -27,16 +27,13 @@
   margin-bottom: 30px;
 }
 
-.border_wrap {
+.img_profile {
   width: 110px;
   height: 110px;
   overflow: hidden;
   border-radius: 50%;
   border: 1px solid #dbdbdb;
-}
-
-.img_profile {
-  width: 110px;
+  object-fit: fill;
 }
 
 .img_upload_btn {

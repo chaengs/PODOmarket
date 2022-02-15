@@ -26,7 +26,7 @@ const searchUser = (e) => {
           document.querySelector(".container").innerHTML += `
           <article>
             <img class="img-profile" src="${user.image}" alt="유저 프로필 이미지" />
-            <a href="./yourpage.html?id=${user.username}">
+            <a href="./yourpage.html?id=${user.accountname}">
               <div class="wrap-profile-desc">
                 <p class="profile-nick-name">${user.username}</p>
                 <p class="profile-id" onclick="sendName()">${user.accountname}</p>

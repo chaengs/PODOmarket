@@ -7,8 +7,17 @@ function follow() {
     }
 }
 
+// 파라미터에서 accountname 가져오기
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+// 각종 변수
 const url = "http://146.56.183.55:5050";
-const sessionAccountName = sessionStorage.getItem("pic_accountName");
+const paramAccountName = getParameterByName("id");
 const token = sessionStorage.getItem("pic_token");
 
 const itemList = document.querySelector(".item-list");
@@ -17,15 +26,14 @@ const postImgWrap = document.querySelector(".post-img-wrap");
 const postNav = document.querySelector(".post-nav");
 
 const myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer " + token);
+myHeaders.append("Authorization", `Bearer ${token}`);
 myHeaders.append("Content-type", "application/json")
 const requestOptions = {
     method: "GET",
     headers: myHeaders,
 };
 
-// 프로필 정보 넣기
-fetch(url+"/profile/"+sessionAccountName, requestOptions)
+fetch(`${url}/profile/${paramAccountName}`, requestOptions)
     .then(res => res.json())
     .then(res => {
         const profile = res.profile;
@@ -38,7 +46,7 @@ fetch(url+"/profile/"+sessionAccountName, requestOptions)
     });
 
 // 판매중인상품
-fetch(url+"/product/"+sessionAccountName, requestOptions)
+fetch(`${url}/product/${paramAccountName}`, requestOptions)
     .then(res => res.json())
     .then(res => {
         if (res.data != 0) {
@@ -68,7 +76,7 @@ fetch(url+"/product/"+sessionAccountName, requestOptions)
 // 게시글 목록형
 const postsContainer = document.querySelector(".posts");
 const postList = (hasLiked) => {
-    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
+    fetch(`${url}/post/${paramAccountName}/userpost/?limit=100&skip=0`, requestOptions)
         .then(res => res.json())
         .then(result => {
             // 포스트가 하나라도 있을 경우 
@@ -192,10 +200,8 @@ postList();
 
 let feedData;
 function handleDomElement(domElements, feed) {
-//   console.log(domElements)
-//   console.log(feed)
   feedData = feed;
-  console.log(feedData)
+
 // 포스팅 이미지 슬라이드
 const slideButtons = document.querySelectorAll(".slide-btn"); 
 const handleImgSlider = (e) => {
@@ -240,7 +246,6 @@ slideButtons.forEach((btn) => {
     const currentBtn = event.target;
     const index = [...commentButtons].indexOf(currentBtn)
     clickedPost = feed.post[index];
-    // console.log(clickedPost)
     // 코멘트버튼 클릭한 해당포스트 정보 로컬스토리지에 저장
     localStorage.setItem("clicked-post-id", clickedPost.id)
     localStorage.setItem("clicked-post", JSON.stringify(clickedPost))
@@ -267,8 +272,6 @@ app.addEventListener("click", handleLikeClick)
 
 // 클릭시 좋아요 및 좋아요 취소
 const applyLike = (clickedBtn) => {
-  // console.log(feedData)
-  // console.log(clickedBtn)
   const likeButtons = document.querySelectorAll("#likebtn");
   const index = [...likeButtons].indexOf(clickedBtn);
   clickedPost = feedData.post[index];
@@ -296,7 +299,6 @@ const applyLike = (clickedBtn) => {
       }
       localStorage.setItem("clicked-post", JSON.stringify(result.post));
       // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
-      // console.log(result)
       const hasLiked = result.post.hearted;
       console.log(hasLiked)
       postList(hasLiked);
@@ -333,7 +335,7 @@ const applyLike = (clickedBtn) => {
 
 //게시글 앨범형
 const postAlbum = () => {
-    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
+    fetch(`${url}/post/"${paramAccountName}/userpost/?limit=100&skip=0`, requestOptions)
         .then(res => res.json())
         .then(res => {
             const post = res.post;

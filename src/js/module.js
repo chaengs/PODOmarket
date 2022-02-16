@@ -2,8 +2,8 @@
 const goBack = () => {
     window.history.back();
 }
-const btnBack = document.querySelector(".btn-back");
-btnBack.addEventListener("click", goBack);
+document.querySelector(".btn-back").addEventListener("click", goBack);
+// btnBack.addEventListener("click", goBack);
 
 // 독바 아이콘 이동
 const goHome = () => {

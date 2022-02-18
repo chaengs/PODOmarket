@@ -67,11 +67,10 @@
                 <p class="profile-id"></p>
                 <p class="profile-info"></p>
             </div>
-            <!-- 팔로우와 공유하기 -->
-            <div class="profile-social">
-                <a href=""><img src="../src/images/mypage/icon-message-circle.png" alt="메세지 보내기"></a>
-                <button type="button" onclick="follow()" class="follow-btn">팔로우</button>
-                <a href=""><img src="../src/images/mypage/icon-share.png" alt="계정 공유하기"></a>
+            <!-- 프로필 수정, 상품 등록 -->
+            <div class="btn-wrap">
+                <button type="button" onclick="location.href='profile_modification.html';">프로필 수정</button>
+                <button type="button" onclick="location.href='add_product.html';">상품 등록</button>
             </div>
         </main>
         <!-- 판매 중인 상품 -->
@@ -84,11 +83,10 @@
             <img src="../src/images/mypage/icon-post-album-on.png" alt="게시글 앨범형으로 보기" onclick="postAlbum()">
             <img src="../src/images/mypage/icon-post-list-on.png" alt="게시글 목록으로 보기" onclick="postList()">
         </nav>
-        <!-- 목록형으로 보기 -->
-        <article class="post-img-wrap">
-            <h3 class="txt-hide">게시글 모아보기</h3>
-            <div class="posts"></div>
-        </article>
+        <!-- 피드 보기 -->
+        <section class="post-img-wrap">
+            <div class="posts" id="posts"></div>
+        </section>
     </div>
     <script src="../src/js/module.js"></script>
     <script src="../src/js/mypage.js"></script>

@@ -11,14 +11,10 @@
   <body>
     <!--  header: 상단바 -->
     <header>
-      <!-- mypage.html로 이동 -->
-      <a href="mypage.html">
-        <img
-          class="btn_back"
-          src="../src/images/upload/icon-arrow-left.png"
-          alt=""
-        />
-      </a>
+      <button type="button" class="btn-back">
+        <img src="../src/images/search/icon-arrow-left.png"
+        alt="뒤로가기">
+      </button>
       <!-- submit button -->
       <button
         class="btn_upload"
@@ -94,5 +90,12 @@
       </form>
     </main>
     <script src="../src/js/add_product.js" />
+    <script>
+      // 뒤로가기
+      const goBack = () => {
+          window.history.back();
+      }
+      document.querySelector(".btn-back").addEventListener("click", goBack);  
+    </script>
   </body>
 </html>

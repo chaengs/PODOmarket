@@ -1,12 +1,3 @@
-function follow() {
-    let btn_follow = document.querySelector(".follow-btn");
-    if (btn_follow.innerText === '팔로우') {
-        btn_follow.innerText = '취소';
-    } else {
-        btn_follow.innerText = '팔로우';
-    }
-}
-
 const url = "http://146.56.183.55:5050";
 const sessionAccountName = sessionStorage.getItem("pic_accountName");
 const token = sessionStorage.getItem("pic_token");
@@ -23,6 +14,14 @@ const requestOptions = {
     method: "GET",
     headers: myHeaders,
 };
+
+// 엘리먼트 제거 함수
+const removeAllchild = () => {
+  const div = document.getElementById("posts");
+  while (div.hasChildNodes()) {
+      div.removeChild(div.firstChild);
+  }
+}
 
 // 프로필 정보 넣기
 fetch(`${url}/profile/${sessionAccountName}`, requestOptions)
@@ -41,29 +40,31 @@ fetch(`${url}/profile/${sessionAccountName}`, requestOptions)
 fetch(`${url}/product/${sessionAccountName}`, requestOptions)
     .then(res => res.json())
     .then(res => {
-        if (res.data != 0) {
-            itemList.classList.remove("txt-hide");
+      if (res.data != 0) {
+        itemList.classList.remove("txt-hide");
+        document.querySelector(".item-wrap").classList.remove("txt-hide");
 
-            const product = res.product;
-            let input = '';
-            for (let i = 0; i < product.length; i++) {
-                input += `
-                    <div class="item-container">
-                        <a href=""><img src="${product[i].itemImage}" alt="판매 중인 상품 사진"></a>
-                        <p class="item-tit">${product[i].itemName}</p>
-                        <p class="item-price">${product[i].price}</p>
-                    </div>
-                `
-            }
-            document.querySelector(".items").innerHTML = input;
-        } else {
-            itemList.classList.add("txt-hide");
-            itemWrap.style.height = 0;
-        }
+        const products = res.product;
+        let productHTML = '';
+        products.forEach((product) => {
+          productHTML += `
+            <div class="item-container">
+                <a href=""><img src="${url}/${product.itemImage}" alt="판매 중인 상품 사진"></a>
+                <p class="item-tit">${product.itemName}</p>
+                <p class="item-price">${product.price}</p>
+            </div>
+            `
+          })
+          document.querySelector(".items").innerHTML = productHTML;
+            ;
+      } else {
+        itemList.classList.add("txt-hide");
+        document.querySelector(".item-wrap").classList.add("txt-hide");
+        // itemWrap.style.height = 0;
+      }
     }).catch(err => {
         console.log("fetch error", err);
     });
-
 
 // 게시글 목록형
 const postsContainer = document.querySelector(".posts");
@@ -72,7 +73,7 @@ const postList = (hasLiked) => {
         .then(res => res.json())
         .then(result => {
             // 포스트가 하나라도 있을 경우 
-            // console.log(result)
+            removeAllchild();
             if(result.post.length >= 1) {
               if(hasLiked === undefined) {
                 result.post.forEach((item) => {
@@ -179,7 +180,11 @@ const postList = (hasLiked) => {
                 postItem.innerHTML = postHTML;
                 postsContainer.append(postItem);
               })
-            } 
+            } else {
+              postNav.classList.add("txt-hide");
+              postImgWrap.style.height = 0;
+              postImgWrap.style.padding = 0;
+            }
             handleDomElement(postImgWrap, result);
           }   
         }).catch(err => {
@@ -188,14 +193,12 @@ const postList = (hasLiked) => {
 }
 postList();
 
-
-
 let feedData;
 function handleDomElement(domElements, feed) {
 //   console.log(domElements)
 //   console.log(feed)
   feedData = feed;
-  console.log(feedData)
+  // console.log(feedData)
 // 포스팅 이미지 슬라이드
 const slideButtons = document.querySelectorAll(".slide-btn"); 
 const handleImgSlider = (e) => {
@@ -333,13 +336,14 @@ const postAlbum = () => {
   fetch(`${url}/post/${sessionAccountName}/userpost/?limit=100&skip=0`, requestOptions)
       .then(res => res.json())
       .then(res => {
+          removeAllchild();
           const posts = res.post;
-          let postHTML = '';
+          let postHTML = '<h2 class="txt-hide">게시글 사진만 모아보기</h2>';
           if (posts.length > 0) {
               posts.forEach((post) => {
-                  let firstImage = post.image;
-                  if (firstImage) {
-                      firstImage = firstImage.split(',')[0]
+                  let images = post.image;
+                  if (images) {
+                      firstImage = images.split(',')[0]
                       postHTML +=
                       `
                           <img src="${url}/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
@@ -382,9 +386,6 @@ const handleDeletePost = () => {
     })
     .catch(error => console.log('error', error));
 }
-
-
-
 
 // 게시물 수정
 const handleEditPost = () => {

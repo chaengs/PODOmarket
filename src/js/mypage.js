@@ -128,7 +128,7 @@ const postList = (hasLiked) => {
         
                 // 이미지가 있는 경우
                 if(images) {
-                  const imgArr = images.split(",");
+                  const imgArr = images.split(',');
                   let imgCount = imgArr.length;
                   
                   if (imgCount === 1) {
@@ -328,36 +328,34 @@ const applyLike = (clickedBtn) => {
   }
 }
 
-
-
-
 //게시글 앨범형
 const postAlbum = () => {
-    fetch(url+"/post/"+sessionAccountName+"/userpost/?limit=100&skip=0", requestOptions)
-        .then(res => res.json())
-        .then(res => {
-            const post = res.post;
-            let input = '';
-            if (post.length > 0) {
-                for (let i = 0; i < post.length; i++) {
-                    const firstImage = post[i].image.split(',')[0];
-                    input +=
-                    `
-                        <img src="http://146.56.183.55:5050/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
-                    `
-                }
-                document.querySelector(".posts").innerHTML = input;
-            } else {
-                postNav.classList.add("txt-hide");
-                postImgWrap.style.height = 0;
-                postImgWrap.style.padding = 0;
-            }
-        }).catch(err => {
-            console.log("fetch error", err);
-        });
+  fetch(`${url}/post/${sessionAccountName}/userpost/?limit=100&skip=0`, requestOptions)
+      .then(res => res.json())
+      .then(res => {
+          const posts = res.post;
+          let postHTML = '';
+          if (posts.length > 0) {
+              posts.forEach((post) => {
+                  let firstImage = post.image;
+                  if (firstImage) {
+                      firstImage = firstImage.split(',')[0]
+                      postHTML +=
+                      `
+                          <img src="${url}/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
+                      `
+                  }
+              })
+              document.querySelector(".posts").innerHTML = postHTML;
+          } else {
+              postNav.classList.add("txt-hide");
+              postImgWrap.style.height = 0;
+              postImgWrap.style.padding = 0;
+          }
+      }).catch(err => {
+          console.log("fetch error", err);
+      });
 }
-
-
 
 // 게시물 삭제
 const handleDeletePost = () => {

@@ -70,11 +70,11 @@ fetch(`${url}/post/feed/?limit=100`, requestOptions)
         <h2 class="txt-hide">포스팅 카드</h2>
           <section class="post-card">
             <nav class="user-info">
-              <a href="javascript:void(0)" class="post-card-profile">
+              <a href="./yourpage.html?id=${post.author.accountname}" class="post-card-profile">
                 <img src=${ post.author.image === "" ? "../src/images/search/default_profile.png"
                 : `${profilePic}`} alt="user-profile-img">
               </a>
-              <a href="javascript:void(0)" class="user">
+              <a href="./yourpage.html?id=${post.author.accountname}" class="user">
                 <span class="user-name">${post.author.username}</span>
                 <span class="user-id">@${post.author.accountname}</span>
               </a>
@@ -433,22 +433,3 @@ const applyLike = (clickedBtn) => {
   .catch(error => console.log('error', error));
   }
 }
-
-// 독바 메뉴 클릭시 해당 페이지로 이동
-const chatBtn = document.querySelector(".btn-chat");
-const newPostBtn = document.querySelector(".btn-new-post");
-const profileBtn = document.querySelector(".btn-profile");
-
-const goToChat = () => {
-  location.href = "chat_room.html";
-}
-const uploadNewPost = () => {
-  location.href = "upload.html";
-}
-const goToProfile = () => {
-  location.href = "mypage.html";
-}
-
-chatBtn.addEventListener("click", goToChat);
-newPostBtn.addEventListener("click", uploadNewPost);
-profileBtn.addEventListener("click", goToProfile);

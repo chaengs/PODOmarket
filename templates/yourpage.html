@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../src/css/reset.css">
     <link rel="stylesheet" href="../src/css/userpost.css">
     <link rel="stylesheet" href="../src/css/menubar.css">
-    <link rel="stylesheet" href="../src/css/mypage.css">
+    <link rel="stylesheet" href="../src/css/yourpage.css">
     <link rel="stylesheet" href="../templates/modal/modal.css">
 </head>
 
@@ -17,9 +17,10 @@
     <div id="app">
         <!-- 상단메뉴바 -->
         <header>
-            <a href="feed.html">
-            <img src="../src/images/search/icon-arrow-left.png" alt="go-back-button">
-            </a>
+            <button type="button" class="btn-back">
+                <img src="../src/images/search/icon-arrow-left.png"
+                alt="뒤로가기">
+            </button>
             <button class="setting-logout-btn">
                 <span class="txt-hide">더보기 버튼</span>
             </button>
@@ -27,19 +28,19 @@
         <!-- 독바 -->
         <section class="bar-menu">
             <button class="btn-home checked">
-                <img class="img-btn" src="../src/images/menubar/icon-home-fill.png" alt="btn-home" />
+                <img class="img-btn home-btn" src="../src/images/menubar/icon-home.png" alt="btn-home" />
                 <p>홈</p>
             </button>
             <button class="btn-chat">
-                <img class="img-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
+                <img class="img-btn chat-btn" src="../src/images/menubar/icon-message-circle.png" alt="btn-chat" />
                 <p>채팅</p>
             </button>
             <button class="btn-new-post">
-                <img class="img-btn" onclick="{toUpload()}" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
+                <img class="img-btn upload-btn" src="../src/images/menubar/icon-edit.png" alt="btn-new-post" />
                 <p>게시물 작성</p>
             </button>
             <button class="btn-profile">
-                <img class="img-btn" onclick="{toProfile()}" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+                <img class="img-btn profile-btn" src="../src/images/menubar/icon-user-fill.png" alt="btn-home" />
                 <p>프로필</p>
             </button>
         </section>
@@ -80,19 +81,18 @@
         </section>
         <!-- 피드 상단 메뉴바 -->
         <nav class="post-nav">
-            <img src="../src/images/mypage/icon-post-album-on.png" alt="게시글 앨범형으로 보기" onclick="postAlbum()">
-            <img src="../src/images/mypage/icon-post-list-on.png" alt="게시글 목록으로 보기" onclick="postList()">
+            <img src="../src/images/mypage/icon-post-album-off.png" alt="게시글 앨범형으로 보기" onclick="postAlbum()" class="post-album">
+            <img src="../src/images/mypage/icon-post-list-on.png" alt="게시글 목록으로 보기" onclick="postList()" class="post-list">
         </nav>
         <!-- 목록형으로 보기 -->
         <article class="post-img-wrap">
             <h3 class="txt-hide">게시글 모아보기</h3>
-            <div class="posts"></div>
+            <div class="posts" id="posts"></div>
         </article>
     </div>
     <script src="../src/js/module.js"></script>
     <script src="../src/js/yourpage.js"></script>
     <script src="../templates/modal/modal.js"></script>
-    <!-- <script src="../src/js/mypageModal.js"></script> -->
 </body>
 
 </html>

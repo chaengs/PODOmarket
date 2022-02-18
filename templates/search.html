@@ -29,7 +29,7 @@
     </main>
     <!-- menubar module -->
     <section class="bar-menu">
-      <button class="btn-home checked">
+      <button class="btn-home checked" onclick="goHome()">
         <img
           class="img-btn"
           src="../src/images/menubar/icon-home-fill.png"
@@ -37,7 +37,7 @@
         />
         <p>홈</p>
       </button>
-      <button class="btn-chat">
+      <button class="btn-chat" onclick="goChat()">
         <img
           class="img-btn"
           src="../src/images/menubar/icon-message-circle.png"
@@ -45,7 +45,7 @@
         />
         <p>채팅</p>
       </button>
-      <button class="btn-new-post">
+      <button class="btn-new-post" onclick="goPost()">
         <img
           class="img-btn"
           src="../src/images/menubar/icon-edit.png"
@@ -53,7 +53,7 @@
         />
         <p>게시물 작성</p>
       </button>
-      <button class="btn-profile">
+      <button class="btn-profile" onclick="goProfile()">
         <img
           class="img-btn"
           src="../src/images/menubar/icon-user.png"
@@ -62,7 +62,27 @@
         <p>프로필</p>
       </button>
     </section>
-    <script src="../src/js/module.js"></script>
     <script src="../src/js/search.js"></script>
+    <script>
+      // 뒤로가기
+      const goBack = () => {
+          window.history.back();
+      }
+      document.querySelector(".btn-back").addEventListener("click", goBack);
+
+      // 독바 아이콘 이동
+      const goHome = () => {
+          location.href = "feed.html";
+      }
+      const goChat = () => {
+          location.href = "chat_list.html";
+      }
+      const goUpload = () => {
+          location.href = "upload.html";
+      }
+      const goProfile = () => {
+          location.href = "mypage.html";
+      }
+    </script>
   </body>
 </html>

@@ -193,13 +193,13 @@ const postList = (hasLiked) => {
                 postItem.innerHTML = postHTML;
                 postsContainer.append(postItem);
               })
-            } else {
-              postNav.classList.add("txt-hide");
-              postImgWrap.style.height = 0;
-              postImgWrap.style.padding = 0;
             }
             handleDomElement(postImgWrap, result);
-          }   
+          } else {
+            postNav.classList.add("txt-hide");
+            postImgWrap.style.height = 0;
+            postImgWrap.style.padding = 0;
+          }
         }).catch(err => {
             console.log("fetch error", err);
         });
@@ -349,24 +349,24 @@ const postAlbum = () => {
   fetch(`${url}/post/${sessionAccountName}/userpost/?limit=100&skip=0`, requestOptions)
       .then(res => res.json())
       .then(res => {
-          removeAllchild();
-          // 버튼 활성화, 비활성화 이미지
-          listImg.src = "../src/images/mypage/icon-post-list-off.png"
-          albumImg.src = "../src/images/mypage/icon-post-album-on.png"
-          const posts = res.post;
-          let postHTML = '<h2 class="txt-hide">게시글 사진만 모아보기</h2>';
-          if (posts.length > 0) {
-              posts.forEach((post) => {
-                  let images = post.image;
-                  if (images) {
-                      firstImage = images.split(',')[0]
-                      postHTML +=
-                      `
-                          <img src="${url}/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
-                      `
-                  }
-              })
-              document.querySelector(".posts").innerHTML = postHTML;
+        removeAllchild();
+        // 버튼 활성화, 비활성화 이미지
+        listImg.src = "../src/images/mypage/icon-post-list-off.png"
+        albumImg.src = "../src/images/mypage/icon-post-album-on.png"
+        const posts = res.post;
+        let postHTML = '<h2 class="txt-hide">게시글 사진만 모아보기</h2>';
+        if (posts.length > 0) {
+            posts.forEach((post) => {
+                let images = post.image;
+                if (images) {
+                    firstImage = images.split(',')[0]
+                    postHTML +=
+                    `
+                        <img src="${url}/${firstImage}" alt="게시글 첫번째 사진" class="post-img-list">
+                    `
+                }
+            })
+            document.querySelector(".posts").innerHTML = postHTML;
           } else {
               postNav.classList.add("txt-hide");
               postImgWrap.style.height = 0;

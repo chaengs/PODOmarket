@@ -15,6 +15,13 @@ const requestOptions = {
     headers: myHeaders,
 };
 
+// 로그인 여부 확인
+const isLogined = sessionStorage.pic_isLogined;
+if (!isLogined) {
+  location.href = "./index.html";
+}
+
+
 // 엘리먼트 제거 함수
 const removeAllchild = () => {
   const div = document.getElementById("posts");
@@ -66,15 +73,21 @@ fetch(`${url}/product/${sessionAccountName}`, requestOptions)
         console.log("fetch error", err);
     });
 
+const albumImg = document.querySelector(".post-album");
+const listImg = document.querySelector(".post-list");
+
 // 게시글 목록형
 const postsContainer = document.querySelector(".posts");
 const postList = (hasLiked) => {
     fetch(`${url}/post/${sessionAccountName}/userpost/?limit=100&skip=0`, requestOptions)
         .then(res => res.json())
         .then(result => {
-            // 포스트가 하나라도 있을 경우 
-            removeAllchild();
-            if(result.post.length >= 1) {
+          removeAllchild();
+          // 버튼 활성화, 비활성화 이미지
+          listImg.src = "../src/images/mypage/icon-post-list-on.png"
+          albumImg.src = "../src/images/mypage/icon-post-album-off.png"
+          // 포스트가 하나라도 있을 경우 
+          if(result.post.length >= 1) {
               if(hasLiked === undefined) {
                 result.post.forEach((item) => {
                 // console.log(item);
@@ -337,6 +350,9 @@ const postAlbum = () => {
       .then(res => res.json())
       .then(res => {
           removeAllchild();
+          // 버튼 활성화, 비활성화 이미지
+          listImg.src = "../src/images/mypage/icon-post-list-off.png"
+          albumImg.src = "../src/images/mypage/icon-post-album-on.png"
           const posts = res.post;
           let postHTML = '<h2 class="txt-hide">게시글 사진만 모아보기</h2>';
           if (posts.length > 0) {

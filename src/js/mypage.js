@@ -67,7 +67,6 @@ fetch(`${url}/product/${sessionAccountName}`, requestOptions)
       } else {
         itemList.classList.add("txt-hide");
         document.querySelector(".item-wrap").classList.add("txt-hide");
-        // itemWrap.style.height = 0;
       }
     }).catch(err => {
         console.log("fetch error", err);

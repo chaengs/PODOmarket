@@ -62,25 +62,27 @@ fetch(`${url}/profile/${paramAccountName}`, requestOptions)
 fetch(`${url}/product/${paramAccountName}`, requestOptions)
     .then(res => res.json())
     .then(res => {
-        if (res.data != 0) {
-            itemList.classList.remove("txt-hide");
+      if (res.data != 0) {
+        itemList.classList.remove("txt-hide");
+        document.querySelector(".item-wrap").classList.remove("txt-hide");
 
-            const product = res.product;
-            let input = '';
-            for (let i = 0; i < product.length; i++) {
-                input += `
-                    <div class="item-container">
-                        <a href=""><img src="${product[i].itemImage}" alt="판매 중인 상품 사진"></a>
-                        <p class="item-tit">${product[i].itemName}</p>
-                        <p class="item-price">${product[i].price}</p>
-                    </div>
-                `
-            }
-            document.querySelector(".items").innerHTML = input;
-        } else {
-            itemList.classList.add("txt-hide");
-            itemWrap.style.height = 0;
-        }
+        const products = res.product;
+        let productHTML = '';
+        products.forEach((product) => {
+          productHTML += `
+            <div class="item-container">
+                <a href=""><img src="${url}/${product.itemImage}" alt="판매 중인 상품 사진"></a>
+                <p class="item-tit">${product.itemName}</p>
+                <p class="item-price">${product.price}</p>
+            </div>
+            `
+          })
+          document.querySelector(".items").innerHTML = productHTML;
+            ;
+      } else {
+        itemList.classList.add("txt-hide");
+        document.querySelector(".item-wrap").classList.add("txt-hide");
+      }
     }).catch(err => {
         console.log("fetch error", err);
     });

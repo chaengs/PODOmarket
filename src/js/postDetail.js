@@ -5,6 +5,10 @@ const postId = localStorage.getItem("clicked-post-id");
 const goBackBtn = document.querySelector(".go-back-button");
 let commentsListArr = [];
 
+// 댓글 입력란 프로필 이미지 반영하기
+const userImg = sessionStorage.getItem("pic_userImg");
+const profileImg = document.querySelector(".profile-img");
+profileImg.src = url+"/"+userImg;
 
 // 포스트 상세 데이터 가져오기
 const getPostData = () => {
@@ -333,7 +337,7 @@ const getCommentInput = (event) => {
   const { value } = event.target;
   newComment = value;
 }
- 
+
 const writeNewComment = () => {
   const raw = JSON.stringify({
     "comment": {

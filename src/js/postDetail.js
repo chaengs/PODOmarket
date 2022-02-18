@@ -652,16 +652,3 @@ const openModal = (clickedBtn) => {
   const modalLayer = document.querySelector(".modal-layer");
   modalLayer.addEventListener("click", closeModal);
 }
-
-// 뒤로가기 (내포스팅인 경우 마이페이지 / 다른사람 글일 경우 피드페이지로 이동)
-const goBackToPreviousPage = () => {
-  const postData = localStorage.getItem("clicked-post");
-  const postInfo = JSON.parse(postData);
-  // 내포스팅인 경우
-  if(userId === postInfo.author._id) {
-    location.href = "./mypage.html";
-  } else {
-    location.href = "./feed.html";
-  }
-}
-goBackBtn.addEventListener("click", goBackToPreviousPage);

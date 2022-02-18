@@ -94,7 +94,7 @@ const imageUpload = async () => {
     redirect: "follow",
   };
   return await fetch(
-    url,
+    `${url}/image/uploadfile`,
     requestOptions
   )
     .then((response) => response.json())

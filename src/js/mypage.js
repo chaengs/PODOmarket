@@ -283,12 +283,9 @@ app.addEventListener("click", handleLikeClick)
 
 // 클릭시 좋아요 및 좋아요 취소
 const applyLike = (clickedBtn) => {
-  // console.log(feedData)
-  // console.log(clickedBtn)
   const likeButtons = document.querySelectorAll("#likebtn");
   const index = [...likeButtons].indexOf(clickedBtn);
   clickedPost = feedData.post[index];
-  // console.log(clickedPost)
   const postId = clickedPost.id;
   const likeCountElement = clickedBtn.nextElementSibling;
   let count = parseInt(likeCountElement.textContent);
@@ -312,7 +309,6 @@ const applyLike = (clickedBtn) => {
       }
       localStorage.setItem("clicked-post", JSON.stringify(result.post));
       // 좋아요 적용 후 피드 정보 새로 불러오기 (새로 불러와야 댓글 페이지에도 적용됨)
-      // console.log(result)
       const hasLiked = result.post.hearted;
       console.log(hasLiked)
       postList(hasLiked);

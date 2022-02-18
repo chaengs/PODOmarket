@@ -18,6 +18,11 @@ function getParameterByName(name) {
 // 각종 변수
 const url = "http://146.56.183.55:5050";
 const paramAccountName = getParameterByName("id");
+const sessionAccountName = sessionStorage.getItem("pic_accountName");
+// 내 계정이라면 mypage.html로 이동
+if (paramAccountName === sessionAccountName) {
+  location.href = "./mypage.html";
+}
 const token = sessionStorage.getItem("pic_token");
 
 const itemList = document.querySelector(".item-list");

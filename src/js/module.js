@@ -19,7 +19,7 @@ const goProfile = () => {
     location.href = "mypage.html";
 }
 const btnHome = document.querySelector(".home-btn");
-btnHome.addEventListener("click", goBack);
+btnHome.addEventListener("click", goHome);
 const btnChat = document.querySelector(".chat-btn");
 btnChat.addEventListener("click", goChat);
 const btnUpload = document.querySelector(".upload-btn");

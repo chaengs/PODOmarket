@@ -128,7 +128,7 @@ const postList = (hasLiked) => {
         
                 // 이미지가 있는 경우
                 if(images) {
-                  const imgArr = images.split(",");
+                  const imgArr = images.split(',');
                   let imgCount = imgArr.length;
                   
                   if (imgCount === 1) {

@@ -41,10 +41,10 @@
               <p>게시물 작성</p>
           </button>
           <button class="btn-profile">
-            <img class="img-btn profile-btn" src="../src/images/menubar/icon-user.png" alt="btn-home" />
-            <p>프로필</p>
+              <img class="img-btn profile-btn" src="../src/images/menubar/icon-user.png" alt="btn-home" />
+              <p>프로필</p>
           </button>
-      </section>
+        </section>
       </header>
       <main id="feed-container">
         <h1 class="txt-hide">피드 화면</h1>
@@ -52,7 +52,25 @@
       </main>
     
     </div>
-    <script src="../src/js/module.js"></script>
-    <script src="../src/js/feed.js"></script>   
+    <script src="../src/js/feed.js"></script>
+    <script>
+      // 독바 아이콘 이동
+        const goHome = () => {
+            location.href = "feed.html";
+        }
+        const goChat = () => {
+            location.href = "chat_list.html";
+        }
+        const goUpload = () => {
+            location.href = "upload.html";
+        }
+        const goProfile = () => {
+            location.href = "mypage.html";
+        }
+        const btnHome = document.querySelector(".home-btn").addEventListener("click", goHome);
+        const btnChat = document.querySelector(".chat-btn").addEventListener("click", goChat);
+        const btnUpload = document.querySelector(".upload-btn").addEventListener("click", goUpload);
+        const btnProfile = document.querySelector(".profile-btn").addEventListener("click", goProfile);
+    </script>
   </body>
 </html>

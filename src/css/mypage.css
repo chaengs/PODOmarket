@@ -77,34 +77,27 @@ main .profile-img {
   color: #767676;
 }
 .profile-container,
-.profile-social {
+.btn-wrap {
   position: relative;
   top: -50px;
 }
 
-.profile-social {
+.btn-wrap {
   display: flex;
   justify-content: center;
   margin-top: 26px;
-  margin-bottom: 26px;
+  /* margin-bottom: 26px; */
 }
-.profile-social img {
-  width: 34px;
-  height: 34px;
-  padding: 9px;
-  border: 1px solid #dbdbdb;
-  border-radius: 30px;
-}
-.profile-social button {
+.btn-wrap button {
   width: 120px;
   height: 34px;
-  background-color: #7e3e9d;
-  border: none;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
   border-radius: 30px;
   font-size: 14px;
   line-height: 18px;
-  color: #ffffff;
-  margin: 0 10px;
+  color: #bdbdbd;
+  margin: 0 6px;
   cursor: pointer;
 }
 

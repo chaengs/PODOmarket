@@ -23,6 +23,7 @@ const itemNameErr = document.querySelector("#itemNameError");
 const token = sessionStorage.getItem("pic_token");
 
 // fetch
+const url = "http://146.56.183.55:5050";
 let imgUrl = "";
 let priceN = 0;
 
@@ -93,7 +94,7 @@ const imageUpload = async () => {
     redirect: "follow",
   };
   return await fetch(
-    "http://146.56.183.55:5050/image/uploadfile",
+    url,
     requestOptions
   )
     .then((response) => response.json())
@@ -108,7 +109,7 @@ const imageUpload = async () => {
 
 const addProduct = () => {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", "Bearer " + token);
+  myHeaders.append("Authorization", `Bearer ${token}`);
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
@@ -127,7 +128,7 @@ const addProduct = () => {
     redirect: "follow",
   };
 
-  fetch("http://146.56.183.55:5050/product", requestOptions)
+  fetch(`${url}/product`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       if (!result.message) {

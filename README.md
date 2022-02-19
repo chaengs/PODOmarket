@@ -15,7 +15,7 @@
 |<a href="https://github.com/chaengs"><img src="https://user-images.githubusercontent.com/73277502/154791225-7298da96-2917-4aef-aff1-82750af3d298.jpeg" width="100"></a>|<a href="https://github.com/hanminss"><img src="https://avatars.githubusercontent.com/u/60065661?v=4" width="100"></a>|<a href="https://github.com/daaahailey"><img src="https://avatars.githubusercontent.com/u/56154510?v=4" width="100px"></a>|
   
 ## 개발 환경  
-- Front-End : HTML / CSS / Vanilla JacaScript
+- Front-End : HTML / CSS / Vanilla JavaScript
 - Back-End : 제공된 API
   
 ## 프로젝트 구조  

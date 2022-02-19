@@ -116,7 +116,24 @@
 ![슬라이드1](https://user-images.githubusercontent.com/73277502/154797157-314ff6fc-fcaa-4876-8c7a-3648c207687c.png)
   
 ## 페이지 기능  
-|스플래쉬|회원가입|로그인|
+### 🍇초기화면  
+|🔗[스플래쉬](https://github.com/chaengs/PODOmarket/wiki#splash)|🔗[로그인](https://github.com/chaengs/PODOmarket/wiki#로그인)|🔗[회원가입](https://github.com/chaengs/PODOmarket/wiki#회원가입)|
 |:-----:|:-----:|:-----:|
-|![스플래쉬 mov](https://user-images.githubusercontent.com/73277502/154797713-1c7a11a8-4872-42b6-8a5d-2deffc13c690.gif)
-|
+|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804686-c2fd1757-218c-4d40-a3b4-f21f0f85e5dc.gif"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804587-f2b19184-ab04-4433-a22e-7631a380993d.gif"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804740-4f8b9610-f198-40b7-92f2-cadbc641ab79.gif"></p>|
+  
+### 🍇홈
+|🔗[피드](https://github.com/chaengs/PODOmarket/wiki#홈-화면피드)|🔗[검색](https://github.com/chaengs/PODOmarket/wiki#검색)|
+|:---:|:---:|
+|<p align="center"><img width="300px" src="https://user-images.githubusercontent.com/73277502/154805261-41771b43-7229-464f-8f5b-c4a6f051c4e6.png"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154805207-fea0179b-f31f-49ea-a32b-bc288318d3b8.gif"></p>|
+  
+### 🍇프로필 페이지
+|🔗[프로필 페이지](https://github.com/chaengs/PODOmarket/wiki#프로필-페이지)|🔗[피드 표기 방식](https://github.com/chaengs/PODOmarket/wiki#나의-프로필-페이지)|🔗[프로필 수정](https://github.com/chaengs/PODOmarket/wiki#프로필-수정)|
+|:---:|:---:|:---:|
+|<p align="center"><img width="300px" src="https://user-images.githubusercontent.com/73277502/154805031-c11104a5-eb6c-42de-85f9-80752b12a131.png"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154805091-d35b7912-a25b-42b9-a49f-c0ccd53cb51d.gif"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804818-eff2fbcf-edb6-473f-9d69-9107c56e36ca.gif"></p>|
+  
+### 🍇게시글
+|🔗[상품 등록](https://github.com/chaengs/PODOmarket/wiki#상품-등록)|🔗[게시글 작성](https://github.com/chaengs/PODOmarket/wiki#게시글-작성)|🔗[좋아요/댓글](https://github.com/chaengs/PODOmarket/wiki#좋아요)|
+|:---:|:---:|:---:|
+|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804870-7eab520f-d817-492e-b491-08cbf1eefc01.gif"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804913-271819c0-7f9e-49ae-be67-e6101445a25a.gif"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804894-81bcf81e-1d24-446a-aace-5b081a35ebf9.gif"></p>|
+|🔗[게시글 삭제](https://github.com/chaengs/PODOmarket/wiki#게시글-삭제)|🔗[채팅](https://github.com/chaengs/PODOmarket/wiki#채팅방)|
+|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154805185-f56b54ac-209b-402f-b20d-9bc986aebd45.gif"></p>|<p align="center"><img src="https://user-images.githubusercontent.com/73277502/154804793-3bade49a-8986-4851-a744-d3078deaf007.gif"></p>|

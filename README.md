@@ -7,7 +7,7 @@
 - 또한 판매가 아니더라도 사진과 글을 작성하여 일상을 공유할 수 있는 SNS입니다.
 - 다른 사용자를 팔로우하여 사람들의 소식을 확인할 수 있습니다.
 - 게시글에 좋아요와 댓글을 남길 수 있습니다.
-- 🍇이웃들이 알알이 모여 이룬 풍성한 한 송이, 포도마켓입니다.
+- 🍇알알이 이웃들이 모여 이룬 풍성한 한 송이, 포도마켓입니다.
   
 ## 팀원  
 |[**심채영**](https://github.com/chaengs)|[**임한민**](https://github.com/hanminss)|[**지다혜**](https://github.com/daaahailey)|
@@ -15,7 +15,7 @@
 |<a href="https://github.com/chaengs"><img src="https://user-images.githubusercontent.com/73277502/154791225-7298da96-2917-4aef-aff1-82750af3d298.jpeg" width="100"></a>|<a href="https://github.com/hanminss"><img src="https://avatars.githubusercontent.com/u/60065661?v=4" width="100"></a>|<a href="https://github.com/daaahailey"><img src="https://avatars.githubusercontent.com/u/56154510?v=4" width="100px"></a>|
   
 ## 개발 환경  
-- Front-End : HTML / CSS / Vanilla JavaScript
+- Front-End : HTML / CSS / Vanilla JS
 - Back-End : 제공된 API
   
 ## 프로젝트 구조  

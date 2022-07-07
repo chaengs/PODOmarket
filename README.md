@@ -1,7 +1,7 @@
 # 🍇포도마켓  
 2021.12.19 - 2022.2.19
 
-<a href=podomarket.netlify.app>포도마켓 입장하기</a>
+<a href=https://podomarket.netlify.app>포도마켓 입장하기</a>
   
 ## 포도마켓은,  
 - 🦁멋쟁이사자처럼 프론트엔드스쿨 1기에서 팀 프로젝트로 진행한 포도마켓입니다.
